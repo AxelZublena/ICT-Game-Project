@@ -1,6 +1,7 @@
 /// <reference path="View.ts" />
 
 class StartMenu extends View {
+
 	private startButton: any;
 	private buttonColor: string;
 	private image: HTMLImageElement;
@@ -13,7 +14,7 @@ class StartMenu extends View {
 			width: 0,
 			height: 0,
 			x: 0,
-			y: 0,
+			y: 0
 		};
 
 		// set the color of the button
@@ -27,14 +28,14 @@ class StartMenu extends View {
 	 * Method to set the button's color
 	 * @param {string} color
 	 */
-	public setButtonColor(color: string) {
+	public setButtonColor = (color: string) => {
 		this.buttonColor = color;
 	}
 
 	/**
 	 * Method to get the button's information
 	 */
-	public getButton() {
+	public getButton = () => {
 		return this.startButton;
 	}
 
@@ -42,7 +43,7 @@ class StartMenu extends View {
 	 * Method to draw the start menu on the canvas
 	 * @param {CanvasRenderingContext2D} ctx
 	 */
-	public draw(ctx: CanvasRenderingContext2D) {
+	public draw = (ctx: CanvasRenderingContext2D) => {
 		// Draw the background color
 		ctx.fillStyle = Game.BASE_COLOR;
 		ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
@@ -71,8 +72,8 @@ class StartMenu extends View {
 			this.startButton.height,
 			20,
 			this.buttonColor,
-            8,
-            "white"
+			8,
+			"white"
 		);
 
 		// Write text in the button
