@@ -1,18 +1,18 @@
 /// <reference path="View.ts" />
 
-class Pause extends View{
+class Pause extends View {
 
-    public constructor(canvas: HTMLCanvasElement){
-        super(canvas);
-    }
+	public constructor(canvas: HTMLCanvasElement) {
+		super(canvas);
+	}
 
 	/**
 	 * Draw on the canvas
 	 * @param ctx 
 	 */
-    public draw(ctx: CanvasRenderingContext2D){
-        //random drawing to test the StartMenu
-        ctx.fillStyle = "dodgerblue";
+	public draw = (ctx: CanvasRenderingContext2D): void => {
+		//random drawing to test the StartMenu
+		ctx.fillStyle = "dodgerblue";
 		ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 		this.writeTextToCanvas(
 			ctx,
@@ -23,5 +23,5 @@ class Pause extends View{
 			"center",
 			"black"
 		);
-    }
+	}
 }

@@ -15,7 +15,7 @@ class Player {
     /**
      * Get the name of the player
      */
-    public getName() {
+    public getName = (): string => {
         return this.name;
     }
 
@@ -23,7 +23,7 @@ class Player {
      * Set the speed of the player
      * @param newSpeed number
      */
-    public setSpeed(newSpeed: number) {
+    public setSpeed = (newSpeed: number): void => {
         this.speed = newSpeed;
     }
 
@@ -31,7 +31,7 @@ class Player {
      * Load the image of the Player
      * @param source string
      */
-    private loadNewImage(source: string): HTMLImageElement {
+    private loadNewImage = (source: string): HTMLImageElement => {
         const img = new Image();
         img.src = source;
         return img;
