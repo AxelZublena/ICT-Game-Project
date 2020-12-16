@@ -1,4 +1,5 @@
 class Game {
+
 	private canvas: HTMLCanvasElement;
     private ctx: CanvasRenderingContext2D;
 
@@ -41,7 +42,9 @@ class Game {
 		requestAnimationFrame(this.step);
 	};
 
-    // Draw on the canvas
+    /**
+	 * Draw on the canvas
+	 */
     private draw(){
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -49,7 +52,10 @@ class Game {
 		this.currentView.draw(this.ctx);
     }
 
-    // Handle the mouse's events (only works for the start menu, but can and will be updated)
+    /**
+	 * Handle the mouse's events (only works for the start menu, but can and will be updated)
+	 * 
+	 */
     private mouseHandling(){
 		this.canvas.addEventListener("mousemove", (event) => {
 			if (this.startMenu.isOnButton(event, this.startMenu.getButton())) {

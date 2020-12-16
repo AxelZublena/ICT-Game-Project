@@ -1,14 +1,22 @@
 abstract class View {
+
 	protected canvas: HTMLCanvasElement;
 
 	public constructor(canvas: HTMLCanvasElement) {
 		this.canvas = canvas;
 	}
 
-	// overidden method
+	/**
+	 * Overidden method
+	 * @param ctx 
+	 */
 	public draw(ctx: CanvasRenderingContext2D) {}
 
-    // Checks if the mouse is on the button
+	/**
+	 * Checks if the mouse is on the button
+	 * @param event 
+	 * @param buttonInfo 
+	 */
 	public isOnButton(event: MouseEvent, buttonInfo: any) {
 		if (
 			event.x > this.canvas.width / 2 - buttonInfo.width / 2 &&
@@ -21,7 +29,18 @@ abstract class View {
 		return false;
 	}
 
-    // Method to draw a rounded rectangle 
+	/**
+	 * Method to draw a rounded rectangle 
+	 * @param ctx 
+	 * @param x 
+	 * @param y 
+	 * @param width 
+	 * @param height 
+	 * @param radius 
+	 * @param color 
+	 * @param boderWidth 
+	 * @param boderColor 
+	 */
 	protected roundRect(
 		ctx: CanvasRenderingContext2D,
 		x: number,
