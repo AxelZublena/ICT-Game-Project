@@ -5,6 +5,7 @@ Objective: Find the sensitive piece of information in the maze and get out doing
 
 ## Technologies
 * HTML
+* CSS
 * TypeScript
 
 ## Developers
