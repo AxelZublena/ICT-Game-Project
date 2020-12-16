@@ -4,8 +4,8 @@ class Game {
 	private ctx: CanvasRenderingContext2D;
 
 	private startMenu: StartMenu;
-	private randomView: View;
-	private currentView: View;
+    private randomView: Pause;
+    private currentView: View;
 
 	public static readonly BASE_COLOR: string = "#00A5DC";
 
@@ -20,8 +20,8 @@ class Game {
 		// event listener to handle mouse actions;
 		this.mouseHandling();
 
-		// randomView to test the start menu
-		this.randomView = new Pause(this.canvas);
+        // randomView to test the start menu and the pause menu
+        this.randomView = new Pause(this.canvas, "purple");
 
 		this.currentView = this.startMenu;
 
@@ -58,6 +58,7 @@ class Game {
 	 */
 	private mouseHandling = () => {
 		this.canvas.addEventListener("mousemove", (event) => {
+
 			if (this.startMenu.isOnButton(event, this.startMenu.getButton())) {
 				this.startMenu.setButtonColor("grey");
 				document.getElementById("canvas").style.cursor = "pointer";
