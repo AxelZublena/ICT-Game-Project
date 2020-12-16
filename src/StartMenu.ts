@@ -1,6 +1,7 @@
 /// <reference path="View.ts" />
 
 class StartMenu extends View {
+	
 	private startButton: any;
 	private buttonColor: string;
 	private image: HTMLImageElement;
