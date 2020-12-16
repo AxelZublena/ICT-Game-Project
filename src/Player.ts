@@ -6,7 +6,7 @@ class Player {
     private yPos: number;
     private image: HTMLImageElement;
 
-    public constructor(name: string, image: string) {
+    constructor(name: string, image: string) {
         this.image = this.loadNewImage(image);
         this.name = name;
         this.speed = 5;
