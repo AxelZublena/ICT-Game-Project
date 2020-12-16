@@ -10,14 +10,14 @@ abstract class View {
 	 * Overidden method
 	 * @param ctx 
 	 */
-	public draw(ctx: CanvasRenderingContext2D) {}
+	public draw(ctx: CanvasRenderingContext2D) { }
 
 	/**
 	 * Checks if the mouse is on the button
 	 * @param event 
 	 * @param buttonInfo 
 	 */
-	public isOnButton(event: MouseEvent, buttonInfo: any) {
+	public isOnButton = (event: MouseEvent, buttonInfo: any): boolean => {
 		if (
 			event.x > this.canvas.width / 2 - buttonInfo.width / 2 &&
 			event.x < this.canvas.width / 2 + buttonInfo.width / 2 &&
@@ -41,7 +41,7 @@ abstract class View {
 	 * @param boderWidth 
 	 * @param boderColor 
 	 */
-	protected roundRect(
+	protected roundRect = (
 		ctx: CanvasRenderingContext2D,
 		x: number,
 		y: number,
@@ -49,9 +49,9 @@ abstract class View {
 		height: number,
 		radius: number,
 		color: string,
-        boderWidth: number,
-        boderColor: string
-	) {
+		boderWidth: number,
+		boderColor: string
+	) => {
 		if (width < 2 * radius) radius = width / 2;
 		if (height < 2 * radius) radius = height / 2;
 		x = x - width / 2;
@@ -75,7 +75,7 @@ abstract class View {
 	 * @param {HTMLImageElement} source
 	 * @return HTMLImageElement - returns an image
 	 */
-	protected loadNewImage(source: string): HTMLImageElement {
+	protected loadNewImage = (source: string): HTMLImageElement => {
 		const img = new Image();
 		img.src = source;
 		return img;
@@ -90,7 +90,7 @@ abstract class View {
 	 * @param {string} alignment - Where to align the text
 	 * @param {string} color - The color of the text
 	 */
-	protected writeTextToCanvas(
+	protected writeTextToCanvas = (
 		ctx: CanvasRenderingContext2D,
 		text: string,
 		fontSize: number = 20,
@@ -98,7 +98,7 @@ abstract class View {
 		yCoordinate: number,
 		alignment: CanvasTextAlign = "center",
 		color: string = "red"
-	) {
+	) => {
 		ctx.font = `${fontSize}px Minecraft`;
 		ctx.fillStyle = color;
 		ctx.textAlign = alignment;
