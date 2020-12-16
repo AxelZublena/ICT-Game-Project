@@ -19,8 +19,8 @@ class Game {
         // event listener to handle mouse actions;
         this.mouseHandling();
 
-        // randomView to test the start menu
-        this.randomView = new Pause(this.canvas);
+        // randomView to test the start menu and the pause menu
+        this.randomView = new Pause(this.canvas, "purple");
 
         this.currentView = this.startMenu;
 
@@ -47,6 +47,7 @@ class Game {
 
         // Draw the current view
 		this.currentView.draw(this.ctx);
+
     }
 
     // Handle the mouse's events (only works for the start menu, but can and will be updated)
