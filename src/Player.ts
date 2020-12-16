@@ -12,4 +12,8 @@ class Player {
         this.speed = 5;
     }
 
+    public getName = () => {
+        return this.name;
+    }
+
 }
