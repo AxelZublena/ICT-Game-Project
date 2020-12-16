@@ -1,64 +1,43 @@
 /// <reference path="View.ts" />
 
 class Pause extends View{
-	
-	private continueButton: any;
-	private backButton: any;
-	private buttonColor: string;
+    
+    private buttons: Button[]
+	private continueButton: Button;
+	private backButton: Button;
 	private image: HTMLImageElement;
 	
 	public constructor(canvas: HTMLCanvasElement, buttonColor: string){
-		super(canvas);
-		
-		// empty continueButton
-		this.continueButton = {
-			width: 0,
-			height: 0,
-			x: 0,
-			y: 0,
-		};
-		
-		// empty backButton
-		this.backButton = {
-			width: 0,
-			height: 0,
-			x: 0,
-			y: 0,
-		};
-		
-		// set the color of the button
-		this.buttonColor = buttonColor;
+        super(canvas);
+        this.buttons = [];
+        this.continueButton = new Button(this.canvas.width * 0.28,this.canvas.height * 0.09,this.canvas.width / 2,this.canvas.height * 0.7,"purple");
+		this.backButton = new Button(this.canvas.width * 0.28,this.canvas.height * 0.09,this.canvas.width / 2,this.canvas.height * 0.85,"purple")
+        this.buttons.push(this.continueButton);
+        this.buttons.push(this.backButton);
 		
 		// load the image/logo
 		this.image = this.loadNewImage("/assets/img/hacker.png");
     }
     
-    /**
-	 * Method to set the button's color
-	 * @param {string} color
-	 */
-	public setButtonColor(color: string) {
-		this.buttonColor = color;
-    }
     
-   
+    
+   /**
+	 * Method to get the button's information
+	 */
+	public getButtons() {
+		return [this.continueButton, this.backButton];
+	}
+
 
 	public draw(ctx: CanvasRenderingContext2D){
+
+
+        this.mouseHandling();
 		// Draw the background color
 		ctx.fillStyle = "purple";
 		ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 		
-		// Gets the button's information in an object for isOnButton()
-		this.continueButton.width = this.canvas.width * 0.28;
-		this.continueButton.height = this.canvas.height * 0.09;
-		this.continueButton.x = this.canvas.width / 2;
-		this.continueButton.y = this.canvas.height * 0.7;
 		
-		// Gets the button's information in an object for isOnButton()
-		this.backButton.width = this.canvas.width * 0.28;
-		this.backButton.height = this.canvas.height * 0.09;
-		this.backButton.x = this.canvas.width / 2;
-		this.backButton.y = this.canvas.height * 0.85;
 		
 		// Draws the image/logo
 		ctx.drawImage(
@@ -72,24 +51,24 @@ class Pause extends View{
 	    // Draws a round rectangle
 	    this.roundRect(
 	    ctx,
-	    this.continueButton.x,
-	    this.continueButton.y,
-	    this.continueButton.width,
-	    this.continueButton.height,
+	    this.continueButton.getxPos(),
+	    this.continueButton.getyPos(),
+	    this.continueButton.getWidth(),
+	    this.continueButton.getHeight(),
 	    20,
-	    this.buttonColor,
+	    this.continueButton.getColor(),
 	    8,
 	    "white"
 	    );
 	 			
 	    this.roundRect(
 	    ctx,
-	    this.backButton.x,
-	    this.backButton.y,
-	    this.backButton.width,
-	    this.backButton.height,
+	    this.backButton.getxPos(),
+	    this.backButton.getyPos(),
+	    this.backButton.getWidth(),
+	    this.backButton.getHeight(),
 	    20,
-	    this.buttonColor,
+	    this.backButton.getColor(),
 	    8,
 	    "white"
 	    );
@@ -114,8 +93,38 @@ class Pause extends View{
 	    this.canvas.height * 0.87,
 	    "center",
 	    "white"
-	    );
+        );
+        
+         // TODO
+   
+         
 							
-	}
+    }
+    
+    private mouseHandling(){
+
+        this.buttons.forEach(button => {
+            this.canvas.addEventListener("mousemove", (event) => {
+                if (this.isOnButton(event, button)) {
+                    button.setColor("grey");
+                    document.getElementById("canvas").style.cursor = "pointer";
+                } else {
+                    button.setColor("purple");
+                    document.getElementById("canvas").style.cursor = "default";
+                }
+            });
+        });
+
+		
+		/* this.canvas.addEventListener("mousedown", (event) => {
+			if (this.isOnButton(event, this.startMenu.getButton())) {
+                this.currentView = this.randomView;
+				console.log("Start the game!");
+			} else {
+				console.log("Don't start the game.");
+			}
+		}); */
+    }
+
 }
 					
