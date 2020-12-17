@@ -12,8 +12,6 @@ abstract class View {
 	 */
 	public draw(ctx: CanvasRenderingContext2D) { }
 
-	
-
 	/**
 	 * Method to draw a rounded rectangle 
 	 * @param ctx 
@@ -88,5 +86,6 @@ abstract class View {
 		ctx.fillStyle = color;
 		ctx.textAlign = alignment;
 		ctx.fillText(text, xCoordinate, yCoordinate);
+
 	}
 }
