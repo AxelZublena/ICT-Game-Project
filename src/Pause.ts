@@ -2,24 +2,22 @@
 
 class Pause extends View{
     
-    private buttons: Button[]
+    private buttons: Button[];
 	private continueButton: Button;
 	private backButton: Button;
 	private image: HTMLImageElement;
 	
-	public constructor(canvas: HTMLCanvasElement, buttonColor: string){
+	public constructor(canvas: HTMLCanvasElement){
         super(canvas);
         this.buttons = [];
-        this.continueButton = new Button(this.canvas.width * 0.28,this.canvas.height * 0.09,this.canvas.width / 2,this.canvas.height * 0.7,"purple");
-		this.backButton = new Button(this.canvas.width * 0.28,this.canvas.height * 0.09,this.canvas.width / 2,this.canvas.height * 0.85,"purple")
+        this.continueButton = new Button(this.canvas, this.canvas.width * 0.28,this.canvas.height * 0.09,this.canvas.width / 2,this.canvas.height * 0.7,"purple");
+		this.backButton = new Button(this.canvas, this.canvas.width * 0.28,this.canvas.height * 0.09,this.canvas.width / 2,this.canvas.height * 0.85,"purple")
         this.buttons.push(this.continueButton);
         this.buttons.push(this.backButton);
 		
 		// load the image/logo
 		this.image = this.loadNewImage("/assets/img/hacker.png");
     }
-    
-    
     
    /**
 	 * Method to get the button's information
@@ -28,14 +26,18 @@ class Pause extends View{
 		return [this.continueButton, this.backButton];
 	}
 
-
 	public draw(ctx: CanvasRenderingContext2D){
 
+		this.buttons.forEach(button => {
+			
+			button.mouseHandling();
+			// Draw the background color
+			ctx.fillStyle = "purple";
+			ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-        this.mouseHandling();
-		// Draw the background color
-		ctx.fillStyle = "purple";
-		ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+		});
+
+        
 		
 		
 		
@@ -95,36 +97,10 @@ class Pause extends View{
 	    "white"
         );
         
-         // TODO
-   
-         
-							
+  				
     }
     
-    private mouseHandling(){
-
-        this.buttons.forEach(button => {
-            this.canvas.addEventListener("mousemove", (event) => {
-                if (this.isOnButton(event, button)) {
-                    button.setColor("grey");
-                    document.getElementById("canvas").style.cursor = "pointer";
-                } else {
-                    button.setColor("purple");
-                    document.getElementById("canvas").style.cursor = "default";
-                }
-            });
-        });
-
-		
-		/* this.canvas.addEventListener("mousedown", (event) => {
-			if (this.isOnButton(event, this.startMenu.getButton())) {
-                this.currentView = this.randomView;
-				console.log("Start the game!");
-			} else {
-				console.log("Don't start the game.");
-			}
-		}); */
-    }
+   
 
 }
 					

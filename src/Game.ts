@@ -21,7 +21,7 @@ class Game {
 		this.mouseHandling();
 
         // randomView to test the start menu and the pause menu
-        this.randomView = new Pause(this.canvas, "purple");
+        this.randomView = new Pause(this.canvas);
 
 		this.currentView = this.startMenu;
 
@@ -54,6 +54,7 @@ class Game {
 
 	/**
 	 * Handle the mouse's events (only works for the start menu, but can and will be updated)
+	 * TODO this should use the Button.ts class!
 	 * 
 	 */
 	private mouseHandling = () => {
