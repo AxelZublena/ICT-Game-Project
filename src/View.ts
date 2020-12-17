@@ -12,22 +12,7 @@ abstract class View {
 	 */
 	public draw(ctx: CanvasRenderingContext2D) { }
 
-	/**
-	 * Checks if the mouse is on the button
-	 * @param event 
-	 * @param buttonInfo 
-	 */
-	public isOnButton = (event: MouseEvent, buttonInfo: any): boolean => {
-		if (
-			event.x > this.canvas.width / 2 - buttonInfo.width / 2 &&
-			event.x < this.canvas.width / 2 + buttonInfo.width / 2 &&
-			event.y > this.canvas.height / 2 + buttonInfo.height &&
-			event.y < this.canvas.height / 2 + buttonInfo.height * 2
-		) {
-			return true;
-		}
-		return false;
-	}
+	
 
 	/**
 	 * Method to draw a rounded rectangle 
