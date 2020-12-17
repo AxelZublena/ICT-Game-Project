@@ -2,7 +2,7 @@
 
 class StartMenu extends View {
 
-	private startButton: any;
+	private startButton: Button;
 	private buttonColor: string;
 	private image: HTMLImageElement;
 
@@ -10,18 +10,13 @@ class StartMenu extends View {
 		super(canvas);
 
 		// empty startButton
-		this.startButton = {
-			width: 0,
-			height: 0,
-			x: 0,
-			y: 0
-		};
+		this.startButton = new Button(this.canvas, 0, 0, 0, 0, buttonColor);
 
 		// set the color of the button
 		this.buttonColor = buttonColor;
 
 		// load the image/logo
-		this.image = this.loadNewImage("/assets/img/hacker.png");
+		this.image = this.loadNewImage("./assets/img/hacker.png");
 	}
 
 	/**
@@ -48,11 +43,12 @@ class StartMenu extends View {
 		ctx.fillStyle = Game.BASE_COLOR;
 		ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
+		console.log("HOMO");
 		// Gets the button's information in an object for isOnButton()
-		this.startButton.width = this.canvas.width * 0.25;
-		this.startButton.height = this.canvas.height * 0.19;
-		this.startButton.x = this.canvas.width / 2;
-		this.startButton.y = this.canvas.height * 0.77;
+		this.startButton.setWidth(this.canvas.width * 0.25);
+		this.startButton.setHeight(this.canvas.height * 0.19);
+		this.startButton.setXPos(this.canvas.width / 2);
+		this.startButton.setYPos(this.canvas.height * 0.77);
 
 		// Draws the image/logo
 		ctx.drawImage(
@@ -66,10 +62,10 @@ class StartMenu extends View {
 		// Draws a round rectangle
 		this.roundRect(
 			ctx,
-			this.startButton.x,
-			this.startButton.y,
-			this.startButton.width,
-			this.startButton.height,
+			this.startButton.getXPos(),
+			this.startButton.getYPos(),
+			this.startButton.getWidth(),
+			this.startButton.getHeight(),
 			20,
 			this.buttonColor,
 			8,
@@ -87,4 +83,5 @@ class StartMenu extends View {
 			"white"
 		);
 	}
+
 }

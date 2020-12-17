@@ -36,4 +36,5 @@ class Player {
         img.src = source;
         return img;
     }
+
 }
