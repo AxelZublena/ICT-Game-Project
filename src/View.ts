@@ -6,11 +6,6 @@ abstract class View {
 		this.canvas = canvas;
 	}
     
-    public close = () => {
-        const buttons = document.querySelectorAll("button");
-        console.log(buttons);
-    }
-
 	/**
 	 * Overidden method
 	 * @param ctx 

@@ -9,10 +9,10 @@ class StartMenu extends View {
 
 		this.startButton = new Button(
 			this.canvas,
-			this.canvas.width * 0.25,
+			this.canvas.width * 0.20,
 			this.canvas.height * 0.19,
-			this.canvas.width / 2,
-			this.canvas.height * 0.77,
+			this.canvas.width / 2 - (this.canvas.width * 0.19)/2,
+			this.canvas.height * 0.77 - (this.canvas.height * 0.19)/2,
 			"purple",
             "START"
 		);

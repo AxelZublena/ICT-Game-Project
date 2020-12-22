@@ -30,17 +30,21 @@ class Button {
 
 		this.canvas.style.position = "absolute";
 
+        // get the body to set the button position
 		const body = document.querySelector("body");
 		body.style.position = "relative";
 
+        // create a button
 		const button = document.createElement("button");
 
+        // set some style
 		button.style.backgroundColor = this.color;
         button.style.borderRadius = "20px";
         button.style.borderWidth = "6px";
         button.style.borderStyle = "solid";
         button.style.borderColor = "white";
 
+        // set position
 		button.style.position = "absolute";
 		button.style.width = this.width.toString() + "px";
 		button.style.height = this.height.toString() + "px";
@@ -48,13 +52,26 @@ class Button {
 		button.style.left = this.xPos.toString() + "px";
 		button.style.top = this.yPos.toString() + "px";
 
+        // set text
         button.innerText = this.text;
         button.style.fontSize = "250%";
         button.style.color = "white";
 
+        // add event listeners
+        
+        /**
+        * unfortunately, because the button is not connected to the Game class,
+        * the only way I found to change views is to change a boolean an access it
+        * through the view and the game.
+        * Look step() in Game.ts to understand its use.
+        */ 
 		button.addEventListener("click", () => {
 			console.log("Start the game!");
+            
+            // allow next view
             this.clicked = true;
+
+            // remove the button from the html document
             button.remove();
 		});
         button.addEventListener("mouseover", () => {
@@ -65,6 +82,7 @@ class Button {
             button.style.backgroundColor = this.color;
         });
 
+        // add the button to the body
 		body.append(button);
 	}
 

@@ -11,21 +11,21 @@ class Pause extends View {
 
 		this.continueButton = new Button(
 			this.canvas,
-			this.canvas.width * 0.28,
+			this.canvas.width * 0.22,
 			this.canvas.height * 0.09,
-			this.canvas.width / 2,
-			this.canvas.height * 0.7,
+			this.canvas.width / 2 - (this.canvas.width * 0.22)/2,
+			this.canvas.height * 0.7 - (this.canvas.height * 0.09)/2,
 			"purple",
             "CONTINUE"
 		);
 		this.backButton = new Button(
 			this.canvas,
-			this.canvas.width * 0.28,
+			this.canvas.width * 0.22,
 			this.canvas.height * 0.09,
-			this.canvas.width / 2,
-			this.canvas.height * 0.85,
+			this.canvas.width / 2 - (this.canvas.width * 0.22)/2,
+			this.canvas.height * 0.85 - (this.canvas.height * 0.09)/2,
 			"purple",
-            "QUIT"
+            "BACK"
 		);
 
 		// load the image/logo
@@ -50,5 +50,12 @@ class Pause extends View {
 			this.canvas.height * 0.9
 		);
 	}
+
+    public getContinueButton = () => {
+        return this.continueButton;
+    }
+    public getBackButton = () => {
+        return this.backButton;
+    }
 }
 

@@ -5,6 +5,7 @@ class Game {
 
 	private startMenu: StartMenu;
 	private pauseMenu: Pause;
+    private level: View; 
 	private currentView: View;
 
 	public static readonly BASE_COLOR: string = "#00A5DC";
@@ -18,8 +19,7 @@ class Game {
 		// create a start menu
         this.startMenu = new StartMenu(this.canvas);
 
-
-		this.currentView = this.startMenu;
+        this.currentView = this.startMenu;
     
         this.step();
     }
@@ -30,13 +30,14 @@ class Game {
 	 * caused by javascript scoping behaviour.
 	 */
 	step = () => {
+        // Handle the start menu button
         if(this.currentView instanceof StartMenu){
             if(this.currentView.getButton().getClicked()){
                 this.currentView.getButton().resetClicked();
-                this.currentView.close();
                 this.currentView = new Pause(this.canvas); 
             }
         }
+
 		// draw the current view
 		this.draw();
 
