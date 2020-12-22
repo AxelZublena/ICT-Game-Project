@@ -4,9 +4,8 @@ class Pause extends View {
 	//private buttons: Button[];
 	private continueButton: Button;
 	private backButton: Button;
-	private image: HTMLImageElement;
 
-	public constructor(canvas: HTMLCanvasElement) {
+	constructor(canvas: HTMLCanvasElement) {
 		super(canvas);
 
 		this.continueButton = new Button(

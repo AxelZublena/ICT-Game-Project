@@ -1,8 +1,9 @@
 abstract class View {
 
 	protected canvas: HTMLCanvasElement;
+	protected image: HTMLImageElement;
 
-	public constructor(canvas: HTMLCanvasElement) {
+	constructor(canvas: HTMLCanvasElement) {
 		this.canvas = canvas;
 	}
     

@@ -4,13 +4,13 @@ class Button {
 	private xPos: number;
 	private yPos: number;
 	private color: string;
-    private text: string;
+	private text: string;
 
 	private canvas: HTMLCanvasElement;
 
     private clicked: boolean;
 
-	public constructor(
+	constructor(
 		canvas: HTMLCanvasElement,
 		width: number,
 		height: number,
@@ -85,8 +85,6 @@ class Button {
         // add the button to the body
 		body.append(button);
 	}
-
-
 
 	public getClicked = () => {
 		return this.clicked;
