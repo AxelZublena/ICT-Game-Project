@@ -1,88 +1,120 @@
 class Button {
+	private width: number;
+	private height: number;
+	private xPos: number;
+	private yPos: number;
+	private color: string;
+    private text: string;
 
-    private width: number;
-    private height: number;
-    private xPos: number;
-    private yPos: number;
-    private color: string;
-    private canvas: HTMLCanvasElement;
+	private canvas: HTMLCanvasElement;
 
-    public constructor(canvs: HTMLCanvasElement, width: number, height: number, xPos: number, yPos: number, color: string) {
-        this.canvas = canvs;
-        this.width = width;
-        this.height = height;
-        this.xPos = xPos;
-        this.yPos = yPos;
-    }
+    private clicked: boolean;
 
-    public getWidth = () => {
-        return this.width;
-    }
+	public constructor(
+		canvas: HTMLCanvasElement,
+		width: number,
+		height: number,
+		xPos: number,
+		yPos: number,
+		color: string,
+        text: string
+	) {
+		this.canvas = canvas;
+		this.width = width;
+		this.height = height;
+		this.xPos = xPos;
+		this.yPos = yPos;
+		this.color = color;
+        this.clicked = false;
+        this.text = text;
 
-    public getHeight = () => {
-        return this.height;
-    }
+		this.canvas.style.position = "absolute";
 
-    public getXPos = () => {
-        return this.xPos;
-    }
+		const body = document.querySelector("body");
+		body.style.position = "relative";
 
-    public getYPos = () => {
-        return this.yPos;
-    }
+		const button = document.createElement("button");
 
-    public getColor = () => {
-        return this.color;
-    }
+		button.style.backgroundColor = this.color;
+        button.style.borderRadius = "20px";
+        button.style.borderWidth = "6px";
+        button.style.borderStyle = "solid";
+        button.style.borderColor = "white";
 
-    public setWidth = (width: number) => {
-        this.width = width;
-    }
+		button.style.position = "absolute";
+		button.style.width = this.width.toString() + "px";
+		button.style.height = this.height.toString() + "px";
+		button.style.zIndex = "10";
+		button.style.left = this.xPos.toString() + "px";
+		button.style.top = this.yPos.toString() + "px";
 
-    public setHeight = (height: number) => {
-        this.height = height;
-    }
+        button.innerText = this.text;
+        button.style.fontSize = "250%";
+        button.style.color = "white";
 
-    public setXPos = (xPos: number) => {
-        this.xPos = xPos;
-    }
+		button.addEventListener("click", () => {
+			console.log("Start the game!");
+            this.clicked = true;
+            button.remove();
+		});
+        button.addEventListener("mouseover", () => {
+            button.style.backgroundColor = "grey";
+            button.style.cursor = "pointer";
+        });
+        button.addEventListener("mouseout", () => {
+            button.style.backgroundColor = this.color;
+        });
 
-    public setYPos = (yPos: number) => {
-        this.yPos = yPos;
-    }
+		body.append(button);
+	}
 
-    public setColor = (color: string) => {
-        this.color = color;
-    }
 
-    public mouseHandling = () => {
-        this.canvas.addEventListener("mousemove", (event) => {
-            if (this.isOnButton(event)) {
-                this.setColor("grey");
-                document.getElementById("canvas").style.cursor = "pointer";
-            } else {
-                this.setColor("purple");
-                document.getElementById("canvas").style.cursor = "default";
-            }
-        })
 
-    }
+	public getClicked = () => {
+		return this.clicked;
+	};
+	public resetClicked = () => {
+		this.clicked = false;
+	};
 
-    /**
-     * Checks if the mouse is on the button
-     * @param event 
-     * @param buttonInfo 
-     */
-    public isOnButton = (event: MouseEvent): boolean => {
-        if (
-            event.x > this.canvas.width / 2 - this.width / 2 &&
-            event.x < this.canvas.width / 2 + this.width / 2 &&
-            event.y > this.canvas.height / 2 + this.height &&
-            event.y < this.canvas.height / 2 + this.height * 2
-        ) {
-            return true;
-        }
-        return false;
-    }
+	public getWidth = () => {
+		return this.width;
+	};
+
+	public getHeight = () => {
+		return this.height;
+	};
+
+	public getXPos = () => {
+		return this.xPos;
+	};
+
+	public getYPos = () => {
+		return this.yPos;
+	};
+
+	public getColor = () => {
+		return this.color;
+	};
+
+	public setWidth = (width: number) => {
+		this.width = width;
+	};
+
+	public setHeight = (height: number) => {
+		this.height = height;
+	};
+
+	public setXPos = (xPos: number) => {
+		this.xPos = xPos;
+	};
+
+	public setYPos = (yPos: number) => {
+		this.yPos = yPos;
+	};
+
+	public setColor = (color: string) => {
+		this.color = color;
+	};
 
 }

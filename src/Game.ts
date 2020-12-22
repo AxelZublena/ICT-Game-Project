@@ -4,7 +4,7 @@ class Game {
 	private ctx: CanvasRenderingContext2D;
 
 	private startMenu: StartMenu;
-	private randomView: Pause;
+	private pauseMenu: Pause;
 	private currentView: View;
 
 	public static readonly BASE_COLOR: string = "#00A5DC";
@@ -16,17 +16,13 @@ class Game {
 		this.ctx = this.canvas.getContext("2d");
 
 		// create a start menu
-		this.startMenu = new StartMenu(this.canvas, Game.BASE_COLOR);
-		// event listener to handle mouse actions;
-		this.mouseHandling();
+        this.startMenu = new StartMenu(this.canvas);
 
-		// randomView to test the start menu and the pause menu
-		this.randomView = new Pause(this.canvas);
 
 		this.currentView = this.startMenu;
-
-		requestAnimationFrame(this.step);
-	}
+    
+        this.step();
+    }
 
 	/**
 	 * This MUST be an arrow method in order to keep the `this` variable
@@ -34,6 +30,13 @@ class Game {
 	 * caused by javascript scoping behaviour.
 	 */
 	step = () => {
+        if(this.currentView instanceof StartMenu){
+            if(this.currentView.getButton().getClicked()){
+                this.currentView.getButton().resetClicked();
+                this.currentView.close();
+                this.currentView = new Pause(this.canvas); 
+            }
+        }
 		// draw the current view
 		this.draw();
 
@@ -50,32 +53,6 @@ class Game {
 
 		// Draw the current view
 		this.currentView.draw(this.ctx);
-	}
-
-	/**
-	 * Handle the mouse's events (only works for the start menu, but can and will be updated)
-	 * TODO this should use the Button.ts class!
-	 * 
-	 */
-	private mouseHandling = () => {
-		this.canvas.addEventListener("mousemove", (event) => {
-
-			if (this.startMenu.getButton().isOnButton(event)) {
-				this.startMenu.setButtonColor("grey");
-				document.getElementById("canvas").style.cursor = "pointer";
-			} else {
-				this.startMenu.setButtonColor(Game.BASE_COLOR);
-				document.getElementById("canvas").style.cursor = "default";
-			}
-		});
-		this.canvas.addEventListener("mousedown", (event) => {
-			if (this.startMenu.getButton().isOnButton(event)) {
-				this.currentView = this.randomView;
-				console.log("Start the game!");
-			} else {
-				console.log("Don't start the game.");
-			}
-		});
 	}
 
 }
