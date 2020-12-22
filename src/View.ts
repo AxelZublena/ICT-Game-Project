@@ -5,53 +5,13 @@ abstract class View {
 	public constructor(canvas: HTMLCanvasElement) {
 		this.canvas = canvas;
 	}
-
+    
 	/**
 	 * Overidden method
 	 * @param ctx 
 	 */
-	public draw(ctx: CanvasRenderingContext2D) { }
+	public draw = (ctx: CanvasRenderingContext2D) => { }
 
-	/**
-	 * Method to draw a rounded rectangle 
-	 * @param ctx 
-	 * @param x 
-	 * @param y 
-	 * @param width 
-	 * @param height 
-	 * @param radius 
-	 * @param color 
-	 * @param boderWidth 
-	 * @param boderColor 
-	 */
-	protected roundRect = (
-		ctx: CanvasRenderingContext2D,
-		x: number,
-		y: number,
-		width: number,
-		height: number,
-		radius: number,
-		color: string,
-		boderWidth: number,
-		boderColor: string
-	) => {
-		if (width < 2 * radius) radius = width / 2;
-		if (height < 2 * radius) radius = height / 2;
-		x = x - width / 2;
-		y = y - height / 2;
-		ctx.beginPath();
-		ctx.fillStyle = color;
-		ctx.moveTo(x + radius, y);
-		ctx.arcTo(x + width, y, x + width, y + height, radius);
-		ctx.arcTo(x + width, y + height, x, y + height, radius);
-		ctx.arcTo(x, y + height, x, y, radius);
-		ctx.arcTo(x, y, x + width, y, radius);
-		ctx.closePath();
-		ctx.fill();
-		ctx.strokeStyle = boderColor;
-		ctx.lineWidth = boderWidth;
-		ctx.stroke();
-	}
 
 	/**
 	 * Loads an image in such a way that the screen doesn't constantly flicker
