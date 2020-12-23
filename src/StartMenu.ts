@@ -2,9 +2,8 @@
 
 class StartMenu extends View {
 	private startButton: Button;
-	private image: HTMLImageElement;
 
-	public constructor(canvas: HTMLCanvasElement) {
+	constructor(canvas: HTMLCanvasElement) {
 		super(canvas);
 
 		this.startButton = new Button(
