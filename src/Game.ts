@@ -63,7 +63,13 @@ class Game {
 
 		if(this.currentView instanceof Room){
 			if(this.currentView.getNextRoom()){
-				this.currentView = new Room(this.canvas);
+                if(this.currentView.isNextRoomGood()){
+                    console.log(this.currentView.isNextRoomGood());
+                    this.currentView = new Room(this.canvas, true);
+                }
+                else{
+                    this.currentView = new Room(this.canvas, false);
+                }
 			}
 		}
 		// Draw the current view
@@ -81,9 +87,7 @@ class Game {
 				document.querySelectorAll('button').forEach(button => {
 					button.remove();
 				});
-				// this.currentView = new LevelMap(this.canvas);
-				// this.prevView = 'map';
-				this.currentView = new Room(this.canvas);
+				this.currentView = new Room(this.canvas, true);
 			}
 		}
 	}

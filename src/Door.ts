@@ -19,6 +19,7 @@ class Door {
 		isCrossed: boolean,
 		canvas: HTMLCanvasElement
 	) {
+        //console.log(isSensitive + " : " + name);
 		this.name = name;
 		this.position = position;
 
@@ -95,7 +96,6 @@ class Door {
 
 		ctx.stroke();
 
-		// TODO
 		if (
 			this.playerCollidesWithDoor(
 				playerXPos,
@@ -104,23 +104,17 @@ class Door {
 				playerHeight
 			)
 		) {
+            console.log(this.isSensitive + " " + this.name);
 			this.isCrossed = true;
 		}
 	};
 
-	// TODO
 	private playerCollidesWithDoor = (
 		playerXPos: number,
 		playerYPos: number,
 		playerWidth: number,
 		playerHeight: number
 	): boolean => {
-		// if(playerXPos > this.positionX && playerXPos < this.positionX + this.width){
-		//     console.log(this.position + " detected");
-		//     //return true;
-		// }
-		// return false;
-
 		if (this.position === "bottom") {
             const playerYPosBottomRight = playerYPos + playerHeight;
 			if (
@@ -154,8 +148,6 @@ class Door {
 		}
 		if (this.position === "right") {
             const playerXPosBottomRight = playerXPos + playerWidth;
-            
-            console.log(this.positionY - this.width/2 + " AND " + playerXPosBottomRight);
 
 			if (
 				playerXPosBottomRight > this.positionX - this.width &&
