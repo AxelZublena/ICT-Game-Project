@@ -61,6 +61,11 @@ class Game {
 	private draw = () => {
 		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
+		if(this.currentView instanceof Room){
+			if(this.currentView.getNextRoom()){
+				this.currentView = new Room(this.canvas);
+			}
+		}
 		// Draw the current view
 		this.currentView.draw(this.ctx);
 	}
@@ -76,8 +81,9 @@ class Game {
 				document.querySelectorAll('button').forEach(button => {
 					button.remove();
 				});
-				this.currentView = new LevelMap(this.canvas);
-				this.prevView = 'map';
+				// this.currentView = new LevelMap(this.canvas);
+				// this.prevView = 'map';
+				this.currentView = new Room(this.canvas);
 			}
 		}
 	}
@@ -95,7 +101,7 @@ class Game {
 				if (this.prevView == 'start') {
 					this.currentView = new StartMenu(this.canvas);
 				} else if (this.prevView == 'map') {
-					this.currentView = new LevelMap(this.canvas);
+					// this.currentView = new LevelMap(this.canvas);
 				}
 			}
 		}
