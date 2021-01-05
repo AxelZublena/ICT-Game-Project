@@ -7,9 +7,13 @@ class Player {
     private keyListener: KeyListener;
     private canvas: HTMLCanvasElement;
 
-    constructor(image: string, canvas: HTMLCanvasElement) {
-        this.image = this.loadNewImage(image);
-        this.speed = 15;
+    private sprite: ["./assets/img/player.png", "./assets/img/arrow.png"];
+    private newImage: string;
+
+    constructor(canvas: HTMLCanvasElement) {
+        // "./assets/img/player.png"
+        this.image = this.loadNewImage(this.newImage);
+        this.speed = 5;
         this.image.width = 100;
         this.image.height = 100;
 
@@ -20,8 +24,8 @@ class Player {
     }
 
     public draw = (ctx: CanvasRenderingContext2D) => {
-        const playerWidth = this.canvas.width * 0.1;
-        const playerHeight = this.canvas.width * 0.1;
+        const playerWidth = this.canvas.width * 0.05;
+        const playerHeight = this.canvas.width * 0.05;
 
         if (this.keyListener.isKeyDown(40) && this.yPos < this.canvas.height - playerHeight) {
             this.yPos += this.speed;
@@ -39,9 +43,16 @@ class Player {
         ctx.drawImage(this.image, this.xPos, this.yPos, playerWidth, playerHeight);
     };
 
+    /**
+     * Get the player x position
+     */
     public getPositionX = () => {
         return this.xPos;
     };
+
+    /**
+     * Get the player y postion
+     */
     public getPositionY = () => {
         return this.yPos;
     };

@@ -18,7 +18,7 @@ class Room extends View {
     constructor(canvas: HTMLCanvasElement){
         super(canvas);
         
-        this.player = new Player("./assets/img/player.png", this.canvas);
+        this.player = new Player(this.canvas);
 
         this.doors = [];
 
