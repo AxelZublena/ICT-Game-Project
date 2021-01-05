@@ -43,6 +43,10 @@ class Player {
         ctx.drawImage(this.image, this.xPos, this.yPos, playerWidth, playerHeight);
     };
 
+    private setNewImage = () => {
+        
+    }
+
     /**
      * Get the player x position
      */
