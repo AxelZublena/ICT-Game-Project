@@ -8,27 +8,22 @@ class Player {
 	private canvas: HTMLCanvasElement;
 
 	constructor(image: string, canvas: HTMLCanvasElement) {
+		this.canvas = canvas;
 		this.image = this.loadNewImage(image);
-		this.speed = 15;
-		this.image.width = 100;
-		this.image.height = 100;
+		this.speed = 5;		
 
 		this.keyListener = new KeyListener();
-		this.canvas = canvas;
+		
 		this.xPos = canvas.width / 2 - this.image.width / 2;
-        this.yPos = canvas.height / 2 - this.image.height / 2;
+		this.yPos = canvas.height / 2 - this.image.height / 2;
 	}
 
 	public draw = (ctx: CanvasRenderingContext2D) => {
-		const playerWidth = this.canvas.width * 0.1;
-		const playerHeight = this.canvas.width * 0.1;
-
-		if (
-			this.keyListener.isKeyDown(40) &&
-			this.yPos < this.canvas.height - playerHeight
-		) {
+		// bottom wall detection
+		if (this.keyListener.isKeyDown(40) && this.yPos < this.canvas.height - this.image.height) {
 			this.yPos += this.speed;
 		}
+
 		if (this.keyListener.isKeyDown(38) && this.yPos > 0) {
 			this.yPos -= this.speed;
 		}
@@ -37,7 +32,7 @@ class Player {
 		}
 		if (
 			this.keyListener.isKeyDown(39) &&
-			this.xPos < this.canvas.width - playerWidth
+			this.xPos < this.canvas.width - this.image.width
 		) {
 			this.xPos += this.speed;
 		}
@@ -46,17 +41,23 @@ class Player {
 			this.image,
 			this.xPos,
 			this.yPos,
-			playerWidth,
-			playerHeight
-        );
+			this.image.width,
+			this.image.height
+		);
 	};
 
-    public getPositionX = () => {
-        return this.xPos;
-    }
-    public getPositionY = () => {
-        return this.yPos;
-    }
+	public getPositionX = () => {
+		return this.xPos;
+	};
+	public getPositionY = () => {
+		return this.yPos;
+	};
+	public getWidth = () => {
+		return this.image.width;
+	};
+	public getHeight = () => {
+		return this.image.height;
+	};
 
 	/**
 	 * Set the speed of the player
@@ -73,6 +74,8 @@ class Player {
 	private loadNewImage = (source: string): HTMLImageElement => {
 		const img = new Image();
 		img.src = source;
+		img.width = this.canvas.width * 0.1;
+		img.height = img.width;
 		return img;
-    };
+	};
 }
