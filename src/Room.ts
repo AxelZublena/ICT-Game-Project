@@ -18,14 +18,16 @@ class Room extends View {
     constructor(canvas: HTMLCanvasElement){
         super(canvas);
         
-        this.player = new Player(this.canvas);
+        this.player = new Player("./assets/img/player.png", this.canvas);
 
         this.doors = [];
 
-        this.doors.push(new Door("Bank", "bottom", true, false, this.canvas));
-        this.doors.push(new Door("Dog", "left", false, false, this.canvas));
+        // Need to respect this pattern: Top, Right, Bottom, Left (just like CSS) 
+        // Index: 0 = Top, 1 = Right, 2 = Bottom, 3 = Left
         this.doors.push(new Door("Food", "top", false, false, this.canvas));
         this.doors.push(new Door("Home Adress", "right", true, false, this.canvas));
+        this.doors.push(new Door("Bank", "bottom", true, false, this.canvas));
+        this.doors.push(new Door("Dog", "left", false, false, this.canvas));
         
         this.nextRoom = false;
     }
@@ -34,7 +36,7 @@ class Room extends View {
         const ctx = this.canvas.getContext("2d");
 
         this.doors.forEach(door => {
-            door.draw(ctx, this.player.getPositionX(), this.player.getPositionY());
+            door.draw(ctx, this.player.getPositionX(), this.player.getPositionY(), this.player.getWidth(), this.player.getHeight());
             if(door.getIsCrossed() === true){
                 this.nextRoom = true;
             }
