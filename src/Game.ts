@@ -60,7 +60,7 @@ class Game {
                     console.log(this.goodRoomCounter);
                     this.goodRoomCounter++;
                     if(this.goodRoomCounter === 5){
-                        this.currentView = new Finish(this.canvas);
+                        this.currentView = new End(this.canvas, "Congratulations! Now you are smart enough to know which information you have to retain from others.");
                     }
                     else{
                         this.currentView = new Room(this.canvas, true);
@@ -143,8 +143,8 @@ class Game {
 	/**
 	 * Handles the finish and on the push of the button gets you back to the start menu
 	 */
-	private finishHandler = () => {
-		if (this.currentView instanceof Finish) {
+	private endHandler = () => {
+		if (this.currentView instanceof End) {
 			if (this.currentView.getButton().getClicked()) {
 				document.querySelectorAll('button').forEach(button => {
 					button.remove();
@@ -170,7 +170,7 @@ class Game {
 		// Continue handler
 		this.continueHandler();
 
-		// Finish handler
-		this.finishHandler();
+		// End handler
+		this.endHandler();
 	}
 }

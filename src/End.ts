@@ -1,9 +1,10 @@
 /// <reference path="View.ts" />
 
-class Finish extends View {
+class End extends View {
     private backToStartMenuButton: Button;
+    private endText: string;
 
-    constructor(canvas: HTMLCanvasElement) {
+    constructor(canvas: HTMLCanvasElement, endText: string) {
         super(canvas);
 
         this.backToStartMenuButton = new Button(
@@ -18,6 +19,9 @@ class Finish extends View {
 
         // load the image
         this.image = this.loadNewImage('./assets/img/hacker.png');
+
+        // ending text
+        this.endText = endText;
     }
 
     /**
@@ -50,7 +54,7 @@ class Finish extends View {
         
         ctx.font = '25px Arial';
         ctx.fillStyle = 'white';
-        ctx.fillText("Congratulations! Now you are smart enough to know which information you have to retain from others.", this.canvas.width/2, 110)
+        ctx.fillText(this.endText, this.canvas.width/2, 110)
         ctx.textAlign = "center";
 	};
 }
