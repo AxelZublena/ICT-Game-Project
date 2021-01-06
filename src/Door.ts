@@ -1,7 +1,7 @@
 class Door {
 	private canvas: HTMLCanvasElement;
 
-	private name: string;
+	private data: any;
 
 	private positionX: number;
 	private positionY: number;
@@ -13,13 +13,13 @@ class Door {
 	private isCrossed: boolean; // The player has touched the door
 
 	constructor(
-		name: string,
+		data: object,
 		position: string,
 		isSensitive: boolean,
 		isCrossed: boolean,
 		canvas: HTMLCanvasElement
 	) {
-		this.name = name;
+		this.data = data;
 		this.position = position;
 		this.isSensitive = isSensitive;
 		this.isCrossed = isCrossed;
@@ -45,7 +45,7 @@ class Door {
 	) => {
 		ctx.fillStyle = "white";
 		ctx.textAlign = "center";
-        const fontSize = this.canvas.width * 0.02; 
+        const fontSize = this.canvas.width * 0.01; 
 		ctx.font = fontSize + "px Arial";
 
 		ctx.beginPath();
@@ -62,16 +62,20 @@ class Door {
 			//);
 			ctx.stroke();
 
-			const words = this.name.split(" ");
+			const words: string[] = this.data.name.split(" ");
 
 			let i = 0;
-			words.forEach((word) => {
+            for(let j = 1; j < words.length; j++){
+                i += fontSize; 
+            }
+
+			words.forEach((word: string) => {
 				ctx.fillText(
 					word,
 					this.canvas.width * 0.41,
 					(this.canvas.height * 0.9) + i
                 );
-				i = fontSize;
+				i -= fontSize;
 			});
 		}
 		if (this.position === "top") {
@@ -86,14 +90,14 @@ class Door {
 			//);
 			ctx.stroke();
 
-			const words = this.name.split(" ").reverse();
+			const words: string[] = this.data.name.split(" ").reverse();
 
 			let i = 0;
             for(let j = 1; j < words.length; j++){
                 i += fontSize; 
             }
 
-			words.forEach((word) => {
+			words.forEach((word: string) => {
 				ctx.fillText(
 					word,
 					this.canvas.width * 0.5,
@@ -115,16 +119,20 @@ class Door {
 			//);
 			ctx.stroke();
 
-			const words = this.name.split(" ");
+			const words: string[] = this.data.name.split(" ");
 
 			let i = 0;
-			words.forEach((word) => {
+            for(let j = 1; j < words.length; j++){
+                i += fontSize; 
+            }
+
+			words.forEach((word: string) => {
 				ctx.fillText(
 					word,
 					this.canvas.width * 0.12,
-					(this.canvas.height * 0.545) + i
+			 		(this.canvas.height * 0.545) + i
                 );
-				i = fontSize;
+				i -= fontSize;
 			});
 
 		}
@@ -140,23 +148,21 @@ class Door {
 			//);
 			ctx.stroke();
 
-			const words = this.name.split(" ");
+			const words: string[] = this.data.name.split(" ");
 
 			let i = 0;
-			words.forEach((word) => {
+            for(let j = 1; j < words.length; j++){
+                i += fontSize; 
+            }
+
+			words.forEach((word: string) => {
 				ctx.fillText(
 					word,
 					this.canvas.width * 0.88,
-					(this.canvas.height * 0.425) + i
+			 		(this.canvas.height * 0.425) + i
                 );
-				i = fontSize;
+				i -= fontSize;
 			});
-
-            //ctx.fillText(
-                //this.name,
-                //this.canvas.width - this.canvas.width / 45,
-                //this.canvas.height / 2
-            //);
 		}
 
 		// Checking if it the door has an overlap with the player
@@ -168,8 +174,9 @@ class Door {
 				playerHeight
 			)
 		) {
-			console.log(this.isSensitive + " " + this.name);
+			console.log(this.isSensitive + " " + this.data.name);
 			this.isCrossed = true;
+
 		}
 	};
 
@@ -270,8 +277,15 @@ class Door {
 	};
 
 	public getName = () => {
-		return this.name;
+		return this.data.name;
 	};
+	public getExplaination = () => {
+		return this.data.explaination;
+	};
+	public getData = () => {
+		return this.data;
+	};
+
 	public getIsSensitive = () => {
 		return this.isSensitive;
 	};
@@ -279,3 +293,4 @@ class Door {
 		return this.isCrossed;
 	};
 }
+

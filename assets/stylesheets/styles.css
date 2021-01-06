@@ -1,4 +1,69 @@
 body {
-    margin: 0; /* getting rid of margin on the edges */
-    overflow: hidden; /* there is no scrollbar, the canvas is the actual whole screen */
+	margin: 0; /* getting rid of margin on the edges */
+	overflow: hidden; /* there is no scrollbar, the canvas is the actual whole screen */
+	position: relative;
+
+	font-family: "Courier New", Courier, monospace;
+}
+canvas {
+	z-index: 0;
+}
+
+#info {
+	justify-content: center;
+	width: 50%;
+	height: 65%;
+
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	/* bring your own prefixes */
+	transform: translate(-50%, -50%);
+	visibility: hidden;
+	z-index: 10;
+
+	background-color: brown;
+	border-radius: 20px;
+	border-color: white;
+	border-width: 6px;
+	border-style: solid;
+
+	padding: 100px;
+}
+
+#name {
+	font-size: 85px;
+	text-align: center;
+	color: white;
+}
+
+#explaination {
+	font-size: 30px;
+	text-align: center;
+	color: black;
+}
+#understoodBtn {
+	font-size: 50px;
+	position: absolute;
+	background-color: dodgerblue;
+	border-radius: 15px;
+	border-color: white;
+	border-width: 4px;
+	border-style: solid;
+	top: 85%;
+	left: 50%;
+	transform: translate(-50%);
+}
+#understoodBtn:hover {
+	font-size: 50px;
+	position: absolute;
+	background-color: grey;
+	border-radius: 15px;
+	border-color: white;
+	border-width: 4px;
+	border-style: solid;
+	top: 85%;
+	left: 50%;
+	transform: translate(-50%);
+	cursor: pointer;
 }
