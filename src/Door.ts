@@ -19,7 +19,6 @@ class Door {
 		isCrossed: boolean,
 		canvas: HTMLCanvasElement
 	) {
-        //console.log(isSensitive + " : " + name);
 		this.name = name;
 		this.position = position;
 
@@ -52,7 +51,12 @@ class Door {
 		playerWidth: number,
 		playerHeight: number
 	) => {
+		ctx.fillStyle = "black";
+		ctx.textAlign = "center";
+		ctx.font = this.canvas.width * 0.02 + "px Arial";
+
 		ctx.beginPath();
+
 		if (this.position === "bottom") {
 			this.width = this.canvas.width * 0.2;
 			this.height = this.canvas.height * 0.05;
@@ -61,6 +65,12 @@ class Door {
 				this.positionY - this.height,
 				this.width,
 				this.height
+			);
+
+			ctx.fillText(
+				this.name,
+				this.canvas.width / 2,
+				this.canvas.height - this.canvas.height / 55
 			);
 		}
 		if (this.position === "top") {
@@ -72,6 +82,12 @@ class Door {
 				this.width,
 				this.height
 			);
+
+			ctx.fillText(
+				this.name,
+				this.canvas.width / 2,
+				this.canvas.height / 26
+			);
 		}
 		if (this.position === "left") {
 			this.width = this.canvas.height * 0.05;
@@ -82,6 +98,12 @@ class Door {
 				this.width,
 				this.height
 			);
+
+			ctx.save();
+			ctx.translate(this.canvas.width / 40, this.canvas.height / 2);
+			ctx.rotate(-Math.PI / 2);
+			ctx.fillText(this.name, 0, 0);
+			ctx.restore();
 		}
 		if (this.position === "right") {
 			this.width = this.canvas.height * 0.05;
@@ -92,6 +114,12 @@ class Door {
 				this.width,
 				this.height
 			);
+
+			ctx.save();
+			ctx.translate(this.canvas.width - this.canvas.width / 45, this.canvas.height / 2);
+			ctx.rotate(Math.PI / 2);
+			ctx.fillText(this.name, 0, 0);
+			ctx.restore();
 		}
 
 		ctx.stroke();
@@ -104,7 +132,7 @@ class Door {
 				playerHeight
 			)
 		) {
-            console.log(this.isSensitive + " " + this.name);
+			console.log(this.isSensitive + " " + this.name);
 			this.isCrossed = true;
 		}
 	};
@@ -116,43 +144,42 @@ class Door {
 		playerHeight: number
 	): boolean => {
 		if (this.position === "bottom") {
-            const playerYPosBottomRight = playerYPos + playerHeight;
+			const playerYPosBottomRight = playerYPos + playerHeight;
 			if (
 				playerXPos > this.positionX - this.width &&
-                playerXPos < this.positionX + this.width/2 &&
-                playerYPosBottomRight > this.positionY - this.height
-			) {
-				return true;
-            }
-        }
-        
-		if (this.position === "top") {
-			if (
-				playerXPos > this.positionX - this.width &&
-                playerXPos < this.positionX + this.width/2 &&
-                playerYPos < this.positionY + this.height
+				playerXPos < this.positionX + this.width / 2 &&
+				playerYPosBottomRight > this.positionY - this.height
 			) {
 				return true;
 			}
-        }
-        
-		if (this.position === "left") {
-            
+		}
+
+		if (this.position === "top") {
 			if (
-                playerXPos < this.positionX + this.width &&
-                playerYPos > this.positionY - this.height &&
-                playerYPos < this.positionY + this.height / 2
+				playerXPos > this.positionX - this.width &&
+				playerXPos < this.positionX + this.width / 2 &&
+				playerYPos < this.positionY + this.height
+			) {
+				return true;
+			}
+		}
+
+		if (this.position === "left") {
+			if (
+				playerXPos < this.positionX + this.width &&
+				playerYPos > this.positionY - this.height &&
+				playerYPos < this.positionY + this.height / 2
 			) {
 				return true;
 			}
 		}
 		if (this.position === "right") {
-            const playerXPosBottomRight = playerXPos + playerWidth;
+			const playerXPosBottomRight = playerXPos + playerWidth;
 
 			if (
 				playerXPosBottomRight > this.positionX - this.width &&
-                playerYPos > this.positionY - this.height &&
-                playerYPos < this.positionY + this.height / 2
+				playerYPos > this.positionY - this.height &&
+				playerYPos < this.positionY + this.height / 2
 			) {
 				return true;
 			}

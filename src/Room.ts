@@ -112,7 +112,6 @@ class Room extends View {
 					)
 				);
 			}
-			// 3 non-sensitive data
 			else {
 				// make sure there is at least one sensitive data
 				if (i === 3 && onlyOneSensitiveData === false) {
@@ -163,19 +162,23 @@ class Room extends View {
 		max: number,
 		alreadyUsedValues: number[] = [-1]
 	) => {
-		if (alreadyUsedValues === [-1]) {
+		if (alreadyUsedValues[0] === -1) {
 			return Math.floor(Math.random() * (max - min) + min);
-		} else {
+		} else if (alreadyUsedValues.length > 0){
 			let random = Math.floor(Math.random() * (max - min) + min);
 			for (let i = 0; i < alreadyUsedValues.length; i++) {
 				if (random === alreadyUsedValues[i]) {
 					random = Math.floor(Math.random() * (max - min) + min);
-				} else {
-					return random;
+                    if(random !== alreadyUsedValues[i]){
+                        return random;
+                    }
 				}
-			}
+            }
 			return random;
 		}
+        else{
+			return Math.floor(Math.random() * (max - min) + min);
+        }
 	};
 }
 
