@@ -4,13 +4,14 @@ class Game {
 	private ctx: CanvasRenderingContext2D;
 
 	private startMenu: StartMenu;
-	private pauseMenu: Pause;
 	private currentView: View;
 	private prevView: string;
 	private keyboard: KeyListener;
 
     private goodRoomCounter: number;
 	private failedRoomCounter: Array<any>;
+
+	private stop: boolean;
 
 	public static readonly BASE_COLOR: string = "#00A5DC";
 
@@ -29,9 +30,12 @@ class Game {
 		this.currentView = this.startMenu;
 
 		this.goodRoomCounter = 0;
-        this.failedRoomCounter = [];
-    
-        this.step();
+		this.failedRoomCounter = [];
+		this.stop = false;
+	
+		if (!this.stop) {
+			this.step();
+		}
     }
 
 	/**
@@ -133,48 +137,34 @@ class Game {
 		}
 	}
 
-	/**
-	 * Handles the continue button in the pause menu
-	 * TODO: later when the levelmap will be dynamic, the last frame before hitting the escape will be stored to an empty view and it is going to load that back
-	 */
-	private continueHandler = () => {
-		if (this.currentView instanceof Pause) {
-			if (this.currentView.getContinueButton().getClicked()) {
-				document.querySelectorAll('button').forEach(button => {
-					button.remove();
-				});
-				if (this.prevView == 'start') {
-					this.currentView = new StartMenu(this.canvas);
-				} else if (this.prevView == 'map') {
-					// this.currentView = new LevelMap(this.canvas);
-				}
-			}
-		}
-	}
-
-	/**
-	 * Handles the back button in the pause menu
-	 */
-	private backHandler = () => {
-		if (this.currentView instanceof Pause) {
-			if (this.currentView.getBackButton().getClicked()) {
-				document.querySelectorAll('button').forEach(button => {
-					button.remove();
-				});
-				this.currentView = new StartMenu(this.canvas);
-			}
-		}
-	}
 
 	/**
 	 * Handles the pause menu on the push of the ESC key
 	 */
 	private pauseMenuHandler = () => {
 		if (this.keyboard.isKeyDown(27)) {
-			document.querySelectorAll('button').forEach(button => {
-				button.remove();
+
+			// this.stop = true;
+			document.getElementById("pause").style.visibility = "visible";
+			this.canvas.style.webkitFilter = "blur(10px)";
+					
+			const continueBtn = document.getElementById("continueBtn");
+			continueBtn.addEventListener("click", () => {
+				document.getElementById("pause").style.visibility = "hidden";
+
+				this.canvas.style.webkitFilter = "blur(0px)";
+				// this.stop = false;
+						
 			});
-			this.currentView = new Pause(this.canvas);
+
+			const backBtn = document.getElementById("backBtn");
+			backBtn.addEventListener("click", () => {
+				document.getElementById("pause").style.visibility = "hidden";
+
+				this.canvas.style.webkitFilter = "blur(0px)";
+				this.currentView = new StartMenu(this.canvas);
+						
+			});
 			
 		}
 	}
@@ -203,12 +193,6 @@ class Game {
 
 		// Pause menu handler
 		this.pauseMenuHandler();
-
-		// Back handler
-		this.backHandler();
-
-		// Continue handler
-		this.continueHandler();
 
 		// End handler
 		this.endHandler();
