@@ -39,19 +39,7 @@ class Game {
 	 */
 	step = () => {
         // Handle the start menu button
-        this.startMenuHandler();
-
-		// Handle pause menu
-		this.pauseMenuHandler();
-
-		// Back handler
-		this.backHandler();
-
-		// Continue handler
-		this.continueHandler();
-
-		// Finish handler
-		this.finishHandler();
+        this.handlers();
 
 		// draw the current view
 		this.draw();
@@ -65,7 +53,6 @@ class Game {
 	 * Draw on the canvas
 	 */
 	private draw = () => {
-		//this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
 		if(this.currentView instanceof Room){
 			if(this.currentView.getNextRoom()){
@@ -86,6 +73,9 @@ class Game {
 		}
 		// Draw the current view
 		this.currentView.draw(this.ctx);
+
+		// Draw the current number of question
+
 	}
 
 	/**
@@ -162,5 +152,25 @@ class Game {
 				this.currentView = new StartMenu(this.canvas);
 			}
 		}
+	}
+
+	/**
+	 * Calling all the handlers in the step method
+	 */
+	private handlers() {
+		// Start menu handler
+		this.startMenuHandler();
+
+		// Pause menu handler
+		this.pauseMenuHandler();
+
+		// Back handler
+		this.backHandler();
+
+		// Continue handler
+		this.continueHandler();
+
+		// Finish handler
+		this.finishHandler();
 	}
 }
