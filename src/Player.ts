@@ -38,7 +38,7 @@ class Player {
 
     public draw = (ctx: CanvasRenderingContext2D) => {
         // bottom wall detection
-        this.directions();
+        this.wallDetection();
 
         ctx.drawImage(this.image, this.xPos, this.yPos, this.image.width, this.image.height);
 
@@ -46,9 +46,9 @@ class Player {
     };
 
     /**
-     * Directions of moving
+     * Function for the player to detect the wall and do not move out from the scope
      */
-    private directions() {
+    private wallDetection() {
         // Down
         if (this.keyListener.isKeyDown(40) && this.yPos < this.canvas.height - this.image.height) {
             this.yPos += this.speed;
@@ -70,7 +70,7 @@ class Player {
             this.image = this.loadNewImage(this.sprites[this.counter]);
         }
     }
-    
+
     /**
      * Iterating the moving images
      */
@@ -87,6 +87,7 @@ class Player {
         }
     };
 
+    //Getters
     public getPositionX = () => {
         return this.xPos;
     };

@@ -1,14 +1,14 @@
 /// <reference path="View.ts" />
 
 class Room extends View {
-	private sensitiveData: string[];
-	private nonSensitiveData: string[];
+	private sensitiveData: string[]; // array to contain the sensitive words
+	private nonSensitiveData: string[]; // array to contain the non-sensitive words
 
-	private doors: Door[];
+	private doors: Door[]; // array to contain 4 doors for the room
 
 	private player: Player;
 
-	private nextRoom: boolean;
+	private nextRoom: boolean; // true if the next room should be loaded
 
 	private background: HTMLImageElement;
 	private backgroundColor: string;
@@ -43,6 +43,9 @@ class Room extends View {
 		this.nextRoom = false;
 	}
 
+	/**
+	 * Determines if the next room will be hostile based on the crossed door
+	 */
 	public isNextRoomGood = () => {
 		for (let i = 0; i < this.doors.length; i++) {
 			if (this.doors[i].getIsSensitive() === true && this.doors[i].getIsCrossed()) {
@@ -53,6 +56,9 @@ class Room extends View {
 		return false;
 	};
 
+	/**
+	 *  Function to draw the room
+	 */
 	public draw = () => {
 		const ctx = this.canvas.getContext("2d");
 
@@ -112,7 +118,6 @@ class Room extends View {
 					)
 				);
 			}
-			// 3 non-sensitive data
 			else {
 				// make sure there is at least one sensitive data
 				if (i === 3 && onlyOneSensitiveData === false) {
@@ -163,19 +168,23 @@ class Room extends View {
 		max: number,
 		alreadyUsedValues: number[] = [-1]
 	) => {
-		if (alreadyUsedValues === [-1]) {
+		if (alreadyUsedValues[0] === -1) {
 			return Math.floor(Math.random() * (max - min) + min);
-		} else {
+		} else if (alreadyUsedValues.length > 0){
 			let random = Math.floor(Math.random() * (max - min) + min);
 			for (let i = 0; i < alreadyUsedValues.length; i++) {
 				if (random === alreadyUsedValues[i]) {
 					random = Math.floor(Math.random() * (max - min) + min);
-				} else {
-					return random;
+                    if(random !== alreadyUsedValues[i]){
+                        return random;
+                    }
 				}
-			}
+            }
 			return random;
 		}
+        else{
+			return Math.floor(Math.random() * (max - min) + min);
+        }
 	};
 }
 
