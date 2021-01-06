@@ -11,6 +11,9 @@ class Player {
     private canvas: HTMLCanvasElement;
 
     private sprites: any[];
+    private sprites_left: any[];
+    private sprites_right: any[];
+    private sprites_downwards: any[];
 
     constructor(image: string, canvas: HTMLCanvasElement) {
         this.canvas = canvas;
@@ -31,6 +34,33 @@ class Player {
             "./assets/img/player/player-5.gif",
         ];
 
+        this.sprites_left = [
+            "./assets/img/player/left/player-0.gif",
+            "./assets/img/player/left/player-1.gif",
+            "./assets/img/player/left/player-2.gif",
+            "./assets/img/player/left/player-3.gif",
+            "./assets/img/player/left/player-4.gif",
+            "./assets/img/player/left/player-5.gif",
+        ];
+
+        this.sprites_right = [
+            "./assets/img/player/right/player-0.gif",
+            "./assets/img/player/right/player-1.gif",
+            "./assets/img/player/right/player-2.gif",
+            "./assets/img/player/right/player-3.gif",
+            "./assets/img/player/right/player-4.gif",
+            "./assets/img/player/right/player-5.gif",
+        ];
+
+        this.sprites_downwards = [
+            "./assets/img/player/downwards/player-0.gif",
+            "./assets/img/player/downwards/player-1.gif",
+            "./assets/img/player/downwards/player-2.gif",
+            "./assets/img/player/downwards/player-3.gif",
+            "./assets/img/player/downwards/player-4.gif",
+            "./assets/img/player/downwards/player-5.gif",
+        ];
+
         this.counter = 0;
         this.i = 0;
         this.skipFrame = 7;
@@ -40,9 +70,9 @@ class Player {
         // bottom wall detection
         this.wallDetection();
 
-        ctx.drawImage(this.image, this.xPos, this.yPos, this.image.width, this.image.height);
-
         this.movement();
+
+        ctx.drawImage(this.image, this.xPos, this.yPos, this.image.width, this.image.height);
     };
 
     /**
@@ -50,24 +80,24 @@ class Player {
      */
     private wallDetection() {
         // Down
-        if (this.keyListener.isKeyDown(40) && this.yPos < this.canvas.height - this.image.height) {
+        if (this.keyListener.isKeyDown(40) || this.keyListener.isKeyDown(83) && this.yPos < this.canvas.height - this.image.height) {
             this.yPos += this.speed;
-            this.image = this.loadNewImage(this.sprites[this.counter]);
+            this.image = this.loadNewImage(this.sprites_downwards[this.counter]);
         }
         // Up
-        if (this.keyListener.isKeyDown(38) && this.yPos > 0) {
+        if (this.keyListener.isKeyDown(38) || this.keyListener.isKeyDown(87) && this.yPos > 0) {
             this.yPos -= this.speed;
             this.image = this.loadNewImage(this.sprites[this.counter]);
         }
         // Left
-        if (this.keyListener.isKeyDown(37) && this.xPos > 0) {
+        if (this.keyListener.isKeyDown(37) || this.keyListener.isKeyDown(65) && this.xPos > 0) {
             this.xPos -= this.speed;
-            this.image = this.loadNewImage(this.sprites[this.counter]);
+            this.image = this.loadNewImage(this.sprites_left[this.counter]);
         }
         // Right
-        if (this.keyListener.isKeyDown(39) && this.xPos < this.canvas.width - this.image.width) {
+        if (this.keyListener.isKeyDown(39) || this.keyListener.isKeyDown(68) && this.xPos < this.canvas.width - this.image.width) {
             this.xPos += this.speed;
-            this.image = this.loadNewImage(this.sprites[this.counter]);
+            this.image = this.loadNewImage(this.sprites_right[this.counter]);
         }
     }
 
@@ -75,7 +105,7 @@ class Player {
      * Iterating the moving images
      */
     private movement = () => {
-        if (this.keyListener.isKeyDown(40) || this.keyListener.isKeyDown(38) || this.keyListener.isKeyDown(37) || this.keyListener.isKeyDown(39)) {
+        if (this.keyListener.isKeyDown(40) || this.keyListener.isKeyDown(38) || this.keyListener.isKeyDown(37) || this.keyListener.isKeyDown(39) || this.keyListener.isKeyDown(83) || this.keyListener.isKeyDown(87) || this.keyListener.isKeyDown(65) || this.keyListener.isKeyDown(68)) {
             this.i++;
             if (this.i % this.skipFrame == 0) {
                 this.counter = this.i / this.skipFrame;
