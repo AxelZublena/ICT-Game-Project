@@ -65,7 +65,7 @@ class Game {
 	 * Draw on the canvas
 	 */
 	private draw = () => {
-		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+		//this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
 		if(this.currentView instanceof Room){
 			if(this.currentView.getNextRoom()){

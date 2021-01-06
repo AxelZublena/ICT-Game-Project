@@ -16,6 +16,8 @@ class Room extends View {
 	constructor(canvas: HTMLCanvasElement, isGood: boolean) {
 		super(canvas);
 
+        this.background = this.loadNewImage("./assets/img/background.jpg", this.canvas.width, this.canvas.height);
+
 		isGood === true
 			? (this.backgroundColor = "green")
 			: (this.backgroundColor = "red");
@@ -41,6 +43,10 @@ class Room extends View {
 		this.generateDoors();
 
 		this.nextRoom = false;
+
+        this.canvas.addEventListener("mousedown", (event) => {
+            console.log("x: " + event.clientX + " AND y: " + event.clientY);
+        });
 	}
 
 	/**
@@ -62,8 +68,14 @@ class Room extends View {
 	public draw = () => {
 		const ctx = this.canvas.getContext("2d");
 
-		ctx.fillStyle = this.backgroundColor;
-		ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+		//ctx.fillStyle = this.backgroundColor;
+		//ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        
+        //this.canvas.width/2 - this.background.width/2
+
+        ctx.drawImage(this.background, 0, 0, this.canvas.width, this.canvas.height);
+
+		this.player.draw(ctx);
 
 		this.doors.forEach((door) => {
 			door.draw(
@@ -78,7 +90,6 @@ class Room extends View {
 			}
 		});
 
-		this.player.draw(ctx);
 	};
 
 	public getNextRoom = () => {
