@@ -6,9 +6,9 @@ class Room extends View {
 
     private doors: Door[]; // array to contain 4 doors for the room
 
-    private player: Player;
-    private enemies: Enemy[];
-    private isGood: boolean;
+	private player: Player;
+	private enemies: Enemy[];
+	private isGood: boolean;
 
     private nextRoom: boolean; // true if the next room should be loaded
 
@@ -18,19 +18,25 @@ class Room extends View {
     constructor(canvas: HTMLCanvasElement, isGood: boolean) {
         super(canvas);
 
-        isGood === true ? (this.backgroundColor = "green") : (this.backgroundColor = "red");
-        this.isGood = isGood;
+        this.background = this.loadNewImage("./assets/img/background.jpg", this.canvas.width, this.canvas.height);
+
+		isGood === true ? (this.backgroundColor = "green") : (this.backgroundColor = "red");
+		this.isGood = isGood;
 
         this.sensitiveData = ["Login credentials", "Home address", "Card number", "Name", "Picture"];
         this.nonSensitiveData = ["Favorite color", "Nationality", "Username", "Favorite food", "Religion"];
 
-        this.player = new Player("./assets/img/player/player-0.gif", this.canvas);
-        this.enemies = [new Enemy(this.canvas), new Enemy(this.canvas)];
+		this.player = new Player("./assets/img/player/player-0.gif", this.canvas);
+		this.enemies = [new Enemy(this.canvas), new Enemy(this.canvas)];
 
         this.doors = [];
         this.generateDoors();
 
         this.nextRoom = false;
+
+        this.canvas.addEventListener("mousedown", (event) => {
+            console.log("x: " + event.clientX + " AND y: " + event.clientY);
+        });
     }
 
     /**
@@ -65,8 +71,14 @@ class Room extends View {
     public draw = () => {
         const ctx = this.canvas.getContext("2d");
 
-        ctx.fillStyle = this.backgroundColor;
-        ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        //ctx.fillStyle = this.backgroundColor;
+        //ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+        //this.canvas.width/2 - this.background.width/2
+
+        ctx.drawImage(this.background, 0, 0, this.canvas.width, this.canvas.height);
+
+        this.player.draw(ctx);
 
         this.doors.forEach((door) => {
             door.draw(ctx, this.player.getPositionX(), this.player.getPositionY(), this.player.getWidth(), this.player.getHeight());
