@@ -80,22 +80,22 @@ class Player {
      */
     private wallDetection() {
         // Down
-        if (this.keyListener.isKeyDown(40) || this.keyListener.isKeyDown(83) && this.yPos < this.canvas.height - this.image.height) {
+        if (this.yPos < this.canvas.height - this.image.height && this.keyListener.isKeyDown(40) || this.keyListener.isKeyDown(83)) {
             this.yPos += this.speed;
             this.image = this.loadNewImage(this.sprites_downwards[this.counter]);
         }
         // Up
-        if (this.keyListener.isKeyDown(38) || this.keyListener.isKeyDown(87) && this.yPos > 0) {
+        if (this.yPos > 0 && this.keyListener.isKeyDown(38) || this.keyListener.isKeyDown(87)) {
             this.yPos -= this.speed;
             this.image = this.loadNewImage(this.sprites[this.counter]);
         }
         // Left
-        if (this.keyListener.isKeyDown(37) || this.keyListener.isKeyDown(65) && this.xPos > 0) {
+        if (this.xPos > 0 && this.keyListener.isKeyDown(37) || this.keyListener.isKeyDown(65)) {
             this.xPos -= this.speed;
             this.image = this.loadNewImage(this.sprites_left[this.counter]);
         }
         // Right
-        if (this.keyListener.isKeyDown(39) || this.keyListener.isKeyDown(68) && this.xPos < this.canvas.width - this.image.width) {
+        if ((this.xPos < this.canvas.width - this.image.width && this.keyListener.isKeyDown(39)) || this.keyListener.isKeyDown(68)) {
             this.xPos += this.speed;
             this.image = this.loadNewImage(this.sprites_right[this.counter]);
         }

@@ -6,8 +6,9 @@ class Room extends View {
 
     private doors: Door[]; // array to contain 4 doors for the room
 
-	private player: Player;
-	private enemies: Enemy[];
+    private player: Player;
+    private enemies: Enemy[];
+    private isGood: boolean;
 
     private nextRoom: boolean; // true if the next room should be loaded
 
@@ -20,27 +21,34 @@ class Room extends View {
         if (isGood === true) {
             this.backgroundColor = "green";
         } else {
-			this.backgroundColor = "red";
-			this.spawnEnemies();
+            this.backgroundColor = "red";
         }
+        this.isGood = isGood;
 
         this.sensitiveData = ["Login credentials", "Home address", "Card number", "Name", "Picture"];
         this.nonSensitiveData = ["Favorite color", "Nationality", "Username", "Favorite food", "Religion"];
 
         this.player = new Player("./assets/img/player/player-0.gif", this.canvas);
+        this.enemies = [new Enemy(this.canvas), new Enemy(this.canvas)];
 
         this.doors = [];
         this.generateDoors();
 
         this.nextRoom = false;
-	}
-	
-	/**
-	 * Spawn enemies
-	 */
-	private spawnEnemies = () => {
+    }
 
-	}
+    /**
+     * Spawn enemies
+     */
+    private spawnEnemies = (ctx: CanvasRenderingContext2D) => {
+        this.enemies.forEach((enemy) => {
+            const sAngle = 0;
+            const eAngle = 2 * Math.PI;
+
+            // draw each ball from the ball array
+            enemy.draw(ctx, sAngle, eAngle);
+        });
+    };
 
     /**
      * Determines if the next room will be hostile based on the crossed door
@@ -70,6 +78,9 @@ class Room extends View {
                 this.nextRoom = true;
             }
         });
+        if (this.isGood == false) {
+            this.spawnEnemies(ctx);
+        }
 
         this.player.draw(ctx);
     };
