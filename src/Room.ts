@@ -35,7 +35,7 @@ class Room extends View {
 			"Religion",
 		];
 
-		this.player = new Player("./assets/img/player.png", this.canvas);
+		this.player = new Player("./assets/img/player/player-0.gif", this.canvas);
 
 		this.doors = [];
 		this.generateDoors();
