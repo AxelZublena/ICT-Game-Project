@@ -18,24 +18,13 @@ class Player {
 		this.yPos = canvas.height / 2 - this.image.height / 2;
 	}
 
+	/**
+	 * Draws the player during each frame
+	 * @param ctx 
+	 */
 	public draw = (ctx: CanvasRenderingContext2D) => {
-		// bottom wall detection
-		if (this.keyListener.isKeyDown(40) && this.yPos < this.canvas.height - this.image.height) {
-			this.yPos += this.speed;
-		}
-
-		if (this.keyListener.isKeyDown(38) && this.yPos > 0) {
-			this.yPos -= this.speed;
-		}
-		if (this.keyListener.isKeyDown(37) && this.xPos > 0) {
-			this.xPos -= this.speed;
-		}
-		if (
-			this.keyListener.isKeyDown(39) &&
-			this.xPos < this.canvas.width - this.image.width
-		) {
-			this.xPos += this.speed;
-		}
+		
+		this.wallDetection();
 
 		ctx.drawImage(
 			this.image,
@@ -46,18 +35,6 @@ class Player {
 		);
 	};
 
-	public getPositionX = () => {
-		return this.xPos;
-	};
-	public getPositionY = () => {
-		return this.yPos;
-	};
-	public getWidth = () => {
-		return this.image.width;
-	};
-	public getHeight = () => {
-		return this.image.height;
-	};
 
 	/**
 	 * Set the speed of the player
@@ -78,4 +55,41 @@ class Player {
 		img.height = img.width;
 		return img;
 	};
+
+
+	/**
+	 * Function for the player to detect the wall and do not move out from the scope
+	 */
+	private wallDetection() {
+		if (this.keyListener.isKeyDown(40) && this.yPos < this.canvas.height - this.image.height) {
+			this.yPos += this.speed;
+		}
+
+		if (this.keyListener.isKeyDown(38) && this.yPos > 0) {
+			this.yPos -= this.speed;
+		}
+		if (this.keyListener.isKeyDown(37) && this.xPos > 0) {
+			this.xPos -= this.speed;
+		}
+		if (this.keyListener.isKeyDown(39) &&
+			this.xPos < this.canvas.width - this.image.width) {
+			this.xPos += this.speed;
+		}
+	}
+
+	// getters and setters
+
+	public getPositionX = () => {
+		return this.xPos;
+	};
+	public getPositionY = () => {
+		return this.yPos;
+	};
+	public getWidth = () => {
+		return this.image.width;
+	};
+	public getHeight = () => {
+		return this.image.height;
+	};
+
 }

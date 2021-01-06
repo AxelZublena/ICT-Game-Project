@@ -5,12 +5,12 @@ class Door {
 
 	private positionX: number;
 	private positionY: number;
-	private position: string;
+	private position: string; // the position of the door in the screen (left,right,top,bottom)
 	private width: number;
 	private height: number;
 
-	private isSensitive: boolean;
-	private isCrossed: boolean;
+	private isSensitive: boolean; // The door contains sensitive data
+	private isCrossed: boolean; // The player has touched the door
 
 	constructor(
 		name: string,
@@ -21,29 +21,22 @@ class Door {
 	) {
 		this.name = name;
 		this.position = position;
-
 		this.isSensitive = isSensitive;
 		this.isCrossed = isCrossed;
 		this.canvas = canvas;
 
-		if (position === "bottom") {
-			this.positionX = canvas.width / 2;
-			this.positionY = canvas.height;
-		}
-		if (position === "top") {
-			this.positionX = canvas.width / 2;
-			this.positionY = 0;
-		}
-		if (position === "left") {
-			this.positionX = 0;
-			this.positionY = canvas.height / 2;
-		}
-		if (position === "right") {
-			this.positionX = canvas.width;
-			this.positionY = canvas.height / 2;
-		}
+		this.doorPositioner(position, canvas);
 	}
 
+
+	/**
+	 * Function to draw the doors and detect collision with the player
+	 * @param ctx 
+	 * @param playerXPos 
+	 * @param playerYPos 
+	 * @param playerWidth 
+	 * @param playerHeight 
+	 */
 	public draw = (
 		ctx: CanvasRenderingContext2D,
 		playerXPos: number,
@@ -122,8 +115,12 @@ class Door {
 			ctx.restore();
 		}
 
+		// Determine the door's position and draw the door
+		ctx.beginPath();
+		this.determineDoorPosition(ctx);
 		ctx.stroke();
 
+		// Checking if it the door has an overlap with the player
 		if (
 			this.playerCollidesWithDoor(
 				playerXPos,
@@ -137,6 +134,13 @@ class Door {
 		}
 	};
 
+	/**
+	 * Function to determine if there is an overlap between the player and the door
+	 * @param playerXPos 
+	 * @param playerYPos 
+	 * @param playerWidth 
+	 * @param playerHeight 
+	 */
 	private playerCollidesWithDoor = (
 		playerXPos: number,
 		playerYPos: number,
@@ -187,6 +191,79 @@ class Door {
 		return false;
 	};
 
+	/**
+	 * Function to determine the door's position and draw it
+	 * @param ctx 
+	 */
+	private determineDoorPosition(ctx: CanvasRenderingContext2D) {
+		if (this.position === "bottom") {
+			this.width = this.canvas.width * 0.2;
+			this.height = this.canvas.height * 0.05;
+			ctx.rect(
+				this.positionX - this.width / 2,
+				this.positionY - this.height,
+				this.width,
+				this.height
+			);
+		}
+		if (this.position === "top") {
+			this.width = this.canvas.width * 0.2;
+			this.height = this.canvas.height * 0.05;
+			ctx.rect(
+				this.positionX - this.width / 2,
+				this.positionY,
+				this.width,
+				this.height
+			);
+		}
+		if (this.position === "left") {
+			this.width = this.canvas.height * 0.05;
+			this.height = this.canvas.width * 0.2;
+			ctx.rect(
+				this.positionX,
+				this.positionY - this.height / 2,
+				this.width,
+				this.height
+			);
+		}
+		if (this.position === "right") {
+			this.width = this.canvas.height * 0.05;
+			this.height = this.canvas.width * 0.2;
+			ctx.rect(
+				this.canvas.width - this.width,
+				this.positionY - this.height / 2,
+				this.width,
+				this.height
+			);
+		}
+	}
+
+	/**
+	 * Determines the default position of the door
+	 * @param position defines the position of the door
+	 * @param canvas 
+	 */
+	private doorPositioner(position: string, canvas: HTMLCanvasElement) {
+		if (position === "bottom") {
+			this.positionX = canvas.width / 2;
+			this.positionY = canvas.height;
+		}
+		if (position === "top") {
+			this.positionX = canvas.width / 2;
+			this.positionY = 0;
+		}
+		if (position === "left") {
+			this.positionX = 0;
+			this.positionY = canvas.height / 2;
+		}
+		if (position === "right") {
+			this.positionX = canvas.width;
+			this.positionY = canvas.height / 2;
+		}
+	}
+
+	// getters and setters
+
 	public getXPosition = () => {
 		return this.positionX;
 	};
@@ -209,4 +286,5 @@ class Door {
 	public getIsCrossed = () => {
 		return this.isCrossed;
 	};
+
 }
