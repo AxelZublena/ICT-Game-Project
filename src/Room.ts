@@ -45,8 +45,8 @@ class Room extends View {
             const sAngle = 0;
             const eAngle = 2 * Math.PI;
 
-            // draw each ball from the ball array
-            enemy.draw(ctx, sAngle, eAngle);
+            // draw each enemy from the ball array
+            enemy.draw(ctx, sAngle, eAngle, this.player);
         });
     };
 

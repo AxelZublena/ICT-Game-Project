@@ -27,13 +27,26 @@ class Enemy {
      * Draws the enemies during each frame
      * @param ctx
      */
-    public draw = (ctx: CanvasRenderingContext2D, sAngle: number, eAngle: number) => {
+    public draw = (ctx: CanvasRenderingContext2D, sAngle: number, eAngle: number, player: Player) => {
         ctx.fillStyle = this.color;
         ctx.beginPath();
         ctx.arc(this.xPos, this.yPos, this.radius, sAngle, eAngle);
         ctx.closePath();
         ctx.fill();
         this.moveBall();
+        console.log(this.collidesWithPlayer(this, player));
+    };
+
+    private collidesWithPlayer = (a: Enemy, b: Player) => {
+        if (
+            a.xPos < b.getPositionX() + b.getWidth() &&
+            a.xPos + a.radius * 2 > b.getPositionX() &&
+            a.yPos < b.getPositionY() + b.getHeight() &&
+            a.yPos + a.radius * 2 > b.getPositionY()
+        ) {
+            return true;
+        }
+        return false;
     };
 
     /**
