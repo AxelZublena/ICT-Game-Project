@@ -9,6 +9,8 @@ class Game {
 	private prevView: string;
 	private keyboard: KeyListener;
 
+    private goodRoomCounter: number;
+
 	public static readonly BASE_COLOR: string = "#00A5DC";
 
 	constructor(canvas: HTMLElement) {
@@ -24,6 +26,8 @@ class Game {
         this.startMenu = new StartMenu(this.canvas);
 
 		this.currentView = this.startMenu;
+
+        this.goodRoomCounter = 0;
     
         this.step();
     }
@@ -63,8 +67,14 @@ class Game {
 		if(this.currentView instanceof Room){
 			if(this.currentView.getNextRoom()){
                 if(this.currentView.isNextRoomGood()){
-                    console.log(this.currentView.isNextRoomGood());
-                    this.currentView = new Room(this.canvas, true);
+                    console.log(this.goodRoomCounter);
+                    this.goodRoomCounter++;
+                    if(this.goodRoomCounter === 5){
+                        this.currentView = new Pause(this.canvas);
+                    }
+                    else{
+                        this.currentView = new Room(this.canvas, true);
+                    }
                 }
                 else{
                     this.currentView = new Room(this.canvas, false);
