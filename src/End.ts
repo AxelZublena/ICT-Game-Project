@@ -52,9 +52,9 @@ class End extends View {
         ctx.fillStyle = 'purple';
         ctx.fillRect(0, 50, this.canvas.width, 100);
         
+        ctx.textAlign = "center";
         ctx.font = '25px Arial';
         ctx.fillStyle = 'white';
         ctx.fillText(this.endText, this.canvas.width/2, 110)
-        ctx.textAlign = "center";
 	};
 }

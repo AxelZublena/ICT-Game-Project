@@ -22,7 +22,7 @@ class Room extends View {
         
         // USE THE FOLLOWING TO DETECT IF YOU NEED TO CREATE ENEMIES OR NOT
         if(isGood !== true){
-            this.enemies = [new Enemy(this.canvas), new Enemy(this.canvas)];
+            
         }
 		this.isGood = isGood;
 
@@ -128,6 +128,7 @@ class Room extends View {
 		];
 
 		this.player = new Player("./assets/img/player/player-0.gif", this.canvas);
+		this.enemies = [new Enemy(this.canvas, 10, 10), new Enemy(this.canvas, this.canvas.width-10, this.canvas.height-10)];
 
         this.doors = [];
         this.generateDoors();
@@ -193,7 +194,15 @@ class Room extends View {
 
     public getNextRoom = () => {
         return this.nextRoom;
-    };
+	};
+	
+	public getEnemies = () => {
+        return this.enemies;
+    }
+
+    public getPlayer = () => {
+        return this.player;
+    }
 
 	/**
 	 * Complete utterly garbage method but I couldn't do better.

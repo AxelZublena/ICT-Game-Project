@@ -62,7 +62,8 @@ class Game {
                 if(data.isGood === true){
                     this.goodRoomCounter++;
                     if(this.goodRoomCounter === 5){
-                        this.currentView = new End(this.canvas, "Congratulations! Now you are smart enough to know which information you have to retain from others.");
+						this.currentView = new End(this.canvas, "Congratulations! Now you are smart enough to know which information you have to keep secret from others.");
+						this.goodRoomCounter = 0;
                     }
                     else{
                         this.currentView = new Room(this.canvas, true);
@@ -90,11 +91,30 @@ class Game {
                 }
 			}
 		}
+
+		// Detects if player was hit
+		if (this.currentView instanceof Room) {
+
+			const player = this.currentView.getPlayer();
+
+			this.currentView.getEnemies().forEach(enemy => {
+				if (enemy.collidesWithPlayer(enemy, player)) {
+					this.currentView = new End(this.canvas, `You lost, you answered ${this.goodRoomCounter}/5 questions right on your quest. Try again!`)
+					this.goodRoomCounter = 0;
+				}
+			});
+		}
+
 		// Draw the current view
 		this.currentView.draw(this.ctx);
 
-		// Draw the current number of question
-
+		// Draw the level number
+		this.ctx.font = '30px Arial';
+		this.ctx.fillStyle = 'white';
+		this.ctx.textAlign = "right";
+		if (this.currentView instanceof Room) {
+			this.ctx.fillText(`${this.goodRoomCounter+1}/5 LEVEL`, this.canvas.width - 50, 50);
+		}
 	}
 
 	/**

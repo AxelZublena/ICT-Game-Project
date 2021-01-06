@@ -7,20 +7,25 @@ class Enemy {
     private color: string;
     private xVel: number;
     private yVel: number;
+    private hit: boolean;
 
     private canvas: HTMLCanvasElement;
 
-    constructor(canvas: HTMLCanvasElement) {
+    constructor(canvas: HTMLCanvasElement, xPos: number, yPos: number) {
         this.canvas = canvas;
         // this.image = this.loadNewImage(image);
         this.speed = 5;
 
-        this.xPos = this.randomNumber(0, canvas.width);
-        this.yPos = this.randomNumber(0, canvas.height);
+        //this.xPos = this.randomNumber(0, canvas.width);
+        //this.yPos = this.randomNumber(0, canvas.height);
+        this.xPos = xPos;
+        this.yPos = yPos;
+
         this.radius = 10;
         this.color = "#FFFF00";
-        this.xVel = 3;
-        this.yVel = 2.5;
+        this.xVel = 10;
+        this.yVel = 8.5;
+        this.hit = false;
     }
 
     /**
@@ -34,10 +39,13 @@ class Enemy {
         ctx.closePath();
         ctx.fill();
         this.moveBall();
-        console.log(this.collidesWithPlayer(this, player));
+        if (this.collidesWithPlayer(this, player)) {
+            this.hit = true;
+        };
+        return this.hit;
     };
 
-    private collidesWithPlayer = (a: Enemy, b: Player) => {
+    public collidesWithPlayer = (a: Enemy, b: Player) => {
         if (
             a.xPos < b.getPositionX() + b.getWidth() &&
             a.xPos + a.radius * 2 > b.getPositionX() &&
