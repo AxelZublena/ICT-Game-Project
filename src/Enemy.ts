@@ -1,4 +1,4 @@
-class Enemies {
+class Enemy {
     private speed: number;
     private xPos: number;
     private yPos: number;
