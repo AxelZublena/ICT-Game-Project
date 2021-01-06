@@ -27,7 +27,7 @@ class Game {
 
 		this.currentView = this.startMenu;
 
-        this.goodRoomCounter = 0;
+		this.goodRoomCounter = 0;
     
         this.step();
     }
@@ -39,16 +39,7 @@ class Game {
 	 */
 	step = () => {
         // Handle the start menu button
-        this.startMenuHandler();
-
-		// Handle pause menu
-		this.pauseMenuHandler();
-
-		// Back handler
-		this.backHandler();
-
-		// Continue handler
-		this.continueHandler();
+        this.handlers();
 
 		// draw the current view
 		this.draw();
@@ -62,7 +53,6 @@ class Game {
 	 * Draw on the canvas
 	 */
 	private draw = () => {
-		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
 		if(this.currentView instanceof Room){
 			if(this.currentView.getNextRoom()){
@@ -70,7 +60,7 @@ class Game {
                     console.log(this.goodRoomCounter);
                     this.goodRoomCounter++;
                     if(this.goodRoomCounter === 5){
-                        this.currentView = new Pause(this.canvas);
+                        this.currentView = new End(this.canvas, "Congratulations! Now you are smart enough to know which information you have to retain from others.");
                     }
                     else{
                         this.currentView = new Room(this.canvas, true);
@@ -83,6 +73,9 @@ class Game {
 		}
 		// Draw the current view
 		this.currentView.draw(this.ctx);
+
+		// Draw the current number of question
+
 	}
 
 	/**
@@ -105,7 +98,7 @@ class Game {
 	 * Handles the continue button in the pause menu
 	 * TODO: later when the levelmap will be dynamic, the last frame before hitting the escape will be stored to an empty view and it is going to load that back
 	 */
-	private continueHandler() {
+	private continueHandler = () => {
 		if (this.currentView instanceof Pause) {
 			if (this.currentView.getContinueButton().getClicked()) {
 				document.querySelectorAll('button').forEach(button => {
@@ -123,7 +116,7 @@ class Game {
 	/**
 	 * Handles the back button in the pause menu
 	 */
-	private backHandler() {
+	private backHandler = () => {
 		if (this.currentView instanceof Pause) {
 			if (this.currentView.getBackButton().getClicked()) {
 				document.querySelectorAll('button').forEach(button => {
@@ -137,7 +130,7 @@ class Game {
 	/**
 	 * Handles the pause menu on the push of the ESC key
 	 */
-	private pauseMenuHandler() {
+	private pauseMenuHandler = () => {
 		if (this.keyboard.isKeyDown(27)) {
 			document.querySelectorAll('button').forEach(button => {
 				button.remove();
@@ -145,5 +138,39 @@ class Game {
 			this.currentView = new Pause(this.canvas);
 			
 		}
+	}
+
+	/**
+	 * Handles the finish and on the push of the button gets you back to the start menu
+	 */
+	private endHandler = () => {
+		if (this.currentView instanceof End) {
+			if (this.currentView.getButton().getClicked()) {
+				document.querySelectorAll('button').forEach(button => {
+					button.remove();
+				});
+				this.currentView = new StartMenu(this.canvas);
+			}
+		}
+	}
+
+	/**
+	 * Calling all the handlers in the step method
+	 */
+	private handlers() {
+		// Start menu handler
+		this.startMenuHandler();
+
+		// Pause menu handler
+		this.pauseMenuHandler();
+
+		// Back handler
+		this.backHandler();
+
+		// Continue handler
+		this.continueHandler();
+
+		// End handler
+		this.endHandler();
 	}
 }

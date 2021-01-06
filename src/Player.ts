@@ -78,7 +78,7 @@ class Player {
     /**
      * Function for the player to detect the wall and do not move out from the scope
      */
-    private wallDetection() {
+    private wallDetection = () => {
         // Down
         if (this.yPos < this.canvas.height - this.image.height && this.keyListener.isKeyDown(40) || this.keyListener.isKeyDown(83)) {
             this.yPos += this.speed;

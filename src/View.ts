@@ -19,9 +19,18 @@ abstract class View {
 	 * @param {HTMLImageElement} source
 	 * @return HTMLImageElement - returns an image
 	 */
-	protected loadNewImage = (source: string): HTMLImageElement => {
+	protected loadNewImage = (source: string, width: number = null, height: number = null): HTMLImageElement => {
 		const img = new Image();
 		img.src = source;
+
+        if(width !== null){
+            img.width = width;
+        }
+
+        if(height !== null){
+            img.height = height;
+        }
+
 		return img;
 	}
 

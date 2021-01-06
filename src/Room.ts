@@ -18,11 +18,7 @@ class Room extends View {
     constructor(canvas: HTMLCanvasElement, isGood: boolean) {
         super(canvas);
 
-        if (isGood === true) {
-            this.backgroundColor = "green";
-        } else {
-            this.backgroundColor = "red";
-        }
+        isGood === true ? (this.backgroundColor = "green") : (this.backgroundColor = "red");
         this.isGood = isGood;
 
         this.sensitiveData = ["Login credentials", "Home address", "Card number", "Name", "Picture"];
