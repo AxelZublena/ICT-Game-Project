@@ -5,7 +5,6 @@ class Game {
 
 	private startMenu: StartMenu;
 	private pauseMenu: Pause;
-    private level: View; 
 	private currentView: View;
 	private prevView: string;
 	private keyboard: KeyListener;

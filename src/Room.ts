@@ -1,14 +1,14 @@
 /// <reference path="View.ts" />
 
 class Room extends View {
-	private sensitiveData: string[];
-	private nonSensitiveData: string[];
+	private sensitiveData: string[]; // array to contain the sensitive words
+	private nonSensitiveData: string[]; // array to contain the non-sensitive words
 
-	private doors: Door[];
+	private doors: Door[]; // array to contain 4 doors for the room
 
 	private player: Player;
 
-	private nextRoom: boolean;
+	private nextRoom: boolean; // true if the next room should be loaded
 
 	private background: HTMLImageElement;
 	private backgroundColor: string;
@@ -43,6 +43,9 @@ class Room extends View {
 		this.nextRoom = false;
 	}
 
+	/**
+	 * Determines if the next room will be hostile based on the crossed door
+	 */
 	public isNextRoomGood = () => {
 		for (let i = 0; i < this.doors.length; i++) {
 			if (this.doors[i].getIsSensitive() === true && this.doors[i].getIsCrossed()) {
@@ -53,6 +56,9 @@ class Room extends View {
 		return false;
 	};
 
+	/**
+	 *  Function to draw the room
+	 */
 	public draw = () => {
 		const ctx = this.canvas.getContext("2d");
 
