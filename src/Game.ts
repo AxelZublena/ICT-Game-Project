@@ -27,7 +27,7 @@ class Game {
 
 		this.currentView = this.startMenu;
 
-        this.goodRoomCounter = 0;
+		this.goodRoomCounter = 0;
     
         this.step();
     }
@@ -50,6 +50,9 @@ class Game {
 		// Continue handler
 		this.continueHandler();
 
+		// Finish handler
+		this.finishHandler();
+
 		// draw the current view
 		this.draw();
 
@@ -70,7 +73,7 @@ class Game {
                     console.log(this.goodRoomCounter);
                     this.goodRoomCounter++;
                     if(this.goodRoomCounter === 5){
-                        this.currentView = new Pause(this.canvas);
+                        this.currentView = new Finish(this.canvas);
                     }
                     else{
                         this.currentView = new Room(this.canvas, true);
@@ -105,7 +108,7 @@ class Game {
 	 * Handles the continue button in the pause menu
 	 * TODO: later when the levelmap will be dynamic, the last frame before hitting the escape will be stored to an empty view and it is going to load that back
 	 */
-	private continueHandler() {
+	private continueHandler = () => {
 		if (this.currentView instanceof Pause) {
 			if (this.currentView.getContinueButton().getClicked()) {
 				document.querySelectorAll('button').forEach(button => {
@@ -123,7 +126,7 @@ class Game {
 	/**
 	 * Handles the back button in the pause menu
 	 */
-	private backHandler() {
+	private backHandler = () => {
 		if (this.currentView instanceof Pause) {
 			if (this.currentView.getBackButton().getClicked()) {
 				document.querySelectorAll('button').forEach(button => {
@@ -137,13 +140,27 @@ class Game {
 	/**
 	 * Handles the pause menu on the push of the ESC key
 	 */
-	private pauseMenuHandler() {
+	private pauseMenuHandler = () => {
 		if (this.keyboard.isKeyDown(27)) {
 			document.querySelectorAll('button').forEach(button => {
 				button.remove();
 			});
 			this.currentView = new Pause(this.canvas);
 			
+		}
+	}
+
+	/**
+	 * Handles the finish and on the push of the button gets you back to the start menu
+	 */
+	private finishHandler = () => {
+		if (this.currentView instanceof Finish) {
+			if (this.currentView.getButton().getClicked()) {
+				document.querySelectorAll('button').forEach(button => {
+					button.remove();
+				});
+				this.currentView = new StartMenu(this.canvas);
+			}
 		}
 	}
 }
