@@ -10,7 +10,7 @@ class Player {
 	constructor(image: string, canvas: HTMLCanvasElement) {
 		this.canvas = canvas;
 		this.image = this.loadNewImage(image);
-		this.speed = 5;		
+		this.speed = 15;		
 
 		this.keyListener = new KeyListener();
 		
