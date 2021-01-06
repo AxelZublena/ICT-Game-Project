@@ -73,7 +73,7 @@ class Door {
 				ctx.fillText(
 					word,
 					this.canvas.width * 0.41,
-					(this.canvas.height * 0.9) + i
+					(this.canvas.height * 0.95) - i
                 );
 				i -= fontSize;
 			});
@@ -92,16 +92,17 @@ class Door {
 
 			const words: string[] = this.data.name.split(" ").reverse();
 
+			let wordCount = words.length;
 			let i = 0;
             for(let j = 1; j < words.length; j++){
-                i += fontSize; 
+				i += fontSize; 
             }
 
 			words.forEach((word: string) => {
 				ctx.fillText(
 					word,
 					this.canvas.width * 0.5,
-					(this.canvas.height * 0.15) + i
+					(this.canvas.height * 0.05) + i
                 );
 				i -= fontSize;
 			});
@@ -130,7 +131,7 @@ class Door {
 				ctx.fillText(
 					word,
 					this.canvas.width * 0.12,
-			 		(this.canvas.height * 0.545) + i
+			 		(this.canvas.height * 0.545) - i
                 );
 				i -= fontSize;
 			});
@@ -159,7 +160,7 @@ class Door {
 				ctx.fillText(
 					word,
 					this.canvas.width * 0.88,
-			 		(this.canvas.height * 0.425) + i
+			 		(this.canvas.height * 0.425) - i
                 );
 				i -= fontSize;
 			});

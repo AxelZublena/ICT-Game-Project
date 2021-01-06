@@ -68,7 +68,7 @@ class Room extends View {
 				explaination: "Sometimes you share this code with trusted people, but in general, it is just for you and for your family to protect your house 🏠 🔒. Never use it anywhere else, and do not use it as a password!"
 			},
 			{
-				name: "Picture about you are on holiday",
+				name: "Photo about your holiday",
 				explaination: "Housebreakers 😒 usually browse social media searching for “holiday-pictures.” This usually means that the family left the house, and it is empty to be robbed more easily 🏠 🔓."
 			},
 			{
