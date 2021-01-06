@@ -9,7 +9,8 @@ class Game {
 	private prevView: string;
 	private keyboard: KeyListener;
 
-    private goodRoomCounter: number;
+	private goodRoomCounter: number;
+	private failedRoomCounter: Array<any>;
 
 	public static readonly BASE_COLOR: string = "#00A5DC";
 
@@ -28,6 +29,7 @@ class Game {
 		this.currentView = this.startMenu;
 
 		this.goodRoomCounter = 0;
+		this.failedRoomCounter = [];
     
         this.step();
     }
@@ -69,8 +71,9 @@ class Game {
 
 		if(this.currentView instanceof Room){
 			if(this.currentView.getNextRoom()){
-                if(this.currentView.isNextRoomGood()){
-                    console.log(this.goodRoomCounter);
+				const data = this.currentView.isNextRoomGood();
+				// Player went through a non sensitive door
+                if(data.isGood === true){
                     this.goodRoomCounter++;
                     if(this.goodRoomCounter === 5){
                         this.currentView = new Finish(this.canvas);
@@ -78,9 +81,26 @@ class Game {
                     else{
                         this.currentView = new Room(this.canvas, true);
                     }
-                }
-                else{
-                    this.currentView = new Room(this.canvas, false);
+				}
+				// Player went through a sensitive door
+                else if(data.isGood === false){
+					console.log(data.data.name);
+					document.getElementById("info").style.visibility = "visible";
+					document.getElementById("name").innerText = data.data.name;
+					document.getElementById("explaination").innerText = data.data.explaination;
+					this.canvas.style.webkitFilter = "blur(10px)";
+					
+					const button = document.getElementById("understoodBtn");
+					button.addEventListener("click", () => {
+						document.getElementById("info").style.visibility = "hidden";
+
+						this.failedRoomCounter.push(data.data);
+						this.canvas.style.webkitFilter = "blur(0px)";
+						
+
+						this.currentView = new Room(this.canvas, false);
+						
+					});
                 }
 			}
 		}
@@ -159,6 +179,7 @@ class Game {
 				document.querySelectorAll('button').forEach(button => {
 					button.remove();
 				});
+				this.failedRoomCounter = [];
 				this.currentView = new StartMenu(this.canvas);
 			}
 		}
