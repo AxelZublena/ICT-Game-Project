@@ -19,8 +19,8 @@ class Enemy {
         this.yPos = this.randomNumber(0, canvas.height);
         this.radius = 10;
         this.color = "#FFFF00";
-        this.xVel = 3;
-        this.yVel = 2.5;
+        this.xVel = 8;
+        this.yVel = 6;
     }
 
     /**
