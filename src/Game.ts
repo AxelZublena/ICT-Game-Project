@@ -63,7 +63,7 @@ class Game {
 			// how to play at the launch of the game
 			if(this.howBool) {
 				document.getElementById("howToPlay").style.visibility = "visible";
-				document.getElementById("details").innerHTML = `Your playing a special agent. Your job is to choose the path that shows the <b>non-sensitive</b> data (data that you don't have to worry if others get to know). In every level of the dungeon you will have to choose the <b>1 right path out of the 4</b>. If you choose a wrong path in the next level you need to show some dodging skills.</br></br><center>GLHF!</center>`;
+				document.getElementById("details").innerHTML = `You are playing a special agent. Your job is to choose the path that shows the <b>non-sensitive</b> data (data that you don't have to worry if others get to know). In every level of the dungeon you will have to choose the <b>1 right path out of the 4</b>. If you choose a wrong path in the next level you need to show some dodging skills.</br></br><center>GLHF!</center>`;
 				this.canvas.style.webkitFilter = "blur(10px)";
 					
 				const howToPlayButton = document.getElementById("letsGo");
