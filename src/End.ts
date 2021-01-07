@@ -3,8 +3,9 @@
 class End extends View {
     private backToStartMenuButton: Button;
     private endText: string;
+    private lineColor: string;
 
-    constructor(canvas: HTMLCanvasElement, endText: string) {
+    constructor(canvas: HTMLCanvasElement, endText: string, lineColor: string) {
         super(canvas);
 
         this.backToStartMenuButton = new Button(
@@ -22,6 +23,9 @@ class End extends View {
 
         // ending text
         this.endText = endText;
+
+        // color of the line at the top behind the text
+        this.lineColor = lineColor;
     }
 
     /**
@@ -49,7 +53,7 @@ class End extends View {
 			this.canvas.height * 0.9
         );
 
-        ctx.fillStyle = 'purple';
+        ctx.fillStyle = this.lineColor;
         ctx.fillRect(0, 50, this.canvas.width, 100);
         
         ctx.textAlign = "center";

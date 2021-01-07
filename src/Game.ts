@@ -82,7 +82,7 @@ class Game {
                 if(data.isGood === true){
                     this.goodRoomCounter++;
                     if(this.goodRoomCounter === 5){
-						this.currentView = new End(this.canvas, "Congratulations! Now you are smart enough to know which information you have to keep secret from others.");
+						this.currentView = new End(this.canvas, "Congratulations! Now you are smart enough to know which information you have to keep secret from others.", "green");
 						this.goodRoomCounter = 0;
                     }
                     else{
@@ -119,7 +119,7 @@ class Game {
 
 			this.currentView.getEnemies().forEach(enemy => {
 				if (enemy.collidesWithPlayer(enemy, player)) {
-					this.currentView = new End(this.canvas, `You lost, you answered ${this.goodRoomCounter}/5 questions right on your quest. Try again!`)
+					this.currentView = new End(this.canvas, `You lost, you answered ${this.goodRoomCounter}/5 questions right on your quest. Try again!`, "red")
 					this.goodRoomCounter = 0;
 				}
 			});
