@@ -15,16 +15,14 @@ class Room extends View {
     private background: HTMLImageElement;
     private backgroundColor: string;
 
-    constructor(canvas: HTMLCanvasElement, isGood: boolean) {
+    constructor(canvas: HTMLCanvasElement, isGood: boolean, playerSpawnPosition: string) {
         super(canvas);
 
         this.background = this.loadNewImage("./assets/img/background.jpg", this.canvas.width, this.canvas.height);
         
-        // USE THE FOLLOWING TO DETECT IF YOU NEED TO CREATE ENEMIES OR NOT
-        if(isGood !== true){
-            
-        }
 		this.isGood = isGood;
+
+
 
 		this.sensitiveDataObjects = [
 			{
@@ -127,7 +125,35 @@ class Room extends View {
 			}
 		];
 
+
 		this.player = new Player("./assets/img/player/player-0.gif", this.canvas);
+
+        // Player spawn position
+        switch(playerSpawnPosition){
+            case "center": 
+                this.player.setPositionX(canvas.width / 2 - this.player.getWidth() / 2);
+                this.player.setPositionY(canvas.height / 2 - this.player.getHeight() / 2);
+                break;
+            case "bottom": 
+                this.player.setPositionX(canvas.width * 0.36);
+                this.player.setPositionY(canvas.height * 0.68);
+                break;
+            case "top": 
+                this.player.setPositionX(canvas.width * 0.45);
+                this.player.setPositionY(canvas.height * 0.20);
+                this.player.setImage("./assets/img/player/downwards/player-0.gif");
+                break;
+            case "left": 
+                this.player.setPositionX(canvas.width * 0.24);
+                this.player.setPositionY(canvas.height * 0.45);
+                this.player.setImage("./assets/img/player/right/player-0.gif");
+                break;
+            case "right": 
+                this.player.setPositionX(canvas.width * 0.67);
+                this.player.setPositionY(canvas.height * 0.32);
+                this.player.setImage("./assets/img/player/left/player-0.gif");
+                break;
+        }
 		this.enemies = [new Enemy(this.canvas, 10, 10), new Enemy(this.canvas, this.canvas.width-10, this.canvas.height-10)];
 
         this.doors = [];
@@ -160,14 +186,14 @@ class Room extends View {
 		for (let i = 0; i < this.doors.length; i++) {
 			if (this.doors[i].getIsSensitive() === false && this.doors[i].getIsCrossed()) {
 				console.log(this.doors[i].getName() + " : " + this.doors[i].getExplaination());
-				return {isGood: true, data: this.doors[i].getData()};
+				return {isGood: true, data: this.doors[i].getData(), position: this.doors[i].getPosition()};
 			}
 			if(this.doors[i].getIsCrossed()){
-				return {isGood: false, data: this.doors[i].getData()};
+				return {isGood: false, data: this.doors[i].getData(), position: this.doors[i].getPosition()};
 			}
 		}
 		
-		return {isGood: false, data: null};
+		return {isGood: false, data: null, position: null};
 	};
 
     /**

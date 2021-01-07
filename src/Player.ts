@@ -22,9 +22,6 @@ class Player {
 
 		this.keyListener = new KeyListener();
 
-		this.xPos = canvas.width / 2 - this.image.width / 2;
-		this.yPos = canvas.height / 2 - this.image.height / 2;
-
 		this.sprites = [
 			"./assets/img/player/player-0.gif",
 			"./assets/img/player/player-1.gif",
@@ -173,6 +170,17 @@ class Player {
 	public getHeight = () => {
 		return this.image.height;
 	};
+
+    // Setters
+	public setPositionX = (xPos: number) => {
+        this.xPos = xPos;
+	};
+	public setPositionY = (yPos: number) => {
+        this.yPos = yPos;
+	};
+    public setImage = (image: string) => {
+        this.image.src = image;
+    }
 
 	/**
 	 * Set the speed of the player

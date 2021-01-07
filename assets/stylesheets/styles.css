@@ -77,7 +77,7 @@ canvas {
 	background-color: purple;
 	color: white;
 }
-#understoodBtn:hover, #continueBtn:hover, #backBtn:hover {
+#understoodBtn:hover, #continueBtn:hover, #backBtn:hover, #letsGo:hover {
 	background-color: grey;
 	cursor: pointer;
 }
