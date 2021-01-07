@@ -12,6 +12,7 @@ class Game {
 	private failedRoomCounter: Array<any>;
 
 	private stop: boolean;
+	private howBool: boolean;
 
 	public static readonly BASE_COLOR: string = "#00A5DC";
 
@@ -32,6 +33,7 @@ class Game {
 		this.goodRoomCounter = 0;
 		this.failedRoomCounter = [];
 		this.stop = false;
+		this.howBool = true;
 	
 		//if (!this.stop) {
 		this.step();
@@ -60,6 +62,20 @@ class Game {
 	 */
 	private draw = () => {
 		if(this.currentView instanceof Room){
+			// how to play at the launch of the game
+			if(this.howBool) {
+				document.getElementById("howToPlay").style.visibility = "visible";
+				document.getElementById("details").innerHTML = `You are playing a special agent. Your job is to choose the path that shows the <b>non-sensitive</b> data (data that you don't have to worry if others get to know). In every level of the dungeon you will have to choose the <b>1 right path out of the 4</b>. If you choose a wrong path in the next level you need to show some dodging skills.</br></br><center>GLHF!</center>`;
+				this.canvas.style.webkitFilter = "blur(10px)";
+					
+				const howToPlayButton = document.getElementById("letsGo");
+				howToPlayButton.addEventListener("click", () => {
+					document.getElementById("howToPlay").style.visibility = "hidden";
+
+					this.canvas.style.webkitFilter = "blur(0px)";
+				});
+				this.howBool = false;
+			}
 			if(this.currentView.getNextRoom()){
 				const data = this.currentView.isNextRoomGood();
 				// Player went through a non sensitive door
@@ -144,7 +160,7 @@ class Game {
 	private pauseMenuHandler = () => {
 		if (this.keyboard.isKeyDown(27)) {
 
-			// this.stop = true;
+			this.stop = true;
 			document.getElementById("pause").style.visibility = "visible";
 			this.canvas.style.webkitFilter = "blur(10px)";
 					
@@ -153,7 +169,7 @@ class Game {
 				document.getElementById("pause").style.visibility = "hidden";
 
 				this.canvas.style.webkitFilter = "blur(0px)";
-				// this.stop = false;
+				
 						
 			});
 
@@ -165,6 +181,7 @@ class Game {
 				this.currentView = new StartMenu(this.canvas);
 						
 			});
+			this.stop = false;
 			
 		}
 	}
