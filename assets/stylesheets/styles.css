@@ -9,7 +9,7 @@ canvas {
 	z-index: 0;
 }
 
-#info, #pause {
+#info, #pause, #howToPlay {
 	justify-content: center;
 	width: 50%;
 	height: 65%;
@@ -31,20 +31,23 @@ canvas {
 
 	z-index: 899;
 }
-#pause {
+#pause, #howToPlay {
 	background-color: dodgerblue;
 }
-#name, #title {
+#name, #title, #title_how {
 	font-size: 85px;
 	text-align: center;
 	color: white;
 }
-#explaination {
+#explaination, #details {
 	font-size: 30px;
 	text-align: center;
 	color: black;
 }
-#understoodBtn, #backBtn {
+#details {
+	color: white;
+}
+#understoodBtn, #backBtn, #letsGo {
 	font-size: 50px;
 	position: absolute;
 	background-color: dodgerblue;
@@ -70,7 +73,7 @@ canvas {
 	transform: translate(-50%);
 	z-index: 900;
 }
-#continueBtn, #backBtn {
+#continueBtn, #backBtn, #letsGo {
 	background-color: purple;
 	color: white;
 }
