@@ -63,6 +63,7 @@ class Door {
 			ctx.stroke();
 
 			const words: string[] = this.data.name.split(" ");
+			
 
 			let i = 0;
             for(let j = 1; j < words.length; j++){
@@ -120,6 +121,7 @@ class Door {
 			ctx.stroke();
 
 			const words: string[] = this.data.name.split(" ");
+			let wordsLength = words.length;
 
 			let i = 0;
             for(let j = 1; j < words.length; j++){
@@ -130,7 +132,7 @@ class Door {
 				ctx.fillText(
 					word,
 					this.canvas.width * 0.12,
-			 		(this.canvas.height * 0.545) + i
+			 		(this.canvas.height * 0.545 - wordsLength / 3) - i
                 );
 				i -= fontSize;
 			});
@@ -159,7 +161,7 @@ class Door {
 				ctx.fillText(
 					word,
 					this.canvas.width * 0.88,
-			 		(this.canvas.height * 0.425) + i
+			 		(this.canvas.height * 0.425) - i
                 );
 				i -= fontSize;
 			});
