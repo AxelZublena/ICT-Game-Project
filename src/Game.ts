@@ -207,6 +207,9 @@ class Game {
 
 			const backBtn = document.getElementById("backBtn");
 			backBtn.addEventListener("click", () => {
+				if (this.stop) {
+					this.step();
+				}
 				document.getElementById("pause").style.visibility = "hidden";
 
 				this.canvas.style.webkitFilter = "blur(0px)";
