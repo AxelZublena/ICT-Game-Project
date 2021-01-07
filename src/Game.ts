@@ -78,6 +78,26 @@ class Game {
 			}
 			if(this.currentView.getNextRoom()){
 				const data = this.currentView.isNextRoomGood();
+
+                let position = "center";
+                switch(data.position){
+                    case "bottom":
+                        position = "top";
+                        break;
+                    case "top":
+                        position = "bottom";
+                        break;
+                    case "left":
+                        position = "right";
+                        break;
+                    case "right":
+                        position = "left";
+                        break;
+                    default:
+                        position = "center";
+                        break;
+                }
+
 				// Player went through a non sensitive door
                 if(data.isGood === true){
                     this.goodRoomCounter++;
@@ -86,7 +106,7 @@ class Game {
 						this.goodRoomCounter = 0;
                     }
                     else{
-                        this.currentView = new Room(this.canvas, true);
+                        this.currentView = new Room(this.canvas, true, position);
                     }
 				}
 				// Player went through a sensitive door
@@ -105,7 +125,7 @@ class Game {
 						this.canvas.style.webkitFilter = "blur(0px)";
 						
 
-						this.currentView = new Room(this.canvas, false);
+						this.currentView = new Room(this.canvas, false, position);
 						
 					});
                 }
@@ -148,7 +168,7 @@ class Game {
 				document.querySelectorAll('button').forEach(button => {
 					button.remove();
 				});
-				this.currentView = new Room(this.canvas, true);
+				this.currentView = new Room(this.canvas, true, "center");
 			}
 		}
 	}

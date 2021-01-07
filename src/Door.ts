@@ -45,7 +45,7 @@ class Door {
 	) => {
 		ctx.fillStyle = "white";
 		ctx.textAlign = "center";
-        const fontSize = this.canvas.width * 0.01; 
+		const fontSize = this.canvas.width * 0.01;
 		ctx.font = fontSize + "px Arial";
 
 		ctx.beginPath();
@@ -65,16 +65,16 @@ class Door {
 			const words: string[] = this.data.name.split(" ");
 
 			let i = 0;
-            for(let j = 1; j < words.length; j++){
-                i += fontSize; 
-            }
+			for (let j = 1; j < words.length; j++) {
+				i += fontSize;
+			}
 
 			words.forEach((word: string) => {
 				ctx.fillText(
 					word,
 					this.canvas.width * 0.41,
-					(this.canvas.height * 0.95) - i
-                );
+					this.canvas.height * 0.95 - i
+				);
 				i -= fontSize;
 			});
 		}
@@ -94,19 +94,18 @@ class Door {
 
 			let wordCount = words.length;
 			let i = 0;
-            for(let j = 1; j < words.length; j++){
-				i += fontSize; 
-            }
+			for (let j = 1; j < words.length; j++) {
+				i += fontSize;
+			}
 
 			words.forEach((word: string) => {
 				ctx.fillText(
 					word,
 					this.canvas.width * 0.5,
-					(this.canvas.height * 0.05) + i
-                );
+					this.canvas.height * 0.05 + i
+				);
 				i -= fontSize;
 			});
-
 		}
 		if (this.position === "left") {
 			this.width = this.canvas.height * 0.05;
@@ -123,19 +122,18 @@ class Door {
 			const words: string[] = this.data.name.split(" ");
 
 			let i = 0;
-            for(let j = 1; j < words.length; j++){
-                i += fontSize; 
-            }
+			for (let j = 1; j < words.length; j++) {
+				i += fontSize;
+			}
 
 			words.forEach((word: string) => {
 				ctx.fillText(
 					word,
 					this.canvas.width * 0.12,
-			 		(this.canvas.height * 0.545) - i
-                );
+					this.canvas.height * 0.545 - i
+				);
 				i -= fontSize;
 			});
-
 		}
 		if (this.position === "right") {
 			this.width = this.canvas.height * 0.05;
@@ -152,16 +150,16 @@ class Door {
 			const words: string[] = this.data.name.split(" ");
 
 			let i = 0;
-            for(let j = 1; j < words.length; j++){
-                i += fontSize; 
-            }
+			for (let j = 1; j < words.length; j++) {
+				i += fontSize;
+			}
 
 			words.forEach((word: string) => {
 				ctx.fillText(
 					word,
 					this.canvas.width * 0.88,
-			 		(this.canvas.height * 0.425) - i
-                );
+					this.canvas.height * 0.425 - i
+				);
 				i -= fontSize;
 			});
 		}
@@ -177,7 +175,6 @@ class Door {
 		) {
 			console.log(this.isSensitive + " " + this.data.name);
 			this.isCrossed = true;
-
 		}
 	};
 
@@ -270,6 +267,9 @@ class Door {
 	public getYPosition = () => {
 		return this.positionY;
 	};
+	public getPosition = () => {
+		return this.position;
+	};
 	public getWidth = () => {
 		return this.width;
 	};
@@ -294,4 +294,3 @@ class Door {
 		return this.isCrossed;
 	};
 }
-
