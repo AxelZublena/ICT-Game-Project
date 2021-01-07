@@ -35,9 +35,8 @@ class Game {
 		this.stop = false;
 		this.howBool = true;
 	
-		//if (!this.stop) {
 		this.step();
-		//}
+
     }
 
 	/**
@@ -46,6 +45,10 @@ class Game {
 	 * caused by javascript scoping behaviour.
 	 */
 	step = () => {
+		this.stop = false;
+
+		console.log(this.stop);
+
         // Handle the start menu button
         this.handlers();
 
@@ -54,7 +57,9 @@ class Game {
 
 		// Call this method again on the next animation frame
 		// The user must hit F5 to reload the game
-		requestAnimationFrame(this.step);
+		if (!this.stop) {
+			requestAnimationFrame(this.step);
+		}
 	};
 
 	/**
@@ -111,6 +116,7 @@ class Game {
 				}
 				// Player went through a sensitive door
                 else if(data.isGood === false){
+					this.stop = true;
 					console.log(data.data.name);
 					document.getElementById("info").style.visibility = "visible";
 					document.getElementById("name").innerText = data.data.name;
@@ -119,6 +125,7 @@ class Game {
 					
 					const button = document.getElementById("understoodBtn");
 					button.addEventListener("click", () => {
+						
 						document.getElementById("info").style.visibility = "hidden";
 
 						this.failedRoomCounter.push(data.data);
@@ -126,7 +133,9 @@ class Game {
 						
 
 						this.currentView = new Room(this.canvas, false, position);
-						
+						if (this.stop) {
+							this.step();
+						}
 					});
                 }
 			}
@@ -186,6 +195,9 @@ class Game {
 					
 			const continueBtn = document.getElementById("continueBtn");
 			continueBtn.addEventListener("click", () => {
+				if (this.stop) {
+					this.step();
+				}
 				document.getElementById("pause").style.visibility = "hidden";
 
 				this.canvas.style.webkitFilter = "blur(0px)";
@@ -201,7 +213,6 @@ class Game {
 				this.currentView = new StartMenu(this.canvas);
 						
 			});
-			this.stop = false;
 			
 		}
 	}
