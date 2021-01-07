@@ -33,9 +33,9 @@ class Game {
 		this.failedRoomCounter = [];
 		this.stop = false;
 	
-		if (!this.stop) {
-			this.step();
-		}
+		//if (!this.stop) {
+		this.step();
+		//}
     }
 
 	/**
