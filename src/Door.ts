@@ -3,6 +3,8 @@ class Door {
 
 	private data: any;
 
+	private infoDot: Infodot;
+
 	private positionX: number;
 	private positionY: number;
 	private position: string; // the position of the door in the screen (left,right,top,bottom)
@@ -24,6 +26,7 @@ class Door {
 		this.isSensitive = isSensitive;
 		this.isCrossed = isCrossed;
 		this.canvas = canvas;
+		this.infoDot = new Infodot(this.canvas,this.position,this.data.name);
 
 		this.doorPositioner(position, canvas);
 	}
@@ -77,6 +80,8 @@ class Door {
 				);
 				i -= fontSize;
 			});
+
+			
 		}
 		if (this.position === "top") {
 			this.width = this.canvas.width * 0.2;
@@ -163,6 +168,10 @@ class Door {
 				i -= fontSize;
 			});
 		}
+
+		
+		this.infoDot.setPlayerPosition(playerXPos,playerYPos,playerWidth,playerHeight);
+		this.infoDot.draw(ctx);
 
 		// Checking if it the door has an overlap with the player
 		if (

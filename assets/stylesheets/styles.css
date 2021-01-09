@@ -81,3 +81,43 @@ canvas {
 	background-color: grey;
 	cursor: pointer;
 }
+#des{
+	justify-content: center;
+	width: 16%;
+	height: 20%;
+
+	position: fixed;
+	top: 18%;
+	left: 9.5%;
+	/* bring your own prefixes */
+	transform: translate(-50%, -50%);
+	
+
+	background-color: rgb(43, 13, 150);
+	border-radius: 20px;
+	border-color: white;
+	border-width: 5px;
+	border-style:dotted;
+	visibility: hidden;
+
+	padding: 8px;
+
+	z-index: 899;
+}
+#desh1{
+	
+	text-align: center;
+	color: rgb(202, 151, 8);
+	overflow:hidden;
+}
+
+@media screen and (max-width: 1000px) {
+	#desh1 {
+		font-size: 0.9em;
+	}
+
+	div {
+		overflow: scroll;
+	}
+
+}
