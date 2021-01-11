@@ -1,21 +1,9 @@
-class Player {
-	private speed: number;
-	private xPos: number;
-	private yPos: number;
-	private counter: number;
-	private i: number;
-	private skipFrame: number;
-	private image: HTMLImageElement;
+/// <reference path="Character.ts" />
 
-	private keyListener: KeyListener;
-	private canvas: HTMLCanvasElement;
-
-	private sprites: any[];
-	private sprites_left: any[];
-	private sprites_right: any[];
-	private sprites_downwards: any[];
-
+class Player extends Character{
+	
 	constructor(image: string, canvas: HTMLCanvasElement) {
+		super(image, canvas);
 		this.canvas = canvas;
 		this.image = this.loadNewImage(image);
 		this.speed = 5;
@@ -190,15 +178,5 @@ class Player {
 		this.speed = newSpeed;
 	};
 
-	/**
-	 * Load the image of the Player
-	 * @param source string
-	 */
-	private loadNewImage = (source: string): HTMLImageElement => {
-		const img = new Image();
-		img.src = source;
-		img.width = this.canvas.width * 0.1;
-		img.height = img.width;
-		return img;
-	};
+	
 }
