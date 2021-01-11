@@ -154,7 +154,7 @@ class Room extends View {
                 this.player.setImage("./assets/img/player/left/player-0.gif");
                 break;
         }
-		this.enemies = [new Enemy(this.canvas, 10, 10), new Enemy(this.canvas, this.canvas.width-10, this.canvas.height-10)];
+		this.enemies = [new Enemy('', this.canvas), new Enemy('', this.canvas)];
 
         this.doors = [];
         this.generateDoors();

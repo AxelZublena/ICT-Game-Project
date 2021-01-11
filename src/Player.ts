@@ -4,11 +4,7 @@ class Player extends Character{
 	
 	constructor(image: string, canvas: HTMLCanvasElement) {
 		super(image, canvas);
-		this.canvas = canvas;
-		this.image = this.loadNewImage(image);
 		this.speed = 5;
-
-		this.keyListener = new KeyListener();
 
 		this.sprites = [
 			"./assets/img/player/player-0.gif",
@@ -46,17 +42,9 @@ class Player extends Character{
 			"./assets/img/player/downwards/player-5.gif",
 		];
 
-		this.counter = 0;
-		this.i = 0;
-		this.skipFrame = 7;
 	}
 
 	public draw = (ctx: CanvasRenderingContext2D) => {
-		// bottom wall detection
-		this.wallDetection();
-
-		this.movement();
-
 		ctx.drawImage(
 			this.image,
 			this.xPos,
@@ -64,6 +52,12 @@ class Player extends Character{
 			this.image.width,
 			this.image.height
 		);
+
+		// bottom wall detection
+		this.wallDetection();
+
+		this.movement();
+
 	};
 
 	/**
@@ -134,49 +128,9 @@ class Player extends Character{
 			this.keyListener.isKeyDown(65) ||
 			this.keyListener.isKeyDown(68)
 		) {
-			this.i++;
-			if (this.i % this.skipFrame == 0) {
-				this.counter = this.i / this.skipFrame;
-			}
-			if (this.counter == 6) {
-				this.counter = 0;
-				this.i = 0;
-			}
+			this.frameCounter();
 		}
 	};
-
-	//Getters
-	public getPositionX = () => {
-		return this.xPos;
-	};
-	public getPositionY = () => {
-		return this.yPos;
-	};
-	public getWidth = () => {
-		return this.image.width;
-	};
-	public getHeight = () => {
-		return this.image.height;
-	};
-
-    // Setters
-	public setPositionX = (xPos: number) => {
-        this.xPos = xPos;
-	};
-	public setPositionY = (yPos: number) => {
-        this.yPos = yPos;
-	};
-    public setImage = (image: string) => {
-        this.image.src = image;
-    }
-
-	/**
-	 * Set the speed of the player
-	 * @param newSpeed number
-	 */
-	public setSpeed = (newSpeed: number): void => {
-		this.speed = newSpeed;
-	};
-
+	
 	
 }
