@@ -4,12 +4,15 @@ class Game {
 	private ctx: CanvasRenderingContext2D;
 
 	private startMenu: StartMenu;
-	private pauseMenu: Pause;
 	private currentView: View;
 	private prevView: string;
 	private keyboard: KeyListener;
 
     private goodRoomCounter: number;
+	private failedRoomCounter: Array<any>;
+
+	private stop: boolean;
+	private howBool: boolean;
 
 	public static readonly BASE_COLOR: string = "#00A5DC";
 
@@ -28,8 +31,12 @@ class Game {
 		this.currentView = this.startMenu;
 
 		this.goodRoomCounter = 0;
-    
-        this.step();
+		this.failedRoomCounter = [];
+		this.stop = false;
+		this.howBool = true;
+	
+		this.step();
+
     }
 
 	/**
@@ -38,6 +45,10 @@ class Game {
 	 * caused by javascript scoping behaviour.
 	 */
 	step = () => {
+		this.stop = false;
+
+		//console.log(this.stop);
+
         // Handle the start menu button
         this.handlers();
 
@@ -46,36 +57,113 @@ class Game {
 
 		// Call this method again on the next animation frame
 		// The user must hit F5 to reload the game
-		requestAnimationFrame(this.step);
+		if (!this.stop) {
+			requestAnimationFrame(this.step);
+		}
 	};
 
 	/**
 	 * Draw on the canvas
 	 */
 	private draw = () => {
-
 		if(this.currentView instanceof Room){
+			// how to play at the launch of the game
+			if(this.howBool) {
+				document.getElementById("howToPlay").style.visibility = "visible";
+				document.getElementById("details").innerHTML = `You are playing a special agent. Your job is to choose the path that shows the <b>non-sensitive</b> data (data that you don't have to worry if others get to know). In every level of the dungeon you will have to choose the <b>1 right path out of the 4</b>. If you choose a wrong path in the next level you need to show some dodging skills.</br></br><center>GLHF!</center>`;
+				this.canvas.style.webkitFilter = "blur(10px)";
+					
+				const howToPlayButton = document.getElementById("letsGo");
+				howToPlayButton.addEventListener("click", () => {
+					document.getElementById("howToPlay").style.visibility = "hidden";
+
+					this.canvas.style.webkitFilter = "blur(0px)";
+				});
+				this.howBool = false;
+			}
 			if(this.currentView.getNextRoom()){
-                if(this.currentView.isNextRoomGood()){
-                    console.log(this.goodRoomCounter);
+				const data = this.currentView.isNextRoomGood();
+
+                let position = "center";
+                switch(data.position){
+                    case "bottom":
+                        position = "top";
+                        break;
+                    case "top":
+                        position = "bottom";
+                        break;
+                    case "left":
+                        position = "right";
+                        break;
+                    case "right":
+                        position = "left";
+                        break;
+                    default:
+                        position = "center";
+                        break;
+                }
+
+				// Player went through a non sensitive door
+                if(data.isGood === true){
                     this.goodRoomCounter++;
                     if(this.goodRoomCounter === 5){
-                        this.currentView = new End(this.canvas, "Congratulations! Now you are smart enough to know which information you have to retain from others.");
+						this.currentView = new End(this.canvas, "Congratulations! Now you are smart enough to know which information you have to keep secret from others.", "green");
+						this.goodRoomCounter = 0;
                     }
                     else{
-                        this.currentView = new Room(this.canvas, true);
+                        this.currentView = new Room(this.canvas, true, position);
                     }
-                }
-                else{
-                    this.currentView = new Room(this.canvas, false);
+				}
+				// Player went through a sensitive door
+                else if(data.isGood === false){
+					this.stop = true;
+					console.log(data.data.name);
+					document.getElementById("info").style.visibility = "visible";
+					document.getElementById("name").innerText = data.data.name;
+					document.getElementById("explaination").innerText = data.data.explaination;
+					this.canvas.style.webkitFilter = "blur(10px)";
+					
+					const button = document.getElementById("understoodBtn");
+					button.addEventListener("click", () => {
+						
+						document.getElementById("info").style.visibility = "hidden";
+
+						this.failedRoomCounter.push(data.data);
+						this.canvas.style.webkitFilter = "blur(0px)";
+						
+
+						this.currentView = new Room(this.canvas, false, position);
+						if (this.stop) {
+							this.step();
+						}
+					});
                 }
 			}
 		}
+
+		// Detects if player was hit
+		if (this.currentView instanceof Room) {
+
+			const player = this.currentView.getPlayer();
+
+			this.currentView.getEnemies().forEach(enemy => {
+				if (enemy.collidesWithPlayer(enemy, player)) {
+					this.currentView = new End(this.canvas, `You lost, you answered ${this.goodRoomCounter}/5 questions right on your quest. Try again!`, "red")
+					this.goodRoomCounter = 0;
+				}
+			});
+		}
+
 		// Draw the current view
 		this.currentView.draw(this.ctx);
 
-		// Draw the current number of question
-
+		// Draw the level number
+		this.ctx.font = '30px Arial';
+		this.ctx.fillStyle = 'white';
+		this.ctx.textAlign = "right";
+		if (this.currentView instanceof Room) {
+			this.ctx.fillText(`${this.goodRoomCounter+1}/5 LEVEL`, this.canvas.width - 50, 50);
+		}
 	}
 
 	/**
@@ -89,53 +177,45 @@ class Game {
 				document.querySelectorAll('button').forEach(button => {
 					button.remove();
 				});
-				this.currentView = new Room(this.canvas, true);
+				this.currentView = new Room(this.canvas, true, "center");
 			}
 		}
 	}
 
-	/**
-	 * Handles the continue button in the pause menu
-	 * TODO: later when the levelmap will be dynamic, the last frame before hitting the escape will be stored to an empty view and it is going to load that back
-	 */
-	private continueHandler = () => {
-		if (this.currentView instanceof Pause) {
-			if (this.currentView.getContinueButton().getClicked()) {
-				document.querySelectorAll('button').forEach(button => {
-					button.remove();
-				});
-				if (this.prevView == 'start') {
-					this.currentView = new StartMenu(this.canvas);
-				} else if (this.prevView == 'map') {
-					// this.currentView = new LevelMap(this.canvas);
-				}
-			}
-		}
-	}
-
-	/**
-	 * Handles the back button in the pause menu
-	 */
-	private backHandler = () => {
-		if (this.currentView instanceof Pause) {
-			if (this.currentView.getBackButton().getClicked()) {
-				document.querySelectorAll('button').forEach(button => {
-					button.remove();
-				});
-				this.currentView = new StartMenu(this.canvas);
-			}
-		}
-	}
 
 	/**
 	 * Handles the pause menu on the push of the ESC key
 	 */
 	private pauseMenuHandler = () => {
 		if (this.keyboard.isKeyDown(27)) {
-			document.querySelectorAll('button').forEach(button => {
-				button.remove();
+
+			this.stop = true;
+			document.getElementById("pause").style.visibility = "visible";
+			this.canvas.style.webkitFilter = "blur(10px)";
+					
+			const continueBtn = document.getElementById("continueBtn");
+			continueBtn.addEventListener("click", () => {
+				if (this.stop) {
+					this.step();
+				}
+				document.getElementById("pause").style.visibility = "hidden";
+
+				this.canvas.style.webkitFilter = "blur(0px)";
+				
+						
 			});
-			this.currentView = new Pause(this.canvas);
+
+			const backBtn = document.getElementById("backBtn");
+			backBtn.addEventListener("click", () => {
+				if (this.stop) {
+					this.step();
+				}
+				document.getElementById("pause").style.visibility = "hidden";
+
+				this.canvas.style.webkitFilter = "blur(0px)";
+				this.currentView = new StartMenu(this.canvas);
+						
+			});
 			
 		}
 	}
@@ -149,6 +229,7 @@ class Game {
 				document.querySelectorAll('button').forEach(button => {
 					button.remove();
 				});
+                this.failedRoomCounter = [];
 				this.currentView = new StartMenu(this.canvas);
 			}
 		}
@@ -163,12 +244,6 @@ class Game {
 
 		// Pause menu handler
 		this.pauseMenuHandler();
-
-		// Back handler
-		this.backHandler();
-
-		// Continue handler
-		this.continueHandler();
 
 		// End handler
 		this.endHandler();

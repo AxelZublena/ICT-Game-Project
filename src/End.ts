@@ -3,10 +3,11 @@
 class End extends View {
     private backToStartMenuButton: Button;
     private endText: string;
+    private lineColor: string;
 
-    constructor(canvas: HTMLCanvasElement, endText: string) {
+    constructor(canvas: HTMLCanvasElement, endText: string, lineColor: string) {
         super(canvas);
-
+        document.getElementById("des").style.visibility = "hidden";
         this.backToStartMenuButton = new Button(
             this.canvas,
 			this.canvas.width * 0.20,
@@ -22,6 +23,9 @@ class End extends View {
 
         // ending text
         this.endText = endText;
+
+        // color of the line at the top behind the text
+        this.lineColor = lineColor;
     }
 
     /**
@@ -49,12 +53,12 @@ class End extends View {
 			this.canvas.height * 0.9
         );
 
-        ctx.fillStyle = 'purple';
+        ctx.fillStyle = this.lineColor;
         ctx.fillRect(0, 50, this.canvas.width, 100);
         
+        ctx.textAlign = "center";
         ctx.font = '25px Arial';
         ctx.fillStyle = 'white';
         ctx.fillText(this.endText, this.canvas.width/2, 110)
-        ctx.textAlign = "center";
 	};
 }

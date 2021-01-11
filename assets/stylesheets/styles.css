@@ -1,4 +1,123 @@
 body {
-    margin: 0; /* getting rid of margin on the edges */
-    overflow: hidden; /* there is no scrollbar, the canvas is the actual whole screen */
+	margin: 0; /* getting rid of margin on the edges */
+	overflow: hidden; /* there is no scrollbar, the canvas is the actual whole screen */
+	position: relative;
+
+	font-family: "Courier New", Courier, monospace;
+}
+canvas {
+	z-index: 0;
+}
+
+#info, #pause, #howToPlay {
+	justify-content: center;
+	width: 50%;
+	height: 65%;
+
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	/* bring your own prefixes */
+	transform: translate(-50%, -50%);
+	visibility: hidden;
+
+	background-color: brown;
+	border-radius: 20px;
+	border-color: white;
+	border-width: 6px;
+	border-style: solid;
+
+	padding: 100px;
+
+	z-index: 899;
+}
+#pause, #howToPlay {
+	background-color: dodgerblue;
+}
+#name, #title, #title_how {
+	font-size: 85px;
+	text-align: center;
+	color: white;
+}
+#explaination, #details {
+	font-size: 30px;
+	text-align: center;
+	color: black;
+}
+#details {
+	color: white;
+}
+#understoodBtn, #backBtn, #letsGo {
+	font-size: 50px;
+	position: absolute;
+	background-color: dodgerblue;
+	border-radius: 15px;
+	border-color: white;
+	border-width: 4px;
+	border-style: solid;
+	top: 85%;
+	left: 50%;
+	transform: translate(-50%);
+	z-index: 900;
+}
+#continueBtn {
+	font-size: 50px;
+	position: absolute;
+	background-color: dodgerblue;
+	border-radius: 15px;
+	border-color: white;
+	border-width: 4px;
+	border-style: solid;
+	top: 75%;
+	left: 50%;
+	transform: translate(-50%);
+	z-index: 900;
+}
+#continueBtn, #backBtn, #letsGo {
+	background-color: purple;
+	color: white;
+}
+#understoodBtn:hover, #continueBtn:hover, #backBtn:hover, #letsGo:hover {
+	background-color: grey;
+	cursor: pointer;
+}
+#des{
+	justify-content: center;
+	width: 16%;
+	height: 20%;
+
+	position: fixed;
+	top: 18%;
+	left: 9.5%;
+	/* bring your own prefixes */
+	transform: translate(-50%, -50%);
+	
+
+	background-color: rgb(43, 13, 150);
+	border-radius: 20px;
+	border-color: white;
+	border-width: 5px;
+	border-style:dotted;
+	visibility: hidden;
+
+	padding: 8px;
+
+	z-index: 899;
+}
+#desh1{
+	
+	text-align: center;
+	color: rgb(202, 151, 8);
+	overflow:hidden;
+}
+
+@media screen and (max-width: 1000px) {
+	#desh1 {
+		font-size: 0.9em;
+	}
+
+	div {
+		overflow: scroll;
+	}
+
 }

@@ -1,7 +1,9 @@
 class Door {
 	private canvas: HTMLCanvasElement;
 
-	private name: string;
+	private data: any;
+
+	private infoDot: Infodot;
 
 	private positionX: number;
 	private positionY: number;
@@ -13,17 +15,18 @@ class Door {
 	private isCrossed: boolean; // The player has touched the door
 
 	constructor(
-		name: string,
+		data: object,
 		position: string,
 		isSensitive: boolean,
 		isCrossed: boolean,
 		canvas: HTMLCanvasElement
 	) {
-		this.name = name;
+		this.data = data;
 		this.position = position;
 		this.isSensitive = isSensitive;
 		this.isCrossed = isCrossed;
 		this.canvas = canvas;
+		this.infoDot = new Infodot(this.canvas,this.position,this.data.name);
 
 		this.doorPositioner(position, canvas);
 	}
@@ -45,7 +48,7 @@ class Door {
 	) => {
 		ctx.fillStyle = "white";
 		ctx.textAlign = "center";
-        const fontSize = this.canvas.width * 0.02; 
+		const fontSize = this.canvas.width * 0.01;
 		ctx.font = fontSize + "px Arial";
 
 		ctx.beginPath();
@@ -62,17 +65,23 @@ class Door {
 			//);
 			ctx.stroke();
 
-			const words = this.name.split(" ");
+			const words: string[] = this.data.name.split(" ");
 
 			let i = 0;
-			words.forEach((word) => {
+			for (let j = 1; j < words.length; j++) {
+				i += fontSize;
+			}
+
+			words.forEach((word: string) => {
 				ctx.fillText(
 					word,
 					this.canvas.width * 0.41,
-					(this.canvas.height * 0.9) + i
-                );
-				i = fontSize;
+					this.canvas.height * 0.95 - i
+				);
+				i -= fontSize;
 			});
+
+			
 		}
 		if (this.position === "top") {
 			this.width = this.canvas.width * 0.2;
@@ -86,22 +95,22 @@ class Door {
 			//);
 			ctx.stroke();
 
-			const words = this.name.split(" ").reverse();
+			const words: string[] = this.data.name.split(" ").reverse();
 
+			let wordCount = words.length;
 			let i = 0;
-            for(let j = 1; j < words.length; j++){
-                i += fontSize; 
-            }
+			for (let j = 1; j < words.length; j++) {
+				i += fontSize;
+			}
 
-			words.forEach((word) => {
+			words.forEach((word: string) => {
 				ctx.fillText(
 					word,
 					this.canvas.width * 0.5,
-					(this.canvas.height * 0.15) + i
-                );
+					this.canvas.height * 0.05 + i
+				);
 				i -= fontSize;
 			});
-
 		}
 		if (this.position === "left") {
 			this.width = this.canvas.height * 0.05;
@@ -115,18 +124,21 @@ class Door {
 			//);
 			ctx.stroke();
 
-			const words = this.name.split(" ");
+			const words: string[] = this.data.name.split(" ");
 
 			let i = 0;
-			words.forEach((word) => {
+			for (let j = 1; j < words.length; j++) {
+				i += fontSize;
+			}
+
+			words.forEach((word: string) => {
 				ctx.fillText(
 					word,
 					this.canvas.width * 0.12,
-					(this.canvas.height * 0.545) + i
-                );
-				i = fontSize;
+					this.canvas.height * 0.545 - i
+				);
+				i -= fontSize;
 			});
-
 		}
 		if (this.position === "right") {
 			this.width = this.canvas.height * 0.05;
@@ -140,24 +152,26 @@ class Door {
 			//);
 			ctx.stroke();
 
-			const words = this.name.split(" ");
+			const words: string[] = this.data.name.split(" ");
 
 			let i = 0;
-			words.forEach((word) => {
+			for (let j = 1; j < words.length; j++) {
+				i += fontSize;
+			}
+
+			words.forEach((word: string) => {
 				ctx.fillText(
 					word,
 					this.canvas.width * 0.88,
-					(this.canvas.height * 0.425) + i
-                );
-				i = fontSize;
+					this.canvas.height * 0.425 - i
+				);
+				i -= fontSize;
 			});
-
-            //ctx.fillText(
-                //this.name,
-                //this.canvas.width - this.canvas.width / 45,
-                //this.canvas.height / 2
-            //);
 		}
+
+		
+		this.infoDot.setPlayerPosition(playerXPos,playerYPos,playerWidth,playerHeight);
+		this.infoDot.draw(ctx);
 
 		// Checking if it the door has an overlap with the player
 		if (
@@ -168,7 +182,7 @@ class Door {
 				playerHeight
 			)
 		) {
-			console.log(this.isSensitive + " " + this.name);
+			console.log(this.isSensitive + " " + this.data.name);
 			this.isCrossed = true;
 		}
 	};
@@ -262,6 +276,9 @@ class Door {
 	public getYPosition = () => {
 		return this.positionY;
 	};
+	public getPosition = () => {
+		return this.position;
+	};
 	public getWidth = () => {
 		return this.width;
 	};
@@ -270,8 +287,15 @@ class Door {
 	};
 
 	public getName = () => {
-		return this.name;
+		return this.data.name;
 	};
+	public getExplaination = () => {
+		return this.data.explaination;
+	};
+	public getData = () => {
+		return this.data;
+	};
+
 	public getIsSensitive = () => {
 		return this.isSensitive;
 	};
