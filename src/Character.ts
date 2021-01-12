@@ -77,4 +77,8 @@ abstract class Character {
 			this.i = 0;
 		}
     };
+
+    protected randomNumber = (min: number, max: number) => {
+        return Math.round(Math.random() * (max - min) + min);
+    };
 }

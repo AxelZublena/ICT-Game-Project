@@ -37,6 +37,7 @@ class Game {
 	
 		this.step();
 
+		console.log(this.canvas.width, this.canvas.height);
     }
 
 	/**
@@ -46,8 +47,6 @@ class Game {
 	 */
 	step = () => {
 		this.stop = false;
-
-		//console.log(this.stop);
 
         // Handle the start menu button
         this.handlers();
