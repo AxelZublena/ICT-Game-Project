@@ -81,7 +81,7 @@ canvas {
 	background-color: grey;
 	cursor: pointer;
 }
-#des{
+#desTop, #desBottom, #desLeft, #desRight{
 	justify-content: center;
 	width: 16%;
 	height: 20%;
@@ -104,7 +104,7 @@ canvas {
 
 	z-index: 899;
 }
-#desh1{
+#desh1Top, #desh1Bottom, #desh1Left, #desh1Right{
 	
 	text-align: center;
 	color: rgb(202, 151, 8);
@@ -112,7 +112,7 @@ canvas {
 }
 
 @media screen and (max-width: 1000px) {
-	#desh1 {
+	#desh1Top, #desh1Bottom, #desh1Left, #desh1Right {
 		font-size: 0.9em;
 	}
 
