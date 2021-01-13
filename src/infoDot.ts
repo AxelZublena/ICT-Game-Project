@@ -75,17 +75,44 @@ class Infodot extends View{
         if ((Math.abs((this.playerPosX + (this.playerWidth / 2)) - (this.posX + ( (this.canvas.width /50 * 1.8)/2))) < 30) && (Math.abs((this.playerPosY + (this.playerHeight / 2)) - (this.posY + ( (this.canvas.height /30 * 1.8)/2))) < 30))  {
            // console.log(this.playerPosX + (this.playerWidth / 2),this.posX + ( (this.canvas.width /50 * 1.8)/2),this.playerPosY + (this.playerHeight / 2),this.posY + ((this.canvas.height /30 * 1.8) / 2));
 
-           document.getElementById("des").style.visibility = "visible";
-           document.getElementById("desh1").innerText = this.data;
+           if (this.position == "top") {
+            document.getElementById("desTop").style.visibility = "visible";
+            document.getElementById("desh1Top").innerText = this.data;
+           }
+           if (this.position == "bottom") {
+            document.getElementById("desBottom").style.visibility = "visible";
+            document.getElementById("desh1Bottom").innerText = this.data;
+           }
+           if (this.position == "left") {
+            document.getElementById("desLeft").style.visibility = "visible";
+            document.getElementById("desh1Left").innerText = this.data;
+           }
+           if (this.position == "right") {
+            document.getElementById("desRight").style.visibility = "visible";
+            document.getElementById("desh1Right").innerText = this.data;
+           }
+
+           console.log();
 
 
         } else{
              
-       console.log("a");
+            if (this.position == "top") {
+                document.getElementById("desTop").style.visibility = "hidden";  
+            }
+            if (this.position == "bottom") {
+                document.getElementById("desBottom").style.visibility = "hidden";  
+            }
+            if (this.position == "left") {
+                document.getElementById("desLeft").style.visibility = "hidden";  
+            }
+            if (this.position == "right") {
+                document.getElementById("desRight").style.visibility = "hidden";  
+            }
        
         }
        
-        };
+    };
 
     public setPlayerPosition(playerXPos: number, playerYPos: number, playerWidth: number, playerHeight: number){
         this.playerPosX = playerXPos;
