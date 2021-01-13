@@ -2,13 +2,17 @@
 
 class Enemy extends Character{
 
+	private dead: boolean;
+
     constructor(image: string, canvas: HTMLCanvasElement, xPos: number, yPos: number) {
         super(image, canvas);
         this.canvas = canvas;
-		this.speed = this.randomNumber(1, 2.5);
+		this.speed = this.randomNumber(1, 4);
 		
 		this.xPos = xPos;
 		this.yPos = yPos;
+
+		this.dead = false;
 
         this.sprites = [
 			"./assets/img/enemy/skeleton-move_0.png",
@@ -111,13 +115,6 @@ class Enemy extends Character{
 		this.frameCounter(17);
     };
 
-    public collidesWithPlayer = (a: Enemy, b: Player) => {
-        if (a.getPositionX() == b.getPositionX() || a.getPositionY() == b.getPositionY()) {
-			return true;
-        }
-        return false;
-    };
-
     private zombieMovement = (player: Player) => {
 
 		if (player.getPositionX() < this.xPos) {
@@ -127,6 +124,7 @@ class Enemy extends Character{
 				this.yPos -= this.speed;
 				this.image = this.loadNewImage(this.sprites[this.counter]);
 			}
+			this.collisionDetection(player);
 		}
 
 		if (player.getPositionX() > this.xPos) {
@@ -136,11 +134,18 @@ class Enemy extends Character{
 				this.yPos += this.speed;
 				this.image = this.loadNewImage(this.sprites_downwards[this.counter]);
 			}
+			this.collisionDetection(player);
 		}
 
-		
-
-
-
 	};
+
+	private collisionDetection = (player: Player) => {
+		if (this.getPositionX() == player.getPositionX() || this.getPositionY() == player.getPositionY()) {
+			this.dead = true;
+		}
+	}
+
+	public getDead = () => {
+		return this.dead;
+	}
 }

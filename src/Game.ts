@@ -142,15 +142,12 @@ class Game {
 
 		// Detects if player was hit
 		if (this.currentView instanceof Room) {
-
-			const player = this.currentView.getPlayer();
-
 			this.currentView.getEnemies().forEach(enemy => {
-				if (enemy.collidesWithPlayer(enemy, player)) {
+				if(enemy.getDead()) {
 					this.currentView = new End(this.canvas, `You lost, you answered ${this.goodRoomCounter}/5 questions right on your quest. Try again!`, "red")
-					this.goodRoomCounter = 0;
 				}
 			});
+			
 		}
 
 		// Draw the current view
