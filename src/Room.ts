@@ -142,7 +142,7 @@ class Room extends View {
 		];
 
 		this.player = new Player(
-			"./assets/img/player/player-0.gif",
+			"./assets/img/player/survivor-move_knife_0.png",
 			this.canvas
 		);
 
@@ -164,26 +164,24 @@ class Room extends View {
 				this.player.setPositionX(canvas.width * 0.45);
 				this.player.setPositionY(canvas.height * 0.2);
 				this.player.setImage(
-					"./assets/img/player/downwards/player-0.gif"
+					"./assets/img/player/downwards/survivor-move_knife_0.png"
 				);
 				break;
 			case "left":
 				this.player.setPositionX(canvas.width * 0.24);
 				this.player.setPositionY(canvas.height * 0.45);
-				this.player.setImage("./assets/img/player/right/player-0.gif");
+				this.player.setImage("./assets/img/player/right/survivor-move_knife_0.png");
 				break;
 			case "right":
 				this.player.setPositionX(canvas.width * 0.67);
 				this.player.setPositionY(canvas.height * 0.32);
-				this.player.setImage("./assets/img/player/left/player-0.gif");
+				this.player.setImage("./assets/img/player/left/survivor-move_knife_0.png");
 				break;
 		}
 		this.enemies = [
-			new Enemy(this.canvas, 10, 10),
+			new Enemy('asd', this.canvas),
 			new Enemy(
-				this.canvas,
-				this.canvas.width - 10,
-				this.canvas.height - 10
+				'asd', this.canvas
 			),
 		];
 
@@ -206,7 +204,7 @@ class Room extends View {
 			const eAngle = 2 * Math.PI;
 
 			// draw each enemy from the ball array
-			enemy.draw(ctx, sAngle, eAngle, this.player);
+			enemy.draw(ctx);
 		});
 	};
 

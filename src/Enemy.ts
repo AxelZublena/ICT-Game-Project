@@ -15,7 +15,7 @@ class Enemy extends Character{
      * Draws the enemies during each frame
      * @param ctx
      */
-    public draw = (ctx: CanvasRenderingContext2D, sAngle: number, eAngle: number, player: Player) => {
+    public draw = (ctx: CanvasRenderingContext2D) => {
         
     };
 

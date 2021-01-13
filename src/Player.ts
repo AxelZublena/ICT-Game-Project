@@ -7,50 +7,108 @@ class Player extends Character{
 		this.speed = 5;
 
 		this.sprites = [
-			"./assets/img/player/player-0.gif",
-			"./assets/img/player/player-1.gif",
-			"./assets/img/player/player-2.gif",
-			"./assets/img/player/player-3.gif",
-			"./assets/img/player/player-4.gif",
-			"./assets/img/player/player-5.gif",
+			"./assets/img/player/survivor-move_knife_0.png",
+			"./assets/img/player/survivor-move_knife_1.png",
+			"./assets/img/player/survivor-move_knife_2.png",
+			"./assets/img/player/survivor-move_knife_3.png",
+			"./assets/img/player/survivor-move_knife_4.png",
+			"./assets/img/player/survivor-move_knife_5.png",
+			"./assets/img/player/survivor-move_knife_6.png",
+			"./assets/img/player/survivor-move_knife_7.png",
+			"./assets/img/player/survivor-move_knife_8.png",
+			"./assets/img/player/survivor-move_knife_9.png",
+			"./assets/img/player/survivor-move_knife_10.png",
+			"./assets/img/player/survivor-move_knife_11.png",
+			"./assets/img/player/survivor-move_knife_12.png",
+			"./assets/img/player/survivor-move_knife_13.png",
+			"./assets/img/player/survivor-move_knife_14.png",
+			"./assets/img/player/survivor-move_knife_15.png",
+			"./assets/img/player/survivor-move_knife_16.png",
+			"./assets/img/player/survivor-move_knife_17.png",
+			"./assets/img/player/survivor-move_knife_18.png",
+			"./assets/img/player/survivor-move_knife_19.png"
 		];
 
 		this.sprites_left = [
-			"./assets/img/player/left/player-0.gif",
-			"./assets/img/player/left/player-1.gif",
-			"./assets/img/player/left/player-2.gif",
-			"./assets/img/player/left/player-3.gif",
-			"./assets/img/player/left/player-4.gif",
-			"./assets/img/player/left/player-5.gif",
+			"./assets/img/player/left/survivor-move_knife_0.png",
+			"./assets/img/player/left/survivor-move_knife_1.png",
+			"./assets/img/player/left/survivor-move_knife_2.png",
+			"./assets/img/player/left/survivor-move_knife_3.png",
+			"./assets/img/player/left/survivor-move_knife_4.png",
+			"./assets/img/player/left/survivor-move_knife_5.png",
+			"./assets/img/player/left/survivor-move_knife_6.png",
+			"./assets/img/player/left/survivor-move_knife_7.png",
+			"./assets/img/player/left/survivor-move_knife_8.png",
+			"./assets/img/player/left/survivor-move_knife_9.png",
+			"./assets/img/player/left/survivor-move_knife_10.png",
+			"./assets/img/player/left/survivor-move_knife_11.png",
+			"./assets/img/player/left/survivor-move_knife_12.png",
+			"./assets/img/player/left/survivor-move_knife_13.png",
+			"./assets/img/player/left/survivor-move_knife_14.png",
+			"./assets/img/player/left/survivor-move_knife_15.png",
+			"./assets/img/player/left/survivor-move_knife_16.png",
+			"./assets/img/player/left/survivor-move_knife_17.png",
+			"./assets/img/player/left/survivor-move_knife_18.png",
+			"./assets/img/player/left/survivor-move_knife_19.png",
 		];
 
 		this.sprites_right = [
-			"./assets/img/player/right/player-0.gif",
-			"./assets/img/player/right/player-1.gif",
-			"./assets/img/player/right/player-2.gif",
-			"./assets/img/player/right/player-3.gif",
-			"./assets/img/player/right/player-4.gif",
-			"./assets/img/player/right/player-5.gif",
+			"./assets/img/player/right/survivor-move_knife_0.png",
+			"./assets/img/player/right/survivor-move_knife_1.png",
+			"./assets/img/player/right/survivor-move_knife_2.png",
+			"./assets/img/player/right/survivor-move_knife_3.png",
+			"./assets/img/player/right/survivor-move_knife_4.png",
+			"./assets/img/player/right/survivor-move_knife_5.png",
+			"./assets/img/player/right/survivor-move_knife_6.png",
+			"./assets/img/player/right/survivor-move_knife_7.png",
+			"./assets/img/player/right/survivor-move_knife_8.png",
+			"./assets/img/player/right/survivor-move_knife_9.png",
+			"./assets/img/player/right/survivor-move_knife_10.png",
+			"./assets/img/player/right/survivor-move_knife_11.png",
+			"./assets/img/player/right/survivor-move_knife_12.png",
+			"./assets/img/player/right/survivor-move_knife_13.png",
+			"./assets/img/player/right/survivor-move_knife_14.png",
+			"./assets/img/player/right/survivor-move_knife_15.png",
+			"./assets/img/player/right/survivor-move_knife_16.png",
+			"./assets/img/player/right/survivor-move_knife_17.png",
+			"./assets/img/player/right/survivor-move_knife_18.png",
+			"./assets/img/player/right/survivor-move_knife_19.png",
 		];
 
 		this.sprites_downwards = [
-			"./assets/img/player/downwards/player-0.gif",
-			"./assets/img/player/downwards/player-1.gif",
-			"./assets/img/player/downwards/player-2.gif",
-			"./assets/img/player/downwards/player-3.gif",
-			"./assets/img/player/downwards/player-4.gif",
-			"./assets/img/player/downwards/player-5.gif",
+			"./assets/img/player/downwards/survivor-move_knife_0.png",
+			"./assets/img/player/downwards/survivor-move_knife_1.png",
+			"./assets/img/player/downwards/survivor-move_knife_2.png",
+			"./assets/img/player/downwards/survivor-move_knife_3.png",
+			"./assets/img/player/downwards/survivor-move_knife_4.png",
+			"./assets/img/player/downwards/survivor-move_knife_5.png",
+			"./assets/img/player/downwards/survivor-move_knife_6.png",
+			"./assets/img/player/downwards/survivor-move_knife_7.png",
+			"./assets/img/player/downwards/survivor-move_knife_8.png",
+			"./assets/img/player/downwards/survivor-move_knife_9.png",
+			"./assets/img/player/downwards/survivor-move_knife_10.png",
+			"./assets/img/player/downwards/survivor-move_knife_11.png",
+			"./assets/img/player/downwards/survivor-move_knife_12.png",
+			"./assets/img/player/downwards/survivor-move_knife_13.png",
+			"./assets/img/player/downwards/survivor-move_knife_14.png",
+			"./assets/img/player/downwards/survivor-move_knife_15.png",
+			"./assets/img/player/downwards/survivor-move_knife_16.png",
+			"./assets/img/player/downwards/survivor-move_knife_17.png",
+			"./assets/img/player/downwards/survivor-move_knife_18.png",
+			"./assets/img/player/downwards/survivor-move_knife_19.png",
 		];
 
 	}
 
 	public draw = (ctx: CanvasRenderingContext2D) => {
+		
+
 		ctx.drawImage(
 			this.image,
 			this.xPos,
 			this.yPos,
-			this.image.width,
-			this.image.height
+			this.image.width/1.5,
+			this.image.height/1.5
 		);
 
 		// bottom wall detection
