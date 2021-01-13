@@ -132,14 +132,16 @@ class Game {
                             this.currentView = new End(
                                 this.canvas,
                                 "Gefeliciteerd! Nu ben je slim genoeg om te weten welke informatie je voor anderen geheim moet houden.",
-                                "green"
+                                "green",
+                                "dutch"
                             );
                         }
                         else{
                             this.currentView = new End(
                                 this.canvas,
                                 "Congratulations! Now you are smart enough to know which information you have to keep secret from others.",
-                                "green"
+                                "green",
+                                "english"
                             );
                         }
 						this.goodRoomCounter = 0;
@@ -163,7 +165,16 @@ class Game {
 						data.data.explaination;
 					this.canvas.style.webkitFilter = "blur(10px)";
 
-					const button = document.getElementById("understoodBtn");
+					const button = document.getElementById("understoodBtn") as HTMLInputElement;
+
+                    // set the language
+                    if(this.language === "dutch"){
+                        button.value = "Begrepen";
+                    }
+                    else{
+                        button.value = "Understood";
+                    }
+
 					button.addEventListener("click", () => {
 						document.getElementById("info").style.visibility =
 							"hidden";
@@ -195,14 +206,16 @@ class Game {
                         this.currentView = new End(
                             this.canvas,
                             `Helaas, je hebt ${this.goodRoomCounter}/5 vragen goed. Probeer het opnieuw!`,
-                            "red"
+                            "red",
+                            "dutch"
                         );
                     }
                     else {
                         this.currentView = new End(
                             this.canvas,
                             `You lost, you answered ${this.goodRoomCounter}/5 questions right on your quest. Try again!`,
-                            "red"
+                            "red",
+                            "english"
                         );
                     }
 					this.goodRoomCounter = 0;
@@ -307,6 +320,8 @@ class Game {
 					button.remove();
 				});
 				this.failedRoomCounter = [];
+
+                document.getElementById("NLENSwitchStart").style.visibility = "visible";
 				this.currentView = new StartMenu(this.canvas);
 			}
 		}

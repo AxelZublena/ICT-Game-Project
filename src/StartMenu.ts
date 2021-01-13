@@ -58,10 +58,6 @@ class StartMenu extends View {
 	 * @param {CanvasRenderingContext2D} ctx
 	 */
 	public draw = (ctx: CanvasRenderingContext2D) => {
-        if(this.language === "dutch"){
-        }
-        else{
-        }
 
 		// Draw the background color
 		ctx.fillStyle = Game.BASE_COLOR;
