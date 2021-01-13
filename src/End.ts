@@ -7,7 +7,10 @@ class End extends View {
 
     constructor(canvas: HTMLCanvasElement, endText: string, lineColor: string) {
         super(canvas);
-        document.getElementById("des").style.visibility = "hidden";
+        document.getElementById("desTop").style.visibility = "hidden";
+        document.getElementById("desLeft").style.visibility = "hidden";
+        document.getElementById("desRight").style.visibility = "hidden";
+        document.getElementById("desBottom").style.visibility = "hidden";
         this.backToStartMenuButton = new Button(
             this.canvas,
 			this.canvas.width * 0.20,
