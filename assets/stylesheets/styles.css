@@ -9,68 +9,60 @@ canvas {
 	z-index: 0;
 }
 
-.howToPlay{
-	justify-content: center;
-	width: 50%;
-	height: 65%;
+.popup {
+    justify-content: center;
+    width: 55vw;
+    height: 55vh;
 
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	/* bring your own prefixes */
-	transform: translate(-50%, -50%);
-	visibility: hidden;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    visibility: hidden;
 
-	background-color: dodgerblue;
-	border-radius: 20px;
-	border-color: white;
-	border-width: 6px;
-	border-style: solid;
-
-	padding: 100px;
-
-	z-index: 899;
+    background-color: brown;
+    border-radius: 20px;
+    border-color: white;
+    border-width: 6px;
+    border-style: solid;
+    padding: 4vw;
+    z-index: 899;
 }
-#info, #pause, #howToPlay {
-	justify-content: center;
-	width: 50%;
-	height: 65%;
 
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	/* bring your own prefixes */
-	transform: translate(-50%, -50%);
-	visibility: hidden;
-
-	background-color: brown;
-	border-radius: 20px;
-	border-color: white;
-	border-width: 6px;
-	border-style: solid;
-
-	padding: 100px;
-
-	z-index: 899;
-}
-#pause, #howToPlay {
-	background-color: dodgerblue;
-}
-#name, #title, #title_how {
-	font-size: 85px;
-	text-align: center;
-	color: white;
-}
-#explaination, #details {
-	font-size: 30px;
+.popup p {
+	font-size: 1.65vw;
 	text-align: center;
 	color: black;
 }
-#details {
+.popup input {
+	font-size: 3vw;
+	position: absolute;
+	background-color: purple;
+	border-radius: 15px;
+	border-color: white;
+	border-width: 4px;
+	border-style: solid;
+	top: 60vh;
+	left: 50%;
+	transform: translate(-50%);
+	z-index: 900;
+}
+
+.howToPlay {
+    background-color: dodgerblue;
+}
+
+.title {
+    font-size: 3vw;
+	text-align: center;
 	color: white;
 }
+
+#pause{
+	background-color: dodgerblue;
+}
 #glhf {
-    font-size: 40px;
+    font-size: 2vw;
     color: white;
 }
 .letsGo{
@@ -91,36 +83,35 @@ canvas {
 	background-color: grey;
 	cursor: pointer;
 }
-#understoodBtn, #backBtn{
-	font-size: 50px;
-	position: absolute;
-	background-color: purple;
-	border-radius: 15px;
-	border-color: white;
-	border-width: 4px;
-	border-style: solid;
-	top: 85%;
-	left: 50%;
-	transform: translate(-50%);
-	z-index: 900;
-}
-#continueBtn {
-	font-size: 50px;
-	position: absolute;
-	background-color: dodgerblue;
-	border-radius: 15px;
-	border-color: white;
-	border-width: 4px;
-	border-style: solid;
-	top: 75%;
-	left: 50%;
-	transform: translate(-50%);
-	z-index: 900;
-}
-#continueBtn, #backBtn{
-	background-color: purple;
-	color: white;
-}
+/*#understoodBtn, #backBtn{*/
+	/*font-size: 50px;*/
+	/*position: absolute;*/
+	/*background-color: purple;*/
+	/*border-radius: 15px;*/
+	/*border-color: white;*/
+	/*border-width: 4px;*/
+	/*border-style: solid;*/
+	/*top: 85%;*/
+	/*left: 50%;*/
+	/*transform: translate(-50%);*/
+	/*z-index: 900;*/
+/*}*/
+/*#continueBtn {*/
+	/*font-size: 50px;*/
+	/*position: absolute;*/
+	/*border-radius: 15px;*/
+	/*border-color: white;*/
+	/*border-width: 4px;*/
+	/*border-style: solid;*/
+	/*top: 75%;*/
+	/*left: 50%;*/
+	/*transform: translate(-50%);*/
+	/*z-index: 900;*/
+/*}*/
+/*#continueBtn, #backBtn{*/
+	/*background-color: purple;*/
+	/*color: white;*/
+/*}*/
 #understoodBtn:hover, #continueBtn:hover, #backBtn:hover{
 	background-color: grey;
 	cursor: pointer;
@@ -165,6 +156,7 @@ canvas {
 	}
 
 }
+
 
 .NLENSwitch {
     position: absolute;
