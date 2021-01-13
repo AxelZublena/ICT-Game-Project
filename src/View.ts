@@ -58,4 +58,8 @@ abstract class View {
 		ctx.fillText(text, xCoordinate, yCoordinate);
 
 	}
+
+    //public getButton = () => {
+        //// nothing, used in End.ts
+    //}
 }
