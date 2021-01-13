@@ -19,7 +19,7 @@ abstract class Character {
         this.keyListener = new KeyListener();
         this.counter = 0;
 		this.i = 0;
-		this.skipFrame = 7;
+		this.skipFrame = 2;
     }
 
     /**
@@ -67,12 +67,12 @@ abstract class Character {
 		this.speed = newSpeed;
     };
     
-    protected frameCounter = () => {
+    protected frameCounter = (maxFrames: number) => {
         this.i++;
 		if (this.i % this.skipFrame == 0) {
 			this.counter = this.i / this.skipFrame;
 		}
-		if (this.counter == 6) {
+		if (this.counter == maxFrames) {
 			this.counter = 0;
 			this.i = 0;
 		}

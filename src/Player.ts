@@ -185,7 +185,7 @@ class Player extends Character{
 			this.keyListener.isKeyDown(65) ||
 			this.keyListener.isKeyDown(68)
 		) {
-			this.frameCounter();
+			this.frameCounter(20);
 		}
 	};
 	

@@ -179,9 +179,9 @@ class Room extends View {
 				break;
 		}
 		this.enemies = [
-			new Enemy('./assets/img/enemy/skeleton-move_0.png', this.canvas),
+			new Enemy('./assets/img/enemy/skeleton-move_0.png', this.canvas, this.canvas.width*0.45, this.canvas.height*0.55),
 			new Enemy(
-				'./assets/img/enemy/skeleton-move_0.png', this.canvas
+				'./assets/img/enemy/skeleton-move_0.png', this.canvas, this.canvas.width*0.5, this.canvas.height*0.6
 			),
 		];
 
@@ -200,11 +200,8 @@ class Room extends View {
 	 */
 	private spawnEnemies = (ctx: CanvasRenderingContext2D) => {
 		this.enemies.forEach((enemy) => {
-			const sAngle = 0;
-			const eAngle = 2 * Math.PI;
 
-			// draw each enemy from the ball array
-			enemy.draw(ctx);
+			enemy.draw(ctx, this.player);
 		});
 	};
 
