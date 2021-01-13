@@ -1,6 +1,8 @@
 /// <reference path="View.ts" />
 
 class Room extends View {
+    private language: string;
+
 	private sensitiveDataObjects: Array<any>;
 	private nonSensitiveDataObjects: Array<any>;
 
@@ -18,9 +20,12 @@ class Room extends View {
 	constructor(
 		canvas: HTMLCanvasElement,
 		isGood: boolean,
-		playerSpawnPosition: string
+		playerSpawnPosition: string,
+        language: string
 	) {
 		super(canvas);
+
+        this.language = language;
 
 		this.background = this.loadRandomBackground();
 		this.lastBackgroundIndex = 0;
@@ -341,10 +346,6 @@ class Room extends View {
 		this.generateDoors();
 
 		this.nextRoom = false;
-
-		this.canvas.addEventListener("mousedown", (event) => {
-			console.log("x: " + event.clientX + " AND y: " + event.clientY);
-		});
 	}
 
 	/**
@@ -479,15 +480,18 @@ class Room extends View {
 			) {
 				onlyOneNonSensitiveData = true;
 
+                // Set the language
+                let index = 0;
+                if(this.language === "dutch"){
+                   index = this.nonSensitiveDataObjects.length/2 + this.random(0,this.nonSensitiveDataObjects.length/2,alreadyUsedValues);
+                }
+                else{
+                    index = this.random(0,this.nonSensitiveDataObjects.length/2,alreadyUsedValues);
+                }
+
 				this.doors.push(
 					new Door(
-						this.nonSensitiveDataObjects[
-							this.random(
-								0,
-								this.nonSensitiveDataObjects.length,
-								alreadyUsedValues
-							)
-						],
+						this.nonSensitiveDataObjects[index],
 						position[i],
 						false,
 						false,
@@ -497,15 +501,19 @@ class Room extends View {
 			} else {
 				// make sure there is at least one sensitive data
 				if (i === 3 && onlyOneNonSensitiveData === false) {
+
+                    // Set the language
+                    let index = 0;
+                    if(this.language === "dutch"){
+                       index = this.nonSensitiveDataObjects.length/2 + this.random(0,this.nonSensitiveDataObjects.length/2,alreadyUsedValues);
+                    }
+                    else{
+                        index = this.random(0,this.nonSensitiveDataObjects.length/2,alreadyUsedValues);
+                    }
+
 					this.doors.push(
 						new Door(
-							this.nonSensitiveDataObjects[
-								this.random(
-									0,
-									this.nonSensitiveDataObjects.length,
-									alreadyUsedValues
-								)
-							],
+							this.nonSensitiveDataObjects[index],
 							position[i],
 							false,
 							false,
@@ -513,11 +521,14 @@ class Room extends View {
 						)
 					);
 				} else {
-					const index = this.random(
-						0,
-						this.nonSensitiveDataObjects.length,
-						alreadyUsedValues
-					);
+                    // Set the language
+                    let index = 0;
+                    if(this.language === "dutch"){
+                       index = this.sensitiveDataObjects.length/2 + this.random(0,this.sensitiveDataObjects.length/2,alreadyUsedValues);
+                    }
+                    else{
+                        index = this.random(0,this.sensitiveDataObjects.length/2,alreadyUsedValues);
+                    }
 
 					alreadyUsedValues.push(index);
 

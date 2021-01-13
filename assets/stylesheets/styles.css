@@ -9,6 +9,28 @@ canvas {
 	z-index: 0;
 }
 
+.howToPlay{
+	justify-content: center;
+	width: 50%;
+	height: 65%;
+
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	/* bring your own prefixes */
+	transform: translate(-50%, -50%);
+	visibility: hidden;
+
+	background-color: dodgerblue;
+	border-radius: 20px;
+	border-color: white;
+	border-width: 6px;
+	border-style: solid;
+
+	padding: 100px;
+
+	z-index: 899;
+}
 #info, #pause, #howToPlay {
 	justify-content: center;
 	width: 50%;
@@ -47,10 +69,32 @@ canvas {
 #details {
 	color: white;
 }
-#understoodBtn, #backBtn, #letsGo {
+#glhf {
+    font-size: 40px;
+    color: white;
+}
+.letsGo{
 	font-size: 50px;
 	position: absolute;
-	background-color: dodgerblue;
+	background-color: purple;
+    color: white;
+	border-radius: 15px;
+	border-color: white;
+	border-width: 4px;
+	border-style: solid;
+	top: 85%;
+	left: 50%;
+	transform: translate(-50%);
+	z-index: 900;
+}
+.letsGo:hover{
+	background-color: grey;
+	cursor: pointer;
+}
+#understoodBtn, #backBtn{
+	font-size: 50px;
+	position: absolute;
+	background-color: purple;
 	border-radius: 15px;
 	border-color: white;
 	border-width: 4px;
@@ -73,11 +117,11 @@ canvas {
 	transform: translate(-50%);
 	z-index: 900;
 }
-#continueBtn, #backBtn, #letsGo {
+#continueBtn, #backBtn{
 	background-color: purple;
 	color: white;
 }
-#understoodBtn:hover, #continueBtn:hover, #backBtn:hover, #letsGo:hover {
+#understoodBtn:hover, #continueBtn:hover, #backBtn:hover{
 	background-color: grey;
 	cursor: pointer;
 }
@@ -120,4 +164,32 @@ canvas {
 		overflow: scroll;
 	}
 
+}
+
+.NLENSwitch {
+    position: absolute;
+    z-index: 10;
+    display: flex;
+    top: 90vh;
+    left: 90vw;
+    background-color: white;
+    border-radius: 10px;
+    visibility: visible;
+}
+.flag{
+    padding: 10px;
+    padding-top: 13px;
+    background-color: white;
+    /*border-radius: 10px;*/
+}
+#NLStart {
+    border-radius: 10px 0px 0px 10px;
+    background-color: purple;
+}
+#ENStart {
+    border-radius: 0px 10px 10px 0px;
+    background-color: white;
+}
+#NLStart:hover, #ENStart:hover {
+    cursor: pointer;
 }

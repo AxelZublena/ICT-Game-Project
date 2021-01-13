@@ -7,6 +7,14 @@
     <link rel="stylesheet" href="assets/stylesheets/styles.css">
 </head>
 <body>
+    <div class="NLENSwitch" id="NLENSwitchStart">
+        <div class="flag" id="NLStart">
+            <img src="./assets/img/NLFlag.png" alt="NL" width="35px" height="30px">
+        </div>
+        <div class="flag" id="ENStart">
+            <img src="./assets/img/GBFlag.png" alt="EN" width="35px" height="30px">
+        </div>
+    </div>
     <div id="info">
         <h1 id="name"></h1>
         <p id="explaination"></p>
@@ -16,14 +24,19 @@
         <h1 id="desh1"></h1>
     </div>
     <div id="pause">
-        <h1 id="title">Pause</h1>
+        <h1 id="title"><span id="pauseTitle"></span></h1>
         <input type="button" value="Continue" id="continueBtn">
         <input type="button" value="Back To Menu" id="backBtn">
     </div>
-    <div id="howToPlay">
+    <div class="howToPlay" id="htpEN">
         <h1 id="title_how">How To Play</h1>
-        <p id="details"></p>
-        <input type="button" value="Let's go!" id="letsGo">
+        <p id="details">You are playing a special agent. Your job is to choose the path that shows the <b>non-sensitive</b> data (data that you don't have to worry if others get to know). In every level of the dungeon you will have to choose the <b>1 right path out of the 4</b>. If you choose a wrong path in the next level you need to show some dodging skills.</br></br><center id="glhf">GLHF!</center></p>
+        <input type="button" value="Let's go!" class="letsGo" id="letsGoEN">
+    </div>
+    <div class="howToPlay" id="htpNL">
+        <h1 id="title_how">Hoe Te Spelen</h1>
+        <p id="details">Je speelt een speciale agent. Het is jouw taak om het pad te kiezen dat de <b>niet-gevoelige</b> gegevens laat zien (gegevens waar je je geen zorgen over hoeft te maken als anderen het leren kennen). In elk niveau van de kerker moet je het <b>1 juiste pad kiezen uit de 4</b>. Als je een verkeerd pad kiest in het volgende niveau moet je wat ontwijkende vaardigheden laten zien.</br><center id="glhf">GLHF!</center></p>
+        <input type="button" value="Let's go!" class="letsGo" id="letsGoNL">
     </div>
     <canvas id="canvas"></canvas>
     <script src="./build/app.js"></script> 
