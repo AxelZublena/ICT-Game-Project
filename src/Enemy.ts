@@ -7,7 +7,7 @@ class Enemy extends Character{
     constructor(image: string, canvas: HTMLCanvasElement, xPos: number, yPos: number) {
         super(image, canvas);
         this.canvas = canvas;
-		this.speed = this.randomNumber(1, 4);
+		this.speed = 1;
 		
 		this.xPos = xPos;
 		this.yPos = yPos;
@@ -118,9 +118,11 @@ class Enemy extends Character{
     private zombieMovement = (player: Player) => {
 
 		if (player.getPositionX() < this.xPos) {
+			this.collisionDetection(player);
 			this.xPos -= this.speed;
 			this.image = this.loadNewImage(this.sprites_left[this.counter]);
 			if (player.getPositionY() < this.yPos) {
+				this.collisionDetection(player);
 				this.yPos -= this.speed;
 				this.image = this.loadNewImage(this.sprites[this.counter]);
 			}
@@ -128,9 +130,11 @@ class Enemy extends Character{
 		}
 
 		if (player.getPositionX() > this.xPos) {
+			this.collisionDetection(player);
 			this.xPos += this.speed;
 			this.image = this.loadNewImage(this.sprites_right[this.counter]);
 			if (player.getPositionY() > this.yPos) {	
+				this.collisionDetection(player);
 				this.yPos += this.speed;
 				this.image = this.loadNewImage(this.sprites_downwards[this.counter]);
 			}
@@ -140,7 +144,10 @@ class Enemy extends Character{
 	};
 
 	private collisionDetection = (player: Player) => {
-		if (this.getPositionX() == player.getPositionX() || this.getPositionY() == player.getPositionY()) {
+		if (this.getPositionX() < player.getPositionX() + player.getWidth() &&
+		this.getPositionX() + this.image.width > player.getPositionX() &&
+			this.getPositionY() < player.getPositionY() + player.getHeight() &&
+			this.getPositionY() + this.image.height > this.getPositionY()) {
 			this.dead = true;
 		}
 	}

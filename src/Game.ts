@@ -144,7 +144,8 @@ class Game {
 		if (this.currentView instanceof Room) {
 			this.currentView.getEnemies().forEach(enemy => {
 				if(enemy.getDead()) {
-					this.currentView = new End(this.canvas, `You lost, you answered ${this.goodRoomCounter}/5 questions right on your quest. Try again!`, "red")
+					this.currentView = new End(this.canvas, `You lost, you answered ${this.goodRoomCounter}/5 questions right on your quest. Try again!`, "red");
+					this.goodRoomCounter = 0;
 				}
 			});
 			
