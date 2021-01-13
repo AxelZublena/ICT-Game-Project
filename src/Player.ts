@@ -102,7 +102,6 @@ class Player extends Character{
 
 	public draw = (ctx: CanvasRenderingContext2D) => {
 		
-
 		ctx.drawImage(
 			this.image,
 			this.xPos,

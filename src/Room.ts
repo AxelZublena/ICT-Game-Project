@@ -179,9 +179,9 @@ class Room extends View {
 				break;
 		}
 		this.enemies = [
-			new Enemy('asd', this.canvas),
+			new Enemy('./assets/img/enemy/skeleton-move_0.png', this.canvas),
 			new Enemy(
-				'asd', this.canvas
+				'./assets/img/enemy/skeleton-move_0.png', this.canvas
 			),
 		];
 
