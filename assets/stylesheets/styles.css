@@ -42,7 +42,7 @@ canvas {
 	border-color: white;
 	border-width: 4px;
 	border-style: solid;
-	top: 60vh;
+	top: 80%;
 	left: 50%;
 	transform: translate(-50%);
 	z-index: 900;
