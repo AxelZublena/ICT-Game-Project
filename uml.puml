@@ -1,0 +1,233 @@
+@startuml
+StartMenu *-- Button
+End *-- Button
+Room *-- Door
+Room *-- Player
+Room *-- Enemy
+Game *-- View
+Game *-- KeyListener
+class Button {
+    -width: number
+    -height: number
+    -xPos: number
+    -yPos: number
+    -color: string
+    -text: string
+    -canvas: HTMLCanvasElement
+    -clicked: boolean
+    +getClicked: () => boolean
+    +resetClicked: () => void
+    +getWidth: () => number
+    +getHeight: () => number
+    +getXPos: () => number
+    +getYPos: () => number
+    +getColor: () => string
+    +setWidth: (width: number) => void
+    +setHeight: (height: number) => void
+    +setXPos: (xPos: number) => void
+    +setYPos: (yPos: number) => void
+    +setColor: (color: string) => void
+}
+abstract class Character {
+    #speed: number
+    #xPos: number
+    #yPos: number
+    #counter: number
+    #i: number
+    #skipFrame: number
+    #image: HTMLImageElement
+    #keyListener: KeyListener
+    #canvas: HTMLCanvasElement
+    #sprites: any[]
+    #sprites_left: any[]
+    #sprites_right: any[]
+    #sprites_downwards: any[]
+    #loadNewImage: (source: string) => HTMLImageElement
+    +getPositionX: () => number
+    +getPositionY: () => number
+    +getWidth: () => number
+    +getHeight: () => number
+    +setPositionX: (xPos: number) => void
+    +setPositionY: (yPos: number) => void
+    +setImage: (image: string) => void
+    #setSpeed: (newSpeed: number) => void
+    #frameCounter: (maxFrames: number) => void
+    #randomNumber: (min: number, max: number) => number
+}
+class Door {
+    -canvas: HTMLCanvasElement
+    -data: any
+    -infoDot: Infodot
+    -positionX: number
+    -positionY: number
+    -position: string
+    -width: number
+    -height: number
+    -isSensitive: boolean
+    -isCrossed: boolean
+    +draw: (ctx: CanvasRenderingContext2D, playerXPos: number, playerYPos: number, playerWidth: number, playerHeight: number) => void
+    -playerCollidesWithDoor: (playerXPos: number, playerYPos: number, playerWidth: number, playerHeight: number) => boolean
+    -doorPositioner(position: string, canvas: HTMLCanvasElement): void
+    +getXPosition: () => number
+    +getYPosition: () => number
+    +getPosition: () => string
+    +getWidth: () => number
+    +getHeight: () => number
+    +getName: () => any
+    +getExplaination: () => any
+    +getData: () => any
+    +getIsSensitive: () => boolean
+    +getIsCrossed: () => boolean
+}
+abstract class View {
+    #canvas: HTMLCanvasElement
+    #image: HTMLImageElement
+    +draw: (ctx: CanvasRenderingContext2D) => void
+    #loadNewImage: (source: string, width?: number, height?: number) => HTMLImageElement
+    #writeTextToCanvas: (ctx: CanvasRenderingContext2D, text: string, fontSize: number, xCoordinate: number, yCoordinate: number, alignment?: CanvasTextAlign, color?: string) => void
+}
+class End extends View {
+    -backToStartMenuButton: Button
+    -endText: string
+    -lineColor: string
+    +getButton: () => Button
+    +draw: (ctx: CanvasRenderingContext2D) => void
+}
+class Enemy extends Character {
+    -dead: boolean
+    +draw: (ctx: CanvasRenderingContext2D, player: Player) => void
+    -zombieMovement: (player: Player) => void
+    -collisionDetection: (player: Player) => void
+    +getDead: () => boolean
+}
+class Game {
+    -canvas: HTMLCanvasElement
+    -ctx: CanvasRenderingContext2D
+    -startMenu: StartMenu
+    -currentView: View
+    -prevView: string
+    -keyboard: KeyListener
+    -goodRoomCounter: number
+    -failedRoomCounter: any[]
+    -allRoomCounter: number
+    -stop: boolean
+    -howBool: boolean
+    -language: string
+    +step: () => void
+    -draw: () => void
+    -startMenuHandler: () => void
+    -pauseMenuHandler: () => void
+    -endHandler: () => void
+    -handlers(): void
+    +{static} BASE_COLOR: string
+}
+class Infodot extends View {
+    -posX: number
+    -posY: number
+    -playerPosX: number
+    -playerPosY: number
+    -playerWidth: number
+    -playerHeight: number
+    -data: string
+    -position: string
+    -touched: boolean
+    +draw: (ctx: CanvasRenderingContext2D) => void
+    -positioning(): void
+    -isTouched(): void
+    +setPlayerPosition(playerXPos: number, playerYPos: number, playerWidth: number, playerHeight: number): void
+}
+class KeyListener {
+    -keyCodeStates: boolean[]
+    -keyCodeTyped: boolean[]
+    -previousState: boolean[]
+    +onFrameStart: () => void
+    +isKeyDown: (keyCode: number) => boolean
+    +isKeyTyped: (keyCode: number) => boolean
+    +{static} KEY_ENTER: 13
+    +{static} KEY_SHIFT: 16
+    +{static} KEY_CTRL: 17
+    +{static} KEY_ALT: 18
+    +{static} KEY_ESC: 27
+    +{static} KEY_SPACE: 32
+    +{static} KEY_LEFT: 37
+    +{static} KEY_UP: 38
+    +{static} KEY_RIGHT: 39
+    +{static} KEY_DOWN: 40
+    +{static} KEY_DEL: 46
+    +{static} KEY_1: 49
+    +{static} KEY_2: 50
+    +{static} KEY_3: 51
+    +{static} KEY_4: 52
+    +{static} KEY_5: 53
+    +{static} KEY_6: 54
+    +{static} KEY_7: 55
+    +{static} KEY_8: 56
+    +{static} KEY_9: 57
+    +{static} KEY_0: 58
+    +{static} KEY_A: 65
+    +{static} KEY_B: 66
+    +{static} KEY_C: 67
+    +{static} KEY_D: 68
+    +{static} KEY_E: 69
+    +{static} KEY_F: 70
+    +{static} KEY_G: 71
+    +{static} KEY_H: 72
+    +{static} KEY_I: 73
+    +{static} KEY_J: 74
+    +{static} KEY_K: 75
+    +{static} KEY_L: 76
+    +{static} KEY_M: 77
+    +{static} KEY_N: 78
+    +{static} KEY_O: 79
+    +{static} KEY_P: 80
+    +{static} KEY_Q: 81
+    +{static} KEY_R: 82
+    +{static} KEY_S: 83
+    +{static} KEY_T: 84
+    +{static} KEY_U: 85
+    +{static} KEY_V: 86
+    +{static} KEY_W: 87
+    +{static} KEY_X: 88
+    +{static} KEY_Y: 89
+    +{static} KEY_Z: 90
+}
+class Player extends Character {
+    +draw: (ctx: CanvasRenderingContext2D) => void
+    -wallDetection(): void
+    -movement: () => void
+}
+class Room extends View {
+    -language: string
+    -sensitiveDataObjects: any[]
+    -nonSensitiveDataObjects: any[]
+    -doors: Door[]
+    -player: Player
+    -enemies: Enemy[]
+    -isGood: boolean
+    -nextRoom: boolean
+    -background: HTMLImageElement
+    -lastBackgroundIndex: number
+    -zombie1X: number
+    -zombie1Y: number
+    -zombie2X: number
+    -zombie2Y: number
+    -playerSpawn: string
+    -spawnEnemies: (ctx: CanvasRenderingContext2D) => void
+    +isNextRoomGood: () => { isGood: boolean; data: any; position: string; }
+    +draw: () => void
+    +getNextRoom: () => boolean
+    +getEnemies: () => Enemy[]
+    +getPlayer: () => Player
+    -loadRandomBackground: () => HTMLImageElement
+    -generateDoors: () => void
+    -random: (min: number, max: number, alreadyUsedValues?: number[]) => number
+}
+class StartMenu extends View {
+    -startButton: Button
+    -language: string
+    -createButton: (text: string) => void
+    +getLanguage: () => string
+    +getButton: () => Button
+    +draw: (ctx: CanvasRenderingContext2D) => void
+}
+@enduml
