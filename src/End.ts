@@ -5,12 +5,20 @@ class End extends View {
     private endText: string;
     private lineColor: string;
 
-    constructor(canvas: HTMLCanvasElement, endText: string, lineColor: string) {
+    constructor(canvas: HTMLCanvasElement, endText: string, lineColor: string, language:string) {
         super(canvas);
         document.getElementById("desTop").style.visibility = "hidden";
         document.getElementById("desLeft").style.visibility = "hidden";
         document.getElementById("desRight").style.visibility = "hidden";
         document.getElementById("desBottom").style.visibility = "hidden";
+
+        let btnText = "";
+        if(language === "dutch"){
+            btnText = "Terug naar begin scherm"; 
+        }
+        else{
+            btnText = "Back to start menu";
+        }
         this.backToStartMenuButton = new Button(
             this.canvas,
 			this.canvas.width * 0.20,
@@ -18,7 +26,7 @@ class End extends View {
 			this.canvas.width / 2 - (this.canvas.width * 0.19)/2,
 			this.canvas.height * 0.77 - (this.canvas.height * 0.19)/2,
 			"purple",
-            "BACK TO START MENU"
+            btnText
         );
 
         // load the image

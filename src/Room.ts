@@ -1,6 +1,8 @@
 /// <reference path="View.ts" />
 
 class Room extends View {
+    private language: string;
+
 	private sensitiveDataObjects: Array<any>;
 	private nonSensitiveDataObjects: Array<any>;
 
@@ -25,9 +27,12 @@ class Room extends View {
 	constructor(
 		canvas: HTMLCanvasElement,
 		isGood: boolean,
-		playerSpawnPosition: string
+		playerSpawnPosition: string,
+        language: string
 	) {
 		super(canvas);
+
+        this.language = language;
 
 		this.background = this.loadRandomBackground();
 		this.lastBackgroundIndex = 0;
@@ -36,116 +41,266 @@ class Room extends View {
 
 		this.sensitiveDataObjects = [
 			{
+				language: "english",
 				name: "Username + Password",
 				explaination:
 					"If somebody knows your username and password, they can log in to your gaming account 🎮 and delete your favorite games or sell everything 💸 you have collected so far. You don’t want that, do you? ☹",
 			},
 			{
+				language: "english",
 				name: "Home address",
 				explaination:
 					"If somebody knows your address, they can stalk you. 👀 Google will give them a picture of your house 🏠 or apartment and the directions ↩️ to get there. It is just weird, so you should keep it for yourself.",
 			},
 			{
+				language: "english",
 				name: "Bank card details",
 				explaination:
 					"You took a picture of your brand new bank card 💳 the last afternoon to show your friends that you are a grown-up person and can have your own card. You wake up the next morning, and all your money is gone 💸. You ignored covering the numbers on the card while taking that picture ☹ Maybe you should stick with cash 💰 for a while.",
 			},
 			{
+				language: "english",
 				name: "Picture of you",
 				explaination:
 					"If you don’t want to see yourself randomly appearing on the internet, don’t send away this one. Some smartphones 📱 can be unlocked by face identification, and if somebody stoles a picture of your face...well, it can be a problem later on.",
 			},
 			{
+				language: "english",
 				name: "Bills",
 				explaination:
 					"There are many information on bills: your address, full name and maybe some bank details too. It is just too much information! Pay attention when you take some random pictures at your home 🏠; check 👀 if there are no bills in the background! There are people out there who got into trouble by sending photographs, including their bills.",
 			},
 			{
+				language: "english",
 				name: "Medical pills you take",
 				explaination:
 					"This is health-related information 💊, and it is considered private 🔒 and sensitive. Therefore, when you contact a new doctor 👨‍⚕️ 👩‍⚕️, they need your permission to access your medical information.",
 			},
 			{
+				language: "english",
 				name: "History from your illnesses",
 				explaination:
 					"This is health-related information 💊, and it is considered private 🔒 and sensitive. Therefore, when you contact a new doctor 👨‍⚕️ 👩‍⚕️, they need your permission to access your medical information.",
 			},
 			{
+				language: "english",
 				name: "Your fingerprint",
 				explaination:
 					"Your fingerprint 👈 is unique so that you can be identified by it. Therefore it is considered sensitive 🔒. Just think about that: you can use it to unlock your phone 📱.",
 			},
 			{
+				language: "english",
 				name: "Political opinions",
 				explaination:
 					"Unfortunately, there are some places where other people or even companies can discriminate you based on your political views. Therefore the European Union considers this information private. Sometimes it is not wise to share it with strangers 🔒.",
 			},
 			{
+				language: "english",
 				name: "Alarm system’s passcode",
 				explaination:
 					"Sometimes you share this code with trusted people, but in general, it is just for you and for your family to protect your house 🏠 🔒. Never use it anywhere else, and do not use it as a password!",
 			},
 			{
+				language: "english",
 				name: "Photo about your holiday",
 				explaination:
 					"Housebreakers 😒 usually browse social media searching for “holiday-pictures.” This usually means that the family left the house, and it is empty to be robbed more easily 🏠 🔓.",
 			},
 			{
+				language: "english",
 				name: "Your birth date",
 				explaination:
 					"It is considered sensitive because you can be identified by it more easily: many times, when you call someone who needs to authorize you, you will need to give your birthdate to them. Do not give it to anyone else. It is not wise to provide it for Facebook or Instagram and set it to public. Never use it as your password ⛔! It can be easily guessed.",
 			},
 			{
+				language: "english",
 				name: "Your ID number",
 				explaination:
 					"It is considered sensitive because it is unique and only identifies you. Never share it on social media ⛔!",
 			},
+			{
+				language: "dutch",
+				name: "Gebruikersnaam + Wachtwoord: ",
+				explaination:
+					"Als iemand je gebruikersnaam en wachtwoord weet, kan hij/zij inloggen op jouw account 🎮 en je favoriete spellen verwijderen of alles verkopen 💸 dat je hebt verzameld. Dat wil je toch niet☹?",
+			},
+			{
+				language: "dutch",
+				name: "Adres",
+				explaination:
+					"Als iemand je adres kent, kunnen ze je stalken. 👀 Google geven ze een foto van je huis 🏠 of appartement en de routebeschrijving ↩️ hoe je daar komt. Het is gewoon raar, dus je moet het voor jezelf houden.",
+			},
+			{
+				language: "dutch",
+				name: "Bank gegevens",
+				explaination:
+					"Je hebt de afgelopen middag een foto gemaakt van je nieuwe bankpas 💳 om je vrienden te laten zien dat je een volwassen persoon bent en je eigen kaart hebt. Je wordt de volgende ochtend wakker en al je geld is op 💸. Je vergat de cijfers op de kaart bedekken terwijl je die foto maakt ☹ Misschien moet je een tijdje bij contant geld blijven 💰.",
+			},
+			{
+				language: "dutch",
+				name: "Foto van jou",
+				explaination:
+					"Als je jezelf niet willekeurig op internet wilt zien verschijnen, stuur deze dan niet weg. Sommige telefoons 📱 kunnen worden ontgrendeld door middel van gezichtsherkenning, en als iemand een foto van je gezicht steelt ... nou, dat kan een probleem worden later.",
+			},
+			{
+				language: "dutch",
+				name: "Rekening",
+				explaination:
+					"Er is veel informatie op een rekening: uw adres, naam en misschien ook enkele bankgegevens. Het is gewoon te veel informatie! Let goed op wanneer je wat foto's thuis maakt 🏠; controleer 👀 of er geen rekeningen op de achtergrond zijn! Er zijn mensen die in de problemen zijn gekomen door foto's te sturen, waar hun rekeningen zichtbaar zijn.",
+			},
+			{
+				language: "dutch",
+				name: "Medicijnen die je gebruikt",
+				explaination:
+					"Dit is heeft te maken met gezondheid en wordt als privé 🔒 en gevoelig beschouwd. Daarom, wanneer je contact opneemt met een nieuwe arts 👨‍⚕️ 👩‍⚕️, heeft hij/zij jouw toestemming nodig om toegang te krijgen tot jouw medische informatie.",
+			},
+			{
+				language: "dutch",
+				name: "Geschiedenis van ziekte",
+				explaination: "Dit is heeft te maken met gezondheid en wordt als privé 🔒 en gevoelig beschouwd. Daarom, wanneer je contact opneemt met een nieuwe arts 👨‍⚕️ 👩‍⚕️, heeft hij/zij jouw toestemming nodig om toegang te krijgen tot jouw medische informatie.",
+			},
+			{
+				language: "dutch",
+				name: "Je vingerafdruk",
+				explaination: "Jouw vingerafdruk is uniek, zodat je eraan kant worden herkend. Daarom wordt het als gevoelig data gezien 🔒. Denk daar maar eens over na: je kunt het gebruiken om uw telefoon te ontgrendelen 📱.",
+			},
+			{
+				language: "dutch",
+				name: "Politieke mening",
+				explaination: "Helaas zijn er plaatsen of landen waar andere mensen je kunnen discrimineren op basis van jouw politieke mening. Daarom beschouwt de Europese Unie deze informatie als privé. Soms is het niet verstandig om het met vreemden te delen 🔒.",
+			},
+			{
+				language: "dutch",
+				name: "Alarmsysteem wachtwoord",
+				explaination: "Soms deel je deze code met mensen die je vertrouw, maar over het algemeen is het alleen voor jou en je gezin om je huis te beschermen 🏠 🔒. Gebruik het nergens anders en/of gebruik het ook niet als wachtwoord!",
+			},
+			{
+				language: "dutch",
+				name: "Foto dat je op vakantie bent",
+				explaination: "Inbrekers 😒 kijken meestal door sociale media en zijn op zoek naar 'vakantiefoto's'. Dit betekent meestal dat het gezin het huis heeft verlaten en dat het leeg is en gemakkelijker beroofd te worden🏠 🔓.",
+			},
+			{
+				language: "dutch",
+				name: "Je geboortedatum",
+				explaination: "Het wordt als gevoelig data gezien omdat je er gemakkelijker door kunt worden herkend: vaak, wanneer je iemand belt en die wilt zeker weten dat jij het bent, moet je jouw geboortedatum aan hen doorgeven. Geef het aan niemand anders. Het is niet verstandig om het op Facebook of Instagram openbaar te maken. Gebruik het nooit als uw wachtwoord ⛔! Het is gemakkelijk te raden.",
+			},
+			{
+				language: "dutch",
+				name: "Je ID-nummer",
+				explaination: "Het wordt als gevoelig data gezien omdat het uniek is en alleen jou identificeert. Deel het nooit op sociale media ⛔!",
+			}
 		];
 		this.nonSensitiveDataObjects = [
 			{
+				language: "english",
 				name: "Favorite Color ",
 				explaination: "",
 			},
 			{
+				language: "english",
 				name: "Nationality ",
 				explaination: "",
 			},
 			{
+				language: "english",
 				name: "Username",
 				explaination: "",
 			},
 			{
+				language: "english",
 				name: "Favorite Food",
 				explaination: "",
 			},
 			{
+				language: "english",
 				name: "Email address",
 				explaination: "",
 			},
 			{
+				language: "english",
 				name: "Your phone’s manufacturer",
 				explaination: "",
 			},
 			{
+				language: "english",
 				name: "A picture of your clothes",
 				explaination: "",
 			},
 			{
+				language: "english",
 				name: "Picture about your cat ",
 				explaination: "",
 			},
 			{
+				language: "english",
 				name: "Your favorite game ",
 				explaination: "",
 			},
 			{
+				language: "english",
 				name: "Your best friend",
 				explaination: "",
 			},
 			{
+				language: "english",
 				name: "Religion",
 				explaination: "",
 			},
+			{
+				language: "dutch",
+				name: "Favoriete kleur",
+				explaination: "",
+			},
+			{
+				language: "dutch",
+				name: "Nationaliteit",
+				explaination: "",
+			},
+			{
+				language: "dutch",
+				name: "Gebruikersnaam",
+				explaination: "",
+			},
+			{
+				language: "dutch",
+				name: "Favoriete eten",
+				explaination: "",
+			},
+			{
+				language: "dutch",
+				name: "Geloof",
+				explaination: "",
+			},
+			{
+				language: "dutch",
+				name: "Email adres",
+				explaination: "",
+			},
+			{
+				language: "dutch",
+				name: "Je telefoon provider",
+				explaination: "",
+			},
+			{
+				language: "dutch",
+				name: "Foto van je kleding",
+				explaination: "",
+			},
+			{
+				language: "dutch",
+				name: "Foto van je kat",
+				explaination: "",
+			},
+			{
+				language: "dutch",
+				name: "Favoriete game",
+				explaination: "",
+			},
+			{
+				language: "dutch",
+				name: "Beste vriend",
+				explaination: "",
+			}
 		];
 
 		this.player = new Player(
@@ -229,10 +384,6 @@ class Room extends View {
 		this.generateDoors();
 
 		this.nextRoom = false;
-
-		this.canvas.addEventListener("mousedown", (event) => {
-			console.log("x: " + event.clientX + " AND y: " + event.clientY);
-		});
 	}
 
 	/**
@@ -366,15 +517,18 @@ class Room extends View {
 			) {
 				onlyOneNonSensitiveData = true;
 
+                // Set the language
+                let index = 0;
+                if(this.language === "dutch"){
+                   index = this.nonSensitiveDataObjects.length/2 + this.random(0,this.nonSensitiveDataObjects.length/2,alreadyUsedValues);
+                }
+                else{
+                    index = this.random(0,this.nonSensitiveDataObjects.length/2,alreadyUsedValues);
+                }
+
 				this.doors.push(
 					new Door(
-						this.nonSensitiveDataObjects[
-							this.random(
-								0,
-								this.nonSensitiveDataObjects.length,
-								alreadyUsedValues
-							)
-						],
+						this.nonSensitiveDataObjects[index],
 						position[i],
 						false,
 						false,
@@ -384,15 +538,19 @@ class Room extends View {
 			} else {
 				// make sure there is at least one sensitive data
 				if (i === 3 && onlyOneNonSensitiveData === false) {
+
+                    // Set the language
+                    let index = 0;
+                    if(this.language === "dutch"){
+                       index = this.nonSensitiveDataObjects.length/2 + this.random(0,this.nonSensitiveDataObjects.length/2,alreadyUsedValues);
+                    }
+                    else{
+                        index = this.random(0,this.nonSensitiveDataObjects.length/2,alreadyUsedValues);
+                    }
+
 					this.doors.push(
 						new Door(
-							this.nonSensitiveDataObjects[
-								this.random(
-									0,
-									this.nonSensitiveDataObjects.length,
-									alreadyUsedValues
-								)
-							],
+							this.nonSensitiveDataObjects[index],
 							position[i],
 							false,
 							false,
@@ -400,11 +558,14 @@ class Room extends View {
 						)
 					);
 				} else {
-					const index = this.random(
-						0,
-						this.nonSensitiveDataObjects.length,
-						alreadyUsedValues
-					);
+                    // Set the language
+                    let index = 0;
+                    if(this.language === "dutch"){
+                       index = this.sensitiveDataObjects.length/2 + this.random(0,this.sensitiveDataObjects.length/2,alreadyUsedValues);
+                    }
+                    else{
+                        index = this.random(0,this.sensitiveDataObjects.length/2,alreadyUsedValues);
+                    }
 
 					alreadyUsedValues.push(index);
 
