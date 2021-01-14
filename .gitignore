@@ -104,7 +104,7 @@ dist
 .tern-port
 
 # Build directory
-build/
+#build/
 
 # yml Files
 *.yml
