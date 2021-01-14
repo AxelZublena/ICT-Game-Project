@@ -116,29 +116,31 @@ class Enemy extends Character{
     };
 
     private zombieMovement = (player: Player) => {
-		if (player.getPositionX() < this.xPos) {
+		if (player.getPositionY() <= this.yPos) {
+			this.yPos -= this.speed;
+			if (player.getPositionY() != this.yPos) {
+				this.image = this.loadNewImage(this.sprites[this.counter]);
+			}
+		} else if (player.getPositionY() >= this.yPos) {
+			this.yPos += this.speed;
+			if (player.getPositionY() != this.yPos) {
+				this.image = this.loadNewImage(this.sprites_downwards[this.counter]);
+			}
+		}
+
+		if (player.getPositionX() <= this.xPos) {
 			this.xPos -= this.speed;
 			if (player.getPositionX() != this.xPos) {
 				this.image = this.loadNewImage(this.sprites_left[this.counter]);
 			}
-		} else if (player.getPositionX() > this.xPos) {
+		} else if (player.getPositionX() >= this.xPos) {
 			this.xPos += this.speed;
 			if (player.getPositionX() != this.xPos) {
 				this.image = this.loadNewImage(this.sprites_right[this.counter]);
 			}	
 		}
 
-		if (player.getPositionY() < this.yPos) {
-			this.yPos -= this.speed;
-			if (player.getPositionY() != this.yPos) {
-				this.image = this.loadNewImage(this.sprites[this.counter]);
-			}
-		} else if (player.getPositionY() > this.yPos) {
-			this.yPos += this.speed;
-			if (player.getPositionY() != this.yPos) {
-				this.image = this.loadNewImage(this.sprites_downwards[this.counter]);
-			}
-		}
+		
 
 	};
 
