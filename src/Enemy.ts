@@ -7,7 +7,7 @@ class Enemy extends Character{
     constructor(image: string, canvas: HTMLCanvasElement, xPos: number, yPos: number) {
         super(image, canvas);
         this.canvas = canvas;
-		this.speed = 1;
+		this.speed = this.randomNumber(1,3);
 		
 		this.xPos = xPos;
 		this.yPos = yPos;
@@ -116,30 +116,27 @@ class Enemy extends Character{
     };
 
     private zombieMovement = (player: Player) => {
-		if (player.getPositionY() <= this.yPos) {
-			this.yPos -= this.speed;
-			if (player.getPositionY() != this.yPos) {
-				this.image = this.loadNewImage(this.sprites[this.counter]);
-			}
-		} else if (player.getPositionY() >= this.yPos) {
-			this.yPos += this.speed;
-			if (player.getPositionY() != this.yPos) {
-				this.image = this.loadNewImage(this.sprites_downwards[this.counter]);
-			}
+		if (Math.abs(player.getPositionX() - this.xPos) < 50 && Math.abs(player.getPositionY() - this.yPos) < 50) {
+			this.dead = true;
+			console.log('hello there');
 		}
 
 		if (player.getPositionX() <= this.xPos) {
 			this.xPos -= this.speed;
-			if (player.getPositionX() != this.xPos) {
-				this.image = this.loadNewImage(this.sprites_left[this.counter]);
+			this.image = this.loadNewImage(this.sprites_left[this.counter]);
+			if (player.getPositionY() <= this.yPos) {
+				this.yPos -= this.speed;
+				this.image = this.loadNewImage(this.sprites[this.counter]);
 			}
-		} else if (player.getPositionX() >= this.xPos) {
-			this.xPos += this.speed;
-			if (player.getPositionX() != this.xPos) {
-				this.image = this.loadNewImage(this.sprites_right[this.counter]);
-			}	
 		}
-
+		if (player.getPositionX() >= this.xPos) {
+			this.xPos += this.speed;
+			this.image = this.loadNewImage(this.sprites_right[this.counter]);
+			if (player.getPositionY() >= this.yPos) {
+				this.yPos += this.speed;
+				this.image = this.loadNewImage(this.sprites_downwards[this.counter]);
+			}
+		}
 		
 
 	};

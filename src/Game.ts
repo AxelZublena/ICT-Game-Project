@@ -10,6 +10,7 @@ class Game {
 
     private goodRoomCounter: number;
 	private failedRoomCounter: Array<any>;
+	private allRoomCounter: number;
 
 	private stop: boolean;
 	private howBool: boolean;
@@ -32,6 +33,7 @@ class Game {
 
 		this.goodRoomCounter = 0;
 		this.failedRoomCounter = [];
+		this.allRoomCounter = 0;
 		this.stop = false;
 		this.howBool = true;
 	
@@ -104,10 +106,12 @@ class Game {
 
 				// Player went through a non sensitive door
                 if(data.isGood === true){
-                    this.goodRoomCounter++;
+					this.goodRoomCounter++;
+					this.allRoomCounter++;
                     if(this.goodRoomCounter === 5){
 						this.currentView = new End(this.canvas, "Congratulations! Now you are smart enough to know which information you have to keep secret from others.", "green");
 						this.goodRoomCounter = 0;
+						this.allRoomCounter = 0;
                     }
                     else{
                         this.currentView = new Room(this.canvas, true, position);
@@ -115,6 +119,7 @@ class Game {
 				}
 				// Player went through a sensitive door
                 else if(data.isGood === false){
+					this.allRoomCounter++;
 					this.stop = true;
 					console.log(data.data.name);
 					document.getElementById("info").style.visibility = "visible";
@@ -144,8 +149,9 @@ class Game {
 		if (this.currentView instanceof Room) {
 			this.currentView.getEnemies().forEach(enemy => {
 				if(enemy.getDead()) {
-					this.currentView = new End(this.canvas, `You lost, you answered ${this.goodRoomCounter}/5 questions right on your quest. Try again!`, "red");
+					this.currentView = new End(this.canvas, `You lost, you answered ${this.goodRoomCounter}/${this.allRoomCounter} questions right on your quest. Try again!`, "red");
 					this.goodRoomCounter = 0;
+					this.allRoomCounter = 0;
 				}
 			});
 			
