@@ -116,38 +116,37 @@ class Enemy extends Character{
     };
 
     private zombieMovement = (player: Player) => {
-
 		if (player.getPositionX() < this.xPos) {
-			this.collisionDetection(player);
 			this.xPos -= this.speed;
-			this.image = this.loadNewImage(this.sprites_left[this.counter]);
-			if (player.getPositionY() < this.yPos) {
-				this.collisionDetection(player);
-				this.yPos -= this.speed;
-				this.image = this.loadNewImage(this.sprites[this.counter]);
+			if (player.getPositionX() != this.xPos) {
+				this.image = this.loadNewImage(this.sprites_left[this.counter]);
 			}
-			this.collisionDetection(player);
+		} else if (player.getPositionX() > this.xPos) {
+			this.xPos += this.speed;
+			if (player.getPositionX() != this.xPos) {
+				this.image = this.loadNewImage(this.sprites_right[this.counter]);
+			}	
 		}
 
-		if (player.getPositionX() > this.xPos) {
-			this.collisionDetection(player);
-			this.xPos += this.speed;
-			this.image = this.loadNewImage(this.sprites_right[this.counter]);
-			if (player.getPositionY() > this.yPos) {	
-				this.collisionDetection(player);
-				this.yPos += this.speed;
+		if (player.getPositionY() < this.yPos) {
+			this.yPos -= this.speed;
+			if (player.getPositionY() != this.yPos) {
+				this.image = this.loadNewImage(this.sprites[this.counter]);
+			}
+		} else if (player.getPositionY() > this.yPos) {
+			this.yPos += this.speed;
+			if (player.getPositionY() != this.yPos) {
 				this.image = this.loadNewImage(this.sprites_downwards[this.counter]);
 			}
-			this.collisionDetection(player);
 		}
 
 	};
 
 	private collisionDetection = (player: Player) => {
-		if (this.getPositionX() < player.getPositionX() + player.getWidth() &&
-		this.getPositionX() + this.image.width > player.getPositionX() &&
-			this.getPositionY() < player.getPositionY() + player.getHeight() &&
-			this.getPositionY() + this.image.height > this.getPositionY()) {
+		if (this.getPositionX() < player.getPositionX() + player.getWidth()/3 &&
+		this.getPositionX() + this.image.width/3 > player.getPositionX() &&
+			this.getPositionY() < player.getPositionY() + player.getHeight()/3 &&
+			this.getPositionY() + this.image.height/3 > this.getPositionY()) {
 			this.dead = true;
 		}
 	}

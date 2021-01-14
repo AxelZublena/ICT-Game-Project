@@ -15,6 +15,13 @@ class Room extends View {
 	private background: HTMLImageElement;
 	private lastBackgroundIndex: number;
 
+	private zombie1X: number;
+	private zombie1Y: number;
+	private zombie2X: number;
+	private zombie2Y: number;
+
+	private playerSpawn: string;
+
 	constructor(
 		canvas: HTMLCanvasElement,
 		isGood: boolean,
@@ -159,6 +166,7 @@ class Room extends View {
 			case "bottom":
 				this.player.setPositionX(canvas.width * 0.36);
 				this.player.setPositionY(canvas.height * 0.68);
+				this.playerSpawn = "bottom";
 				break;
 			case "top":
 				this.player.setPositionX(canvas.width * 0.45);
@@ -166,22 +174,54 @@ class Room extends View {
 				this.player.setImage(
 					"./assets/img/player/downwards/survivor-move_knife_0.png"
 				);
+				this.playerSpawn = "top";
 				break;
 			case "left":
 				this.player.setPositionX(canvas.width * 0.24);
 				this.player.setPositionY(canvas.height * 0.45);
 				this.player.setImage("./assets/img/player/right/survivor-move_knife_0.png");
+				this.playerSpawn = "left";
 				break;
 			case "right":
 				this.player.setPositionX(canvas.width * 0.67);
 				this.player.setPositionY(canvas.height * 0.32);
 				this.player.setImage("./assets/img/player/left/survivor-move_knife_0.png");
+				this.playerSpawn = "right";
 				break;
 		}
+
+		switch(this.playerSpawn) {
+			case 'left':
+				this.zombie1X = this.canvas.width * 0.65;
+				this.zombie1Y = this.canvas.height * 0.29;
+				this.zombie2X = this.canvas.width * 0.65;
+				this.zombie2Y = this.canvas.height * 0.65;
+				break;
+			case 'top':
+				this.zombie1X = this.canvas.width * 0.65;
+				this.zombie1Y = this.canvas.height * 0.65;
+				this.zombie2X = this.canvas.width * 0.3;
+				this.zombie2Y = this.canvas.height * 0.65;
+				break;
+			case 'right':
+				this.zombie1X = this.canvas.width * 0.3;
+				this.zombie1Y = this.canvas.height * 0.29;
+				this.zombie2X = this.canvas.width * 0.3;
+				this.zombie2Y = this.canvas.height * 0.65;
+				break;
+			case 'bottom':
+				this.zombie1X = this.canvas.width * 0.3;
+				this.zombie1Y = this.canvas.height * 0.29;
+				this.zombie2X = this.canvas.width * 0.65;
+				this.zombie2Y = this.canvas.height * 0.29;
+				break;
+			default:
+		};
+
 		this.enemies = [
-			new Enemy('./assets/img/enemy/skeleton-move_0.png', this.canvas, this.canvas.width*0.45, this.canvas.height*0.55),
+			new Enemy('./assets/img/enemy/skeleton-move_0.png', this.canvas, this.zombie1X, this.zombie1Y),
 			new Enemy(
-				'./assets/img/enemy/skeleton-move_0.png', this.canvas, this.canvas.width*0.5, this.canvas.height*0.6
+				'./assets/img/enemy/skeleton-move_0.png', this.canvas, this.zombie2X, this.zombie2Y
 			),
 		];
 
@@ -199,6 +239,8 @@ class Room extends View {
 	 * Spawn enemies
 	 */
 	private spawnEnemies = (ctx: CanvasRenderingContext2D) => {
+		
+
 		this.enemies.forEach((enemy) => {
 
 			enemy.draw(ctx, this.player);
