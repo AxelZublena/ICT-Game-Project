@@ -9,6 +9,7 @@ class Game {
 
 	private goodRoomCounter: number;
 	private failedRoomCounter: Array<any>;
+	private allRoomCounter: number;
 
 	private stop: boolean;
 	private howBool: boolean;
@@ -35,6 +36,7 @@ class Game {
 
 		this.goodRoomCounter = 0;
 		this.failedRoomCounter = [];
+		this.allRoomCounter = 0;
 		this.stop = false;
 		this.howBool = true;
 
@@ -52,10 +54,8 @@ class Game {
 	step = () => {
 		this.stop = false;
 
-		//console.log(this.stop);
-
-		// Handle the start menu button
-		this.handlers();
+        // Handle the start menu button
+        this.handlers();
 
 		// draw the current view
 		this.draw();
@@ -126,6 +126,7 @@ class Game {
 				// Player went through a non sensitive door
 				if (data.isGood === true) {
 					this.goodRoomCounter++;
+					this.allRoomCounter++;
 					if (this.goodRoomCounter === 5) {
                         // set the language
                         if(this.language === "dutch"){
@@ -156,6 +157,7 @@ class Game {
 				}
 				// Player went through a sensitive door
 				else if (data.isGood === false) {
+					this.allRoomCounter++;
 					this.stop = true;
 					console.log(data.data.name);
 					document.getElementById("info").style.visibility =
@@ -201,11 +203,11 @@ class Game {
 			const player = this.currentView.getPlayer();
 
 			this.currentView.getEnemies().forEach((enemy) => {
-				if (enemy.collidesWithPlayer(enemy, player)) {
+				if (enemy.getDead()) {
                     if(this.language === "dutch"){
                         this.currentView = new End(
                             this.canvas,
-                            `Helaas, je hebt ${this.goodRoomCounter}/5 vragen goed. Probeer het opnieuw!`,
+                            `Helaas, je hebt ${this.goodRoomCounter}/${this.allRoomCounter} vragen goed. Probeer het opnieuw!`,
                             "red",
                             "dutch"
                         );
@@ -213,14 +215,16 @@ class Game {
                     else {
                         this.currentView = new End(
                             this.canvas,
-                            `You lost, you answered ${this.goodRoomCounter}/5 questions right on your quest. Try again!`,
+                            `You lost, you answered ${this.goodRoomCounter}/${this.allRoomCounter} questions right on your quest. Try again!`,
                             "red",
                             "english"
                         );
                     }
 					this.goodRoomCounter = 0;
+					this.allRoomCounter = 0;
 				}
 			});
+			
 		}
 
 		// Draw the current view

@@ -1,81 +1,120 @@
-class Player {
-	private speed: number;
-	private xPos: number;
-	private yPos: number;
-	private counter: number;
-	private i: number;
-	private skipFrame: number;
-	private image: HTMLImageElement;
+/// <reference path="Character.ts" />
 
-	private keyListener: KeyListener;
-	private canvas: HTMLCanvasElement;
-
-	private sprites: any[];
-	private sprites_left: any[];
-	private sprites_right: any[];
-	private sprites_downwards: any[];
-
+class Player extends Character{
+	
 	constructor(image: string, canvas: HTMLCanvasElement) {
-		this.canvas = canvas;
-		this.image = this.loadNewImage(image);	
+		super(image, canvas);
 		this.speed = 5;
 
-		this.keyListener = new KeyListener();
-
 		this.sprites = [
-			"./assets/img/player/player-0.gif",
-			"./assets/img/player/player-1.gif",
-			"./assets/img/player/player-2.gif",
-			"./assets/img/player/player-3.gif",
-			"./assets/img/player/player-4.gif",
-			"./assets/img/player/player-5.gif",
+			"./assets/img/player/survivor-move_knife_0.png",
+			"./assets/img/player/survivor-move_knife_1.png",
+			"./assets/img/player/survivor-move_knife_2.png",
+			"./assets/img/player/survivor-move_knife_3.png",
+			"./assets/img/player/survivor-move_knife_4.png",
+			"./assets/img/player/survivor-move_knife_5.png",
+			"./assets/img/player/survivor-move_knife_6.png",
+			"./assets/img/player/survivor-move_knife_7.png",
+			"./assets/img/player/survivor-move_knife_8.png",
+			"./assets/img/player/survivor-move_knife_9.png",
+			"./assets/img/player/survivor-move_knife_10.png",
+			"./assets/img/player/survivor-move_knife_11.png",
+			"./assets/img/player/survivor-move_knife_12.png",
+			"./assets/img/player/survivor-move_knife_13.png",
+			"./assets/img/player/survivor-move_knife_14.png",
+			"./assets/img/player/survivor-move_knife_15.png",
+			"./assets/img/player/survivor-move_knife_16.png",
+			"./assets/img/player/survivor-move_knife_17.png",
+			"./assets/img/player/survivor-move_knife_18.png",
+			"./assets/img/player/survivor-move_knife_19.png"
 		];
 
 		this.sprites_left = [
-			"./assets/img/player/left/player-0.gif",
-			"./assets/img/player/left/player-1.gif",
-			"./assets/img/player/left/player-2.gif",
-			"./assets/img/player/left/player-3.gif",
-			"./assets/img/player/left/player-4.gif",
-			"./assets/img/player/left/player-5.gif",
+			"./assets/img/player/left/survivor-move_knife_0.png",
+			"./assets/img/player/left/survivor-move_knife_1.png",
+			"./assets/img/player/left/survivor-move_knife_2.png",
+			"./assets/img/player/left/survivor-move_knife_3.png",
+			"./assets/img/player/left/survivor-move_knife_4.png",
+			"./assets/img/player/left/survivor-move_knife_5.png",
+			"./assets/img/player/left/survivor-move_knife_6.png",
+			"./assets/img/player/left/survivor-move_knife_7.png",
+			"./assets/img/player/left/survivor-move_knife_8.png",
+			"./assets/img/player/left/survivor-move_knife_9.png",
+			"./assets/img/player/left/survivor-move_knife_10.png",
+			"./assets/img/player/left/survivor-move_knife_11.png",
+			"./assets/img/player/left/survivor-move_knife_12.png",
+			"./assets/img/player/left/survivor-move_knife_13.png",
+			"./assets/img/player/left/survivor-move_knife_14.png",
+			"./assets/img/player/left/survivor-move_knife_15.png",
+			"./assets/img/player/left/survivor-move_knife_16.png",
+			"./assets/img/player/left/survivor-move_knife_17.png",
+			"./assets/img/player/left/survivor-move_knife_18.png",
+			"./assets/img/player/left/survivor-move_knife_19.png",
 		];
 
 		this.sprites_right = [
-			"./assets/img/player/right/player-0.gif",
-			"./assets/img/player/right/player-1.gif",
-			"./assets/img/player/right/player-2.gif",
-			"./assets/img/player/right/player-3.gif",
-			"./assets/img/player/right/player-4.gif",
-			"./assets/img/player/right/player-5.gif",
+			"./assets/img/player/right/survivor-move_knife_0.png",
+			"./assets/img/player/right/survivor-move_knife_1.png",
+			"./assets/img/player/right/survivor-move_knife_2.png",
+			"./assets/img/player/right/survivor-move_knife_3.png",
+			"./assets/img/player/right/survivor-move_knife_4.png",
+			"./assets/img/player/right/survivor-move_knife_5.png",
+			"./assets/img/player/right/survivor-move_knife_6.png",
+			"./assets/img/player/right/survivor-move_knife_7.png",
+			"./assets/img/player/right/survivor-move_knife_8.png",
+			"./assets/img/player/right/survivor-move_knife_9.png",
+			"./assets/img/player/right/survivor-move_knife_10.png",
+			"./assets/img/player/right/survivor-move_knife_11.png",
+			"./assets/img/player/right/survivor-move_knife_12.png",
+			"./assets/img/player/right/survivor-move_knife_13.png",
+			"./assets/img/player/right/survivor-move_knife_14.png",
+			"./assets/img/player/right/survivor-move_knife_15.png",
+			"./assets/img/player/right/survivor-move_knife_16.png",
+			"./assets/img/player/right/survivor-move_knife_17.png",
+			"./assets/img/player/right/survivor-move_knife_18.png",
+			"./assets/img/player/right/survivor-move_knife_19.png",
 		];
 
 		this.sprites_downwards = [
-			"./assets/img/player/downwards/player-0.gif",
-			"./assets/img/player/downwards/player-1.gif",
-			"./assets/img/player/downwards/player-2.gif",
-			"./assets/img/player/downwards/player-3.gif",
-			"./assets/img/player/downwards/player-4.gif",
-			"./assets/img/player/downwards/player-5.gif",
+			"./assets/img/player/downwards/survivor-move_knife_0.png",
+			"./assets/img/player/downwards/survivor-move_knife_1.png",
+			"./assets/img/player/downwards/survivor-move_knife_2.png",
+			"./assets/img/player/downwards/survivor-move_knife_3.png",
+			"./assets/img/player/downwards/survivor-move_knife_4.png",
+			"./assets/img/player/downwards/survivor-move_knife_5.png",
+			"./assets/img/player/downwards/survivor-move_knife_6.png",
+			"./assets/img/player/downwards/survivor-move_knife_7.png",
+			"./assets/img/player/downwards/survivor-move_knife_8.png",
+			"./assets/img/player/downwards/survivor-move_knife_9.png",
+			"./assets/img/player/downwards/survivor-move_knife_10.png",
+			"./assets/img/player/downwards/survivor-move_knife_11.png",
+			"./assets/img/player/downwards/survivor-move_knife_12.png",
+			"./assets/img/player/downwards/survivor-move_knife_13.png",
+			"./assets/img/player/downwards/survivor-move_knife_14.png",
+			"./assets/img/player/downwards/survivor-move_knife_15.png",
+			"./assets/img/player/downwards/survivor-move_knife_16.png",
+			"./assets/img/player/downwards/survivor-move_knife_17.png",
+			"./assets/img/player/downwards/survivor-move_knife_18.png",
+			"./assets/img/player/downwards/survivor-move_knife_19.png",
 		];
 
-		this.counter = 0;
-		this.i = 0;
-		this.skipFrame = 7;
 	}
 
 	public draw = (ctx: CanvasRenderingContext2D) => {
+		
+		ctx.drawImage(
+			this.image,
+			this.xPos,
+			this.yPos,
+			this.image.width/1.5,
+			this.image.height/1.5
+		);
+
 		// bottom wall detection
 		this.wallDetection();
 
 		this.movement();
 
-		ctx.drawImage(
-			this.image,
-			this.xPos,
-			this.yPos,
-			this.image.width,
-			this.image.height
-		);
 	};
 
 	/**
@@ -146,59 +185,9 @@ class Player {
 			this.keyListener.isKeyDown(65) ||
 			this.keyListener.isKeyDown(68)
 		) {
-			this.i++;
-			if (this.i % this.skipFrame == 0) {
-				this.counter = this.i / this.skipFrame;
-			}
-			if (this.counter == 6) {
-				this.counter = 0;
-				this.i = 0;
-			}
+			this.frameCounter(20);
 		}
 	};
-
-	//Getters
-	public getPositionX = () => {
-		return this.xPos;
-	};
-	public getPositionY = () => {
-		return this.yPos;
-	};
-	public getWidth = () => {
-		return this.image.width;
-	};
-	public getHeight = () => {
-		return this.image.height;
-	};
-
-    // Setters
-	public setPositionX = (xPos: number) => {
-        this.xPos = xPos;
-	};
-	public setPositionY = (yPos: number) => {
-        this.yPos = yPos;
-	};
-    public setImage = (image: string) => {
-        this.image.src = image;
-    }
-
-	/**
-	 * Set the speed of the player
-	 * @param newSpeed number
-	 */
-	public setSpeed = (newSpeed: number): void => {
-		this.speed = newSpeed;
-	};
-
-	/**
-	 * Load the image of the Player
-	 * @param source string
-	 */
-	private loadNewImage = (source: string): HTMLImageElement => {
-		const img = new Image();
-		img.src = source;
-		img.width = this.canvas.width * 0.1;
-		img.height = img.width;
-		return img;
-	};
+	
+	
 }

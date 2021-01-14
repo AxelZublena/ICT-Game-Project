@@ -1,128 +1,156 @@
-class Enemy {
-    private speed: number;
-    private xPos: number;
-    private yPos: number;
-    private image: HTMLImageElement;
-    private radius: number;
-    private color: string;
-    private xVel: number;
-    private yVel: number;
-    private hit: boolean;
+/// <reference path="Character.ts" />
 
-    private canvas: HTMLCanvasElement;
+class Enemy extends Character{
 
-    constructor(canvas: HTMLCanvasElement, xPos: number, yPos: number) {
+	private dead: boolean;
+
+    constructor(image: string, canvas: HTMLCanvasElement, xPos: number, yPos: number) {
+        super(image, canvas);
         this.canvas = canvas;
-        // this.image = this.loadNewImage(image);
-        this.speed = 5;
+		this.speed = this.randomNumber(1,3);
+		
+		this.xPos = xPos;
+		this.yPos = yPos;
 
-        //this.xPos = this.randomNumber(0, canvas.width);
-        //this.yPos = this.randomNumber(0, canvas.height);
-        this.xPos = xPos;
-        this.yPos = yPos;
+		this.dead = false;
 
-        this.radius = 10;
-        this.color = "#FFFF00";
-        this.xVel = 10;
-        this.yVel = 8.5;
-        this.hit = false;
+        this.sprites = [
+			"./assets/img/enemy/skeleton-move_0.png",
+			"./assets/img/enemy/skeleton-move_1.png",
+			"./assets/img/enemy/skeleton-move_2.png",
+			"./assets/img/enemy/skeleton-move_3.png",
+			"./assets/img/enemy/skeleton-move_4.png",
+			"./assets/img/enemy/skeleton-move_5.png",
+			"./assets/img/enemy/skeleton-move_6.png",
+			"./assets/img/enemy/skeleton-move_7.png",
+			"./assets/img/enemy/skeleton-move_8.png",
+			"./assets/img/enemy/skeleton-move_9.png",
+			"./assets/img/enemy/skeleton-move_10.png",
+			"./assets/img/enemy/skeleton-move_11.png",
+			"./assets/img/enemy/skeleton-move_12.png",
+			"./assets/img/enemy/skeleton-move_13.png",
+			"./assets/img/enemy/skeleton-move_14.png",
+			"./assets/img/enemy/skeleton-move_15.png",
+			"./assets/img/enemy/skeleton-move_16.png",
+		];
+
+		this.sprites_left = [
+			"./assets/img/enemy/left/skeleton-move_0.png",
+			"./assets/img/enemy/left/skeleton-move_1.png",
+			"./assets/img/enemy/left/skeleton-move_2.png",
+			"./assets/img/enemy/left/skeleton-move_3.png",
+			"./assets/img/enemy/left/skeleton-move_4.png",
+			"./assets/img/enemy/left/skeleton-move_5.png",
+			"./assets/img/enemy/left/skeleton-move_6.png",
+			"./assets/img/enemy/left/skeleton-move_7.png",
+			"./assets/img/enemy/left/skeleton-move_8.png",
+			"./assets/img/enemy/left/skeleton-move_9.png",
+			"./assets/img/enemy/left/skeleton-move_10.png",
+			"./assets/img/enemy/left/skeleton-move_11.png",
+			"./assets/img/enemy/left/skeleton-move_12.png",
+			"./assets/img/enemy/left/skeleton-move_13.png",
+			"./assets/img/enemy/left/skeleton-move_14.png",
+			"./assets/img/enemy/left/skeleton-move_15.png",
+			"./assets/img/enemy/left/skeleton-move_16.png",
+		];
+
+		this.sprites_right = [
+			"./assets/img/enemy/right/skeleton-move_0.png",
+			"./assets/img/enemy/right/skeleton-move_1.png",
+			"./assets/img/enemy/right/skeleton-move_2.png",
+			"./assets/img/enemy/right/skeleton-move_3.png",
+			"./assets/img/enemy/right/skeleton-move_4.png",
+			"./assets/img/enemy/right/skeleton-move_5.png",
+			"./assets/img/enemy/right/skeleton-move_6.png",
+			"./assets/img/enemy/right/skeleton-move_7.png",
+			"./assets/img/enemy/right/skeleton-move_8.png",
+			"./assets/img/enemy/right/skeleton-move_9.png",
+			"./assets/img/enemy/right/skeleton-move_10.png",
+			"./assets/img/enemy/right/skeleton-move_11.png",
+			"./assets/img/enemy/right/skeleton-move_12.png",
+			"./assets/img/enemy/right/skeleton-move_13.png",
+			"./assets/img/enemy/right/skeleton-move_14.png",
+			"./assets/img/enemy/right/skeleton-move_15.png",
+			"./assets/img/enemy/right/skeleton-move_16.png",
+		];
+
+		this.sprites_downwards = [
+			"./assets/img/enemy/downwards/skeleton-move_0.png",
+			"./assets/img/enemy/downwards/skeleton-move_1.png",
+			"./assets/img/enemy/downwards/skeleton-move_2.png",
+			"./assets/img/enemy/downwards/skeleton-move_3.png",
+			"./assets/img/enemy/downwards/skeleton-move_4.png",
+			"./assets/img/enemy/downwards/skeleton-move_5.png",
+			"./assets/img/enemy/downwards/skeleton-move_6.png",
+			"./assets/img/enemy/downwards/skeleton-move_7.png",
+			"./assets/img/enemy/downwards/skeleton-move_8.png",
+			"./assets/img/enemy/downwards/skeleton-move_9.png",
+			"./assets/img/enemy/downwards/skeleton-move_10.png",
+			"./assets/img/enemy/downwards/skeleton-move_11.png",
+			"./assets/img/enemy/downwards/skeleton-move_12.png",
+			"./assets/img/enemy/downwards/skeleton-move_13.png",
+			"./assets/img/enemy/downwards/skeleton-move_14.png",
+			"./assets/img/enemy/downwards/skeleton-move_15.png",
+			"./assets/img/enemy/downwards/skeleton-move_16.png",
+		];
+
     }
 
     /**
      * Draws the enemies during each frame
      * @param ctx
      */
-    public draw = (ctx: CanvasRenderingContext2D, sAngle: number, eAngle: number, player: Player) => {
-        ctx.fillStyle = this.color;
-        ctx.beginPath();
-        ctx.arc(this.xPos, this.yPos, this.radius, sAngle, eAngle);
-        ctx.closePath();
-        ctx.fill();
-        this.moveBall();
-        if (this.collidesWithPlayer(this, player)) {
-            this.hit = true;
-        };
-        return this.hit;
+    public draw = (ctx: CanvasRenderingContext2D, player: Player) => {
+
+        ctx.drawImage(
+			this.image,
+			this.xPos,
+			this.yPos,
+			this.image.width/1.5,
+			this.image.height/1.5
+		);
+
+		this.zombieMovement(player);
+
+		this.frameCounter(17);
     };
 
-    public collidesWithPlayer = (a: Enemy, b: Player) => {
-        if (
-            a.xPos < b.getPositionX() + b.getWidth() &&
-            a.xPos + a.radius * 2 > b.getPositionX() &&
-            a.yPos < b.getPositionY() + b.getHeight() &&
-            a.yPos + a.radius * 2 > b.getPositionY()
-        ) {
-            return true;
-        }
-        return false;
-    };
+    private zombieMovement = (player: Player) => {
+		if (Math.abs(player.getPositionX() - this.xPos) < 50 && Math.abs(player.getPositionY() - this.yPos) < 50) {
+			this.dead = true;
+			console.log('hello there');
+		}
 
-    /**
-     * Load the image of the enemies
-     * @param source string
-     */
-    private loadNewImage = (source: string): HTMLImageElement => {
-        const img = new Image();
-        img.src = source;
-        img.width = this.canvas.width * 0.1;
-        img.height = img.width;
-        return img;
-    };
+		if (player.getPositionX() <= this.xPos) {
+			this.xPos -= this.speed;
+			this.image = this.loadNewImage(this.sprites_left[this.counter]);
+			if (player.getPositionY() <= this.yPos) {
+				this.yPos -= this.speed;
+				this.image = this.loadNewImage(this.sprites[this.counter]);
+			}
+		}
+		if (player.getPositionX() >= this.xPos) {
+			this.xPos += this.speed;
+			this.image = this.loadNewImage(this.sprites_right[this.counter]);
+			if (player.getPositionY() >= this.yPos) {
+				this.yPos += this.speed;
+				this.image = this.loadNewImage(this.sprites_downwards[this.counter]);
+			}
+		}
+		
 
-    // /**
-    //  * Function for the enemies to detect the wall and do not move out from the scope
-    //  */
-    // private wallDetection() {
-    //     if (this.yPos < this.canvas.height - this.image.height) {
-    //         this.yPos += this.speed;
-    //     }
+	};
 
-    //     if (this.yPos > 0) {
-    //         this.yPos -= this.speed;
-    //     }
-    //     if (this.xPos > 0) {
-    //         this.xPos -= this.speed;
-    //     }
-    //     if (this.xPos < this.canvas.width - this.image.width) {
-    //         this.xPos += this.speed;
-    //     }
-    // }
+	private collisionDetection = (player: Player) => {
+		if (this.getPositionX() < player.getPositionX() + player.getWidth()/3 &&
+		this.getPositionX() + this.image.width/3 > player.getPositionX() &&
+			this.getPositionY() < player.getPositionY() + player.getHeight()/3 &&
+			this.getPositionY() + this.image.height/3 > this.getPositionY()) {
+			this.dead = true;
+		}
+	}
 
-    // getters and setters
-    public getPositionX = () => {
-        return this.xPos;
-    };
-    public getPositionY = () => {
-        return this.yPos;
-    };
-    public getWidth = () => {
-        return this.image.width;
-    };
-    public getHeight = () => {
-        return this.image.height;
-    };
-
-    /**
-     * Function to move the ball and let it 'bounche' to the boundaries of the canvas
-     */
-    public moveBall() {
-        if (this.xPos + this.radius > this.canvas.width || this.xPos - this.radius < 0) {
-            this.xVel = -this.xVel;
-        }
-        if (this.yPos + this.radius > this.canvas.height || this.yPos - this.radius < 0) {
-            this.yVel = -this.yVel;
-        }
-
-        this.xPos += this.xVel;
-        this.yPos += this.yVel;
-    }
-
-    /**
-     * Renders a random number between min and max
-     * @param min
-     * @param max
-     */
-    private randomNumber = (min: number, max: number) => {
-        return Math.round(Math.random() * (max - min) + min);
-    };
+	public getDead = () => {
+		return this.dead;
+	}
 }
