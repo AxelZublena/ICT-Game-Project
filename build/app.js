@@ -1,27 +1,41 @@
+let areImgLoaded = false;
 window.addEventListener("load", () => {
-    let images = new Array();
-    function preload() {
-        const baseURL = "./assets/img/";
-        const character = ["player/", "enemy/"];
-        const folder = ["", "downwards/", "left/", "right/"];
-        const name = ["survivor-move_knife_", "skeleton-move_"];
-        let paths = [];
-        for (let i = 0; i < 2; i++) {
-            for (let j = 0; j < 4; j++) {
-                for (let h = 0; h < 20; h++) {
-                    paths.push(baseURL + character[i] + folder[j] + name[i] + h + ".png");
-                }
-            }
-        }
-        console.log(paths);
-        for (let i = 0; i < paths.length; i++) {
-            images[i] = new Image();
-            images[i].src = paths[i];
+    while (true) {
+        if (areImgLoaded === true) {
+            const game = new Game(document.getElementById("canvas"));
+            break;
         }
     }
-    preload();
-    const game = new Game(document.getElementById("canvas"));
+    console.log("loading done.");
 });
+function loadImages() {
+    let images = new Array();
+    const baseURL = "./assets/img/";
+    const character = ["player/", "enemy/"];
+    const folder = ["", "downwards/", "left/", "right/"];
+    const name = ["survivor-move_knife_", "skeleton-move_"];
+    let paths = [];
+    for (let i = 0; i < 2; i++) {
+        for (let j = 0; j < 4; j++) {
+            let limit;
+            if (character[i] === "player/") {
+                limit = 20;
+            }
+            else {
+                limit = 17;
+            }
+            for (let h = 0; h < limit; h++) {
+                paths.push(baseURL + character[i] + folder[j] + name[i] + h + ".png");
+            }
+        }
+    }
+    for (let i = 0; i < paths.length; i++) {
+        images[i] = new Image();
+        images[i].src = paths[i];
+    }
+    areImgLoaded = true;
+}
+loadImages();
 class Button {
     constructor(canvas, width, height, xPos, yPos, color, text) {
         this.getClicked = () => {
