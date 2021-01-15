@@ -29,6 +29,9 @@ function loadImages() {
             }
         }
     }
+    for (let i = 0; i < 4; i++) {
+        paths.push(baseURL + "background" + i + ".jpg");
+    }
     for (let i = 0; i < paths.length; i++) {
         images[i] = new Image();
         images[i].src = paths[i];
