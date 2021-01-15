@@ -2,6 +2,8 @@ let areImgLoaded = false;
 window.addEventListener("load", () => {
     while (true) {
         if (areImgLoaded === true) {
+            "";
+            document.getElementById("loading").style.visibility = "hidden";
             const game = new Game(document.getElementById("canvas"));
             break;
         }

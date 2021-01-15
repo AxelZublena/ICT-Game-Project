@@ -3,7 +3,8 @@ let areImgLoaded = false;
 // Add EventListener to load the game whenever the browser is ready
 window.addEventListener("load", () => {
     while(true){
-        if(areImgLoaded === true) {
+        if(areImgLoaded === true) {""
+            document.getElementById("loading").style.visibility = "hidden"; 
             const game = new Game(document.getElementById("canvas"));
             break;
         }
