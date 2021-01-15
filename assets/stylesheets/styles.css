@@ -83,35 +83,35 @@ canvas {
 	background-color: grey;
 	cursor: pointer;
 }
-/*#understoodBtn, #backBtn{*/
-	/*font-size: 50px;*/
-	/*position: absolute;*/
-	/*background-color: purple;*/
-	/*border-radius: 15px;*/
-	/*border-color: white;*/
-	/*border-width: 4px;*/
-	/*border-style: solid;*/
-	/*top: 85%;*/
-	/*left: 50%;*/
-	/*transform: translate(-50%);*/
-	/*z-index: 900;*/
-/*}*/
-/*#continueBtn {*/
-	/*font-size: 50px;*/
-	/*position: absolute;*/
-	/*border-radius: 15px;*/
-	/*border-color: white;*/
-	/*border-width: 4px;*/
-	/*border-style: solid;*/
-	/*top: 75%;*/
-	/*left: 50%;*/
-	/*transform: translate(-50%);*/
-	/*z-index: 900;*/
-/*}*/
-/*#continueBtn, #backBtn{*/
-	/*background-color: purple;*/
-	/*color: white;*/
-/*}*/
+#understoodBtn, #backBtn{
+	font-size: 50px;
+	position: absolute;
+	background-color: purple;
+	border-radius: 15px;
+	border-color: white;
+	border-width: 4px;
+	border-style: solid;
+	top: 85%;
+	left: 50%;
+	transform: translate(-50%);
+	z-index: 900;
+}
+#continueBtn {
+	font-size: 50px;
+	position: absolute;
+	border-radius: 15px;
+	border-color: white;
+	border-width: 4px;
+	border-style: solid;
+	top: 75%;
+	left: 50%;
+	transform: translate(-50%);
+	z-index: 900;
+}
+#continueBtn, #backBtn{
+	background-color: purple;
+	color: white;
+}
 #understoodBtn:hover, #continueBtn:hover, #backBtn:hover{
 	background-color: grey;
 	cursor: pointer;
