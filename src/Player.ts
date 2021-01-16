@@ -121,6 +121,7 @@ class Player extends Character{
 	 * Function for the player to detect the wall and do not move out from the scope
 	 */
 	private wallDetection() {
+		console.log(this.getPositionX(),this.getPositionY());
 		// Down
 		if (this.keyListener.isKeyDown(40) || this.keyListener.isKeyDown(83)) {
 			if (
