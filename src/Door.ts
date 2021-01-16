@@ -252,18 +252,18 @@ class Door {
 	private doorPositioner(position: string, canvas: HTMLCanvasElement) {
 		if (position === "bottom") {
 			this.positionX = canvas.width * 0.41;
-			this.positionY = canvas.height * 0.97;
+			this.positionY = canvas.height * 1;
 		}
 		if (position === "top") {
 			this.positionX = canvas.width * 0.5;
 			this.positionY = canvas.height * 0.11;
 		}
 		if (position === "left") {
-			this.positionX = canvas.width * 0.18;
+			this.positionX = canvas.width * 0.2;
 			this.positionY = canvas.height / 2;
 		}
 		if (position === "right") {
-			this.positionX = canvas.width * 0.8;
+			this.positionX = canvas.width * 0.82;
 			this.positionY = canvas.height * 0.37;
 		}
 	}

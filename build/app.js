@@ -320,18 +320,18 @@ class Door {
     doorPositioner(position, canvas) {
         if (position === "bottom") {
             this.positionX = canvas.width * 0.41;
-            this.positionY = canvas.height * 0.97;
+            this.positionY = canvas.height * 1;
         }
         if (position === "top") {
             this.positionX = canvas.width * 0.5;
             this.positionY = canvas.height * 0.11;
         }
         if (position === "left") {
-            this.positionX = canvas.width * 0.18;
+            this.positionX = canvas.width * 0.2;
             this.positionY = canvas.height / 2;
         }
         if (position === "right") {
-            this.positionX = canvas.width * 0.8;
+            this.positionX = canvas.width * 0.82;
             this.positionY = canvas.height * 0.37;
         }
     }
@@ -911,8 +911,9 @@ class Player extends Character {
         ];
     }
     wallDetection() {
+        console.log(this.getPositionX(), this.getPositionY());
         if (this.keyListener.isKeyDown(40) || this.keyListener.isKeyDown(83)) {
-            if (this.yPos + this.image.height < this.canvas.height * 0.89 ||
+            if (this.yPos + this.image.height < this.canvas.height * 0.93 ||
                 (this.xPos > this.canvas.width * 0.33 &&
                     this.xPos + this.image.width < this.canvas.width * 0.49)) {
                 this.yPos += this.speed;
@@ -928,7 +929,7 @@ class Player extends Character {
             }
         }
         if (this.keyListener.isKeyDown(37) || this.keyListener.isKeyDown(65)) {
-            if (this.xPos > this.canvas.width * 0.24 ||
+            if (this.xPos > this.canvas.width * 0.25 ||
                 (this.yPos + this.image.height > this.canvas.height * 0.63 &&
                     this.yPos < this.canvas.height * 0.53)) {
                 this.xPos -= this.speed;
@@ -936,7 +937,7 @@ class Player extends Character {
             }
         }
         if (this.keyListener.isKeyDown(39) || this.keyListener.isKeyDown(68)) {
-            if (this.xPos + this.image.width < this.canvas.width * 0.76 ||
+            if (this.xPos + this.image.width < this.canvas.width * 0.78 ||
                 (this.yPos + this.image.height > this.canvas.height * 0.5 &&
                     this.yPos < this.canvas.height * 0.35)) {
                 this.xPos += this.speed;

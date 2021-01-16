@@ -125,7 +125,7 @@ class Player extends Character{
 		// Down
 		if (this.keyListener.isKeyDown(40) || this.keyListener.isKeyDown(83)) {
 			if (
-				this.yPos + this.image.height < this.canvas.height * 0.89 ||
+				this.yPos + this.image.height < this.canvas.height * 0.93 ||
 				(this.xPos > this.canvas.width * 0.33 &&
 					this.xPos + this.image.width < this.canvas.width * 0.49)
 			) {
@@ -149,7 +149,7 @@ class Player extends Character{
 		// Left
 		if (this.keyListener.isKeyDown(37) || this.keyListener.isKeyDown(65)) {
 			if (
-				this.xPos > this.canvas.width * 0.24 ||
+				this.xPos > this.canvas.width * 0.25 ||
 				(this.yPos + this.image.height > this.canvas.height * 0.63 &&
 					this.yPos < this.canvas.height * 0.53)
 			) {
@@ -160,7 +160,7 @@ class Player extends Character{
 		// Right
 		if (this.keyListener.isKeyDown(39) || this.keyListener.isKeyDown(68)) {
 			if (
-				this.xPos + this.image.width < this.canvas.width * 0.76 ||
+				this.xPos + this.image.width < this.canvas.width * 0.78 ||
 				(this.yPos + this.image.height > this.canvas.height * 0.5 &&
 					this.yPos < this.canvas.height * 0.35)
 			) {
