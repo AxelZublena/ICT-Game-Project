@@ -55,7 +55,8 @@ class Button {
         // set text
         button.innerText = this.text;
         button.style.fontSize = "250%";
-        button.style.color = "white";
+		button.style.color = "white";
+		button.style.fontFamily = "Turret Road, cursive"
 
         // add event listeners
         
