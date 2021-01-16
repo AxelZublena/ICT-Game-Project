@@ -162,7 +162,7 @@ class Player extends Character{
 			if (
 				this.xPos + this.image.width < this.canvas.width * 0.78 ||
 				(this.yPos + this.image.height > this.canvas.height * 0.5 &&
-					this.yPos < this.canvas.height * 0.35)
+					this.yPos < this.canvas.height * 0.4)
 			) {
 				this.xPos += this.speed;
 				this.image = this.loadNewImage(

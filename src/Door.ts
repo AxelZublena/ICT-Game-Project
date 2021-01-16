@@ -144,12 +144,12 @@ class Door {
 			this.width = this.canvas.height * 0.05;
 			this.height = this.canvas.width * 0.2;
 			// KEEP TO SEE THE DETECTION ZONE
-			//ctx.rect(
-			//this.positionX,
-			//this.positionY - this.height / 2,
-			//this.width,
-			//this.height
-			//);
+			// ctx.rect(
+			// this.positionX,
+			// this.positionY - this.height / 2,
+			// this.width,
+			// this.height
+			// );
 			ctx.stroke();
 
 			const words: string[] = this.data.name.split(" ");
