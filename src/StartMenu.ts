@@ -27,7 +27,7 @@ class StartMenu extends View {
         });
 
 		// load the image/logo
-		this.image = this.loadNewImage("./assets/img/hacker.png");
+		this.image = this.loadNewImage("./assets/img/bg.jpg");
 	}
 
     private createButton = (text: string) => {
@@ -63,14 +63,36 @@ class StartMenu extends View {
 		ctx.fillStyle = Game.BASE_COLOR;
 		ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
+        ctx.shadowBlur = 20;
+        ctx.shadowColor = "black";
+
 		// Draws the image/logo
 		ctx.drawImage(
 			this.image,
-			this.canvas.width / 2 - ((this.canvas.height * 0.9) / 2) * 0.97,
-			this.canvas.height / 2 - (this.canvas.height * 0.9) / 2,
-			this.canvas.height * 0.9,
-			this.canvas.height * 0.9
-		);
+			this.canvas.width / 2 - this.image.width / 2,
+            this.canvas.height / 2 - this.image.height / 2,
+        );
+        ctx.font = 'bold 150px Turret Road';
+        ctx.textAlign = 'center'
+
+        ctx.shadowBlur = 20;
+        ctx.shadowColor = "purple";
+
+        ctx.fillText('Agent Steve', this.canvas.width / 2, this.canvas.height * 0.53);
+        
+        ctx.shadowBlur = 20;
+        ctx.shadowColor = "black";
+
+        ctx.font = '30px Turret Road'
+        ctx.fillText('MOVEMENT', this.canvas.width * 0.15, this.canvas.height * 0.7)
+
+        ctx.drawImage(
+            this.loadNewImage('./assets/img/wasd.png'),
+			this.canvas.width * 0.085,
+            this.canvas.height * 0.75,
+            this.canvas.width/7.68,
+            this.canvas.height/6.43
+        );
 	};
 
 }

@@ -1,195 +1,218 @@
-body {
-	margin: 0; /* getting rid of margin on the edges */
-	overflow: hidden; /* there is no scrollbar, the canvas is the actual whole screen */
-	position: relative;
+@import url("https://fonts.googleapis.com/css2?family=Turret+Road:wght@300&display=swap");
 
-	font-family: "Courier New", Courier, monospace;
+@font-face {
+  font-family: "Turret Road", cursive;
+  src: url("https://fonts.googleapis.com/css2?family=Turret+Road:wght@300&display=swap");
+}
+
+* {
+  font-family: "Turret Road", cursive;
+}
+
+body {
+  margin: 0; /* getting rid of margin on the edges */
+  overflow: hidden; /* there is no scrollbar, the canvas is the actual whole screen */
+  position: relative;
 }
 canvas {
-	z-index: 0;
+  z-index: 0;
 }
 
 #loading {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10000;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
 }
 
 .popup {
-    justify-content: center;
-    width: 55vw;
-    height: 55vh;
+  justify-content: center;
+  width: 55vw;
+  height: 55vh;
 
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    visibility: hidden;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  visibility: hidden;
 
-    background-color: brown;
-    border-radius: 20px;
-    border-color: white;
-    border-width: 6px;
-    border-style: solid;
-    padding: 4vw;
-    z-index: 899;
+  background-color: brown;
+  border-radius: 20px;
+  border-color: white;
+  border-width: 6px;
+  border-style: solid;
+  padding: 4vw;
+  z-index: 899;
 }
 
 .popup p {
-	font-size: 1.65vw;
-	text-align: center;
-	color: black;
+  font-size: 1.65vw;
+  text-align: center;
+  color: black;
 }
 .popup input {
-	font-size: 3vw;
-	position: absolute;
-	background-color: purple;
-	border-radius: 15px;
-	border-color: white;
-	border-width: 4px;
-	border-style: solid;
-	top: 80%;
-	left: 50%;
-	transform: translate(-50%);
-	z-index: 900;
+  font-size: 3vw;
+  position: absolute;
+  background-color: purple;
+  border-radius: 15px;
+  border-color: white;
+  border-width: 4px;
+  border-style: solid;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%);
+  z-index: 900;
 }
 
 .howToPlay {
-    background-color: dodgerblue;
+  background-color: dodgerblue;
 }
 
 .title {
-    font-size: 3vw;
-	text-align: center;
-	color: white;
+  font-size: 3vw;
+  text-align: center;
+  color: white;
 }
 
-#pause{
-	background-color: dodgerblue;
+#pause {
+  background-color: dodgerblue;
 }
 #glhf {
-    font-size: 2vw;
-    color: white;
+  font-size: 2vw;
+  color: white;
 }
-.letsGo{
-	font-size: 50px;
-	position: absolute;
-	background-color: purple;
-    color: white;
-	border-radius: 15px;
-	border-color: white;
-	border-width: 4px;
-	border-style: solid;
-	top: 85%;
-	left: 50%;
-	transform: translate(-50%);
-	z-index: 900;
+.letsGo {
+  font-size: 50px;
+  position: absolute;
+  background-color: purple;
+  color: white;
+  border-radius: 15px;
+  border-color: white;
+  border-width: 4px;
+  border-style: solid;
+  top: 85%;
+  left: 50%;
+  transform: translate(-50%);
+  z-index: 900;
 }
-.letsGo:hover{
-	background-color: grey;
-	cursor: pointer;
+.letsGo:hover {
+  background-color: grey;
+  cursor: pointer;
 }
-#understoodBtn, #backBtn{
-	font-size: 50px;
-	position: absolute;
-	background-color: purple;
-	border-radius: 15px;
-	border-color: white;
-	border-width: 4px;
-	border-style: solid;
-	top: 85%;
-	left: 50%;
-	transform: translate(-50%);
-	z-index: 900;
+#understoodBtn,
+#backBtn {
+  font-size: 50px;
+  position: absolute;
+  background-color: purple;
+  border-radius: 15px;
+  border-color: white;
+  border-width: 4px;
+  border-style: solid;
+  top: 85%;
+  left: 50%;
+  transform: translate(-50%);
+  z-index: 900;
 }
 #continueBtn {
-	font-size: 50px;
-	position: absolute;
-	border-radius: 15px;
-	border-color: white;
-	border-width: 4px;
-	border-style: solid;
-	top: 75%;
-	left: 50%;
-	transform: translate(-50%);
-	z-index: 900;
+  font-size: 50px;
+  position: absolute;
+  border-radius: 15px;
+  border-color: white;
+  border-width: 4px;
+  border-style: solid;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%);
+  z-index: 900;
 }
-#continueBtn, #backBtn{
-	background-color: purple;
-	color: white;
+#continueBtn,
+#backBtn {
+  background-color: purple;
+  color: white;
 }
-#understoodBtn:hover, #continueBtn:hover, #backBtn:hover{
-	background-color: grey;
-	cursor: pointer;
+#understoodBtn:hover,
+#continueBtn:hover,
+#backBtn:hover {
+  background-color: grey;
+  cursor: pointer;
 }
-#desTop, #desBottom, #desLeft, #desRight{
-	justify-content: center;
-	width: 16%;
-	height: 20%;
+#desTop,
+#desBottom,
+#desLeft,
+#desRight {
+  justify-content: center;
+  width: 16%;
+  height: 20%;
 
-	position: fixed;
-	top: 18%;
-	left: 9.5%;
-	/* bring your own prefixes */
-	transform: translate(-50%, -50%);
-	
+  position: fixed;
+  top: 18%;
+  left: 9.5%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
 
-	background-color: rgb(43, 13, 150);
-	border-radius: 20px;
-	border-color: white;
-	border-width: 5px;
-	border-style:dotted;
-	visibility: hidden;
+  background-color: rgb(43, 13, 150);
+  border-radius: 20px;
+  border-color: white;
+  border-width: 5px;
+  border-style: dotted;
+  visibility: hidden;
 
-	padding: 8px;
+  padding: 8px;
 
-	z-index: 899;
+  z-index: 899;
 }
-#desh1Top, #desh1Bottom, #desh1Left, #desh1Right{
-	
-	text-align: center;
-	color: rgb(202, 151, 8);
-	overflow:hidden;
+#desh1Top,
+#desh1Bottom,
+#desh1Left,
+#desh1Right {
+  text-align: center;
+  color: rgb(202, 151, 8);
+  overflow: hidden;
 }
 
 @media screen and (max-width: 1000px) {
-	#desh1Top, #desh1Bottom, #desh1Left, #desh1Right {
-		font-size: 0.9em;
-	}
+  #desh1Top,
+  #desh1Bottom,
+  #desh1Left,
+  #desh1Right {
+    font-size: 0.9em;
+  }
 
-	div {
-		overflow: scroll;
-	}
-
+  div {
+    overflow: scroll;
+  }
 }
-
 
 .NLENSwitch {
-    position: absolute;
-    z-index: 10;
-    display: flex;
-    top: 90vh;
-    left: 90vw;
-    background-color: white;
-    border-radius: 10px;
-    visibility: visible;
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  top: 90vh;
+  left: 90vw;
+  background-color: white;
+  border-radius: 10px;
+  visibility: visible;
 }
-.flag{
-    padding: 10px;
-    padding-top: 13px;
-    background-color: white;
-    /*border-radius: 10px;*/
+.flag {
+  padding: 10px;
+  padding-top: 13px;
+  background-color: white;
+  /*border-radius: 10px;*/
 }
 #NLStart {
-    border-radius: 10px 0px 0px 10px;
-    background-color: purple;
+  border-radius: 10px 0px 0px 10px;
+  background-color: purple;
 }
 #ENStart {
-    border-radius: 0px 10px 10px 0px;
-    background-color: white;
+  border-radius: 0px 10px 10px 0px;
+  background-color: white;
 }
-#NLStart:hover, #ENStart:hover {
-    cursor: pointer;
+#NLStart:hover,
+#ENStart:hover {
+  cursor: pointer;
+}
+
+#details b {
+  color: white;
 }

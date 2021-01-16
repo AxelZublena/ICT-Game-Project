@@ -105,6 +105,7 @@ class Button {
         button.innerText = this.text;
         button.style.fontSize = "250%";
         button.style.color = "white";
+        button.style.fontFamily = "Turret Road, cursive";
         button.addEventListener("click", () => {
             console.log("Start the game!");
             this.clicked = true;
@@ -368,7 +369,7 @@ class End extends View {
         this.draw = (ctx) => {
             ctx.fillStyle = Game.BASE_COLOR;
             ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-            ctx.drawImage(this.image, this.canvas.width / 2 - ((this.canvas.height * 0.9) / 2) * 0.97, this.canvas.height / 2 - (this.canvas.height * 0.9) / 2, this.canvas.height * 0.9, this.canvas.height * 0.9);
+            ctx.drawImage(this.image, this.canvas.width / 2 - this.image.width / 2, this.canvas.height / 2 - this.image.height / 2);
             ctx.fillStyle = this.lineColor;
             ctx.fillRect(0, 50, this.canvas.width, 100);
             ctx.textAlign = "center";
@@ -388,7 +389,7 @@ class End extends View {
             btnText = "Back to start menu";
         }
         this.backToStartMenuButton = new Button(this.canvas, this.canvas.width * 0.20, this.canvas.height * 0.19, this.canvas.width / 2 - (this.canvas.width * 0.19) / 2, this.canvas.height * 0.77 - (this.canvas.height * 0.19) / 2, "purple", btnText);
-        this.image = this.loadNewImage('./assets/img/hacker.png');
+        this.image = this.loadNewImage('./assets/img/bg.jpg');
         this.endText = endText;
         this.lineColor = lineColor;
     }
@@ -1415,7 +1416,19 @@ class StartMenu extends View {
         this.draw = (ctx) => {
             ctx.fillStyle = Game.BASE_COLOR;
             ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-            ctx.drawImage(this.image, this.canvas.width / 2 - ((this.canvas.height * 0.9) / 2) * 0.97, this.canvas.height / 2 - (this.canvas.height * 0.9) / 2, this.canvas.height * 0.9, this.canvas.height * 0.9);
+            ctx.shadowBlur = 20;
+            ctx.shadowColor = "black";
+            ctx.drawImage(this.image, this.canvas.width / 2 - this.image.width / 2, this.canvas.height / 2 - this.image.height / 2);
+            ctx.font = 'bold 150px Turret Road';
+            ctx.textAlign = 'center';
+            ctx.shadowBlur = 20;
+            ctx.shadowColor = "purple";
+            ctx.fillText('Agent Steve', this.canvas.width / 2, this.canvas.height * 0.53);
+            ctx.shadowBlur = 20;
+            ctx.shadowColor = "black";
+            ctx.font = '30px Turret Road';
+            ctx.fillText('MOVEMENT', this.canvas.width * 0.15, this.canvas.height * 0.7);
+            ctx.drawImage(this.loadNewImage('./assets/img/wasd.png'), this.canvas.width * 0.085, this.canvas.height * 0.75, this.canvas.width / 7.68, this.canvas.height / 6.43);
         };
         this.language = "dutch";
         this.createButton("BEGIN");
@@ -1433,7 +1446,7 @@ class StartMenu extends View {
             NLButton.style.backgroundColor = "white";
             ENButton.style.backgroundColor = "purple";
         });
-        this.image = this.loadNewImage("./assets/img/hacker.png");
+        this.image = this.loadNewImage("./assets/img/bg.jpg");
     }
 }
 class Infodot extends View {

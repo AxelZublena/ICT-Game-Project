@@ -30,7 +30,7 @@ class End extends View {
         );
 
         // load the image
-        this.image = this.loadNewImage('./assets/img/hacker.png');
+        this.image = this.loadNewImage('./assets/img/bg.jpg');
 
         // ending text
         this.endText = endText;
@@ -58,10 +58,8 @@ class End extends View {
 		// Draws the image/logo
 		ctx.drawImage(
 			this.image,
-			this.canvas.width / 2 - ((this.canvas.height * 0.9) / 2) * 0.97,
-			this.canvas.height / 2 - (this.canvas.height * 0.9) / 2,
-			this.canvas.height * 0.9,
-			this.canvas.height * 0.9
+			this.canvas.width / 2 - this.image.width / 2,
+            this.canvas.height / 2 - this.image.height / 2,
         );
 
         ctx.fillStyle = this.lineColor;
