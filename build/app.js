@@ -186,59 +186,18 @@ class Door {
             if (this.position === "bottom") {
                 this.width = this.canvas.width * 0.2;
                 this.height = this.canvas.height * 0.05;
-                ctx.stroke();
-                const words = this.data.name.split(" ");
-                let i = 0;
-                for (let j = 1; j < words.length; j++) {
-                    i += fontSize;
-                }
-                words.forEach((word) => {
-                    ctx.fillText(word, this.canvas.width * 0.41, this.canvas.height * 0.95 - i);
-                    i -= fontSize;
-                });
             }
             if (this.position === "top") {
                 this.width = this.canvas.width * 0.2;
                 this.height = this.canvas.height * 0.05;
-                ctx.stroke();
-                const words = this.data.name.split(" ").reverse();
-                let wordCount = words.length;
-                let i = 0;
-                for (let j = 1; j < words.length; j++) {
-                    i += fontSize;
-                }
-                words.forEach((word) => {
-                    ctx.fillText(word, this.canvas.width * 0.5, this.canvas.height * 0.05 + i);
-                    i -= fontSize;
-                });
             }
             if (this.position === "left") {
                 this.width = this.canvas.height * 0.05;
                 this.height = this.canvas.width * 0.2;
-                ctx.stroke();
-                const words = this.data.name.split(" ");
-                let i = 0;
-                for (let j = 1; j < words.length; j++) {
-                    i += fontSize;
-                }
-                words.forEach((word) => {
-                    ctx.fillText(word, this.canvas.width * 0.12, this.canvas.height * 0.545 - i);
-                    i -= fontSize;
-                });
             }
             if (this.position === "right") {
                 this.width = this.canvas.height * 0.05;
                 this.height = this.canvas.width * 0.2;
-                ctx.stroke();
-                const words = this.data.name.split(" ");
-                let i = 0;
-                for (let j = 1; j < words.length; j++) {
-                    i += fontSize;
-                }
-                words.forEach((word) => {
-                    ctx.fillText(word, this.canvas.width * 0.88, this.canvas.height * 0.425 - i);
-                    i -= fontSize;
-                });
             }
             this.infoDot.setPlayerPosition(playerXPos, playerYPos, playerWidth, playerHeight);
             this.infoDot.draw(ctx);
