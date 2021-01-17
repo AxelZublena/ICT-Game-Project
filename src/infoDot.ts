@@ -72,24 +72,24 @@ class Infodot extends View{
 
     private isTouched(){
 
-        if ((Math.abs((this.playerPosX + (this.playerWidth / 2)) - (this.posX + ( (this.canvas.width /50 * 1.8)/2))) < 30) && (Math.abs((this.playerPosY + (this.playerHeight / 2)) - (this.posY + ( (this.canvas.height /30 * 1.8)/2))) < 30))  {
+        if ((Math.abs((this.playerPosX + (this.playerWidth / 2)) - (this.posX + ( (this.canvas.width /50 * 1.8)/2))) < 30) && (Math.abs((this.playerPosY + (this.playerHeight / 2)) - (this.posY + ( (this.canvas.height /30 * 1.8)/2))) < 150))  {
            // console.log(this.playerPosX + (this.playerWidth / 2),this.posX + ( (this.canvas.width /50 * 1.8)/2),this.playerPosY + (this.playerHeight / 2),this.posY + ((this.canvas.height /30 * 1.8) / 2));
 
            if (this.position == "top") {
             document.getElementById("desTop").style.visibility = "visible";
-            document.getElementById("desh1Top").innerText = this.data;
+            document.getElementById("desh1Top").innerText = `${this.data}`;
            }
            if (this.position == "bottom") {
             document.getElementById("desBottom").style.visibility = "visible";
-            document.getElementById("desh1Bottom").innerText = this.data;
+            document.getElementById("desh1Bottom").innerText = `${this.data}`;
            }
            if (this.position == "left") {
             document.getElementById("desLeft").style.visibility = "visible";
-            document.getElementById("desh1Left").innerText = this.data;
+            document.getElementById("desh1Left").innerText = `${this.data}`;
            }
            if (this.position == "right") {
             document.getElementById("desRight").style.visibility = "visible";
-            document.getElementById("desh1Right").innerText = this.data;
+            document.getElementById("desh1Right").innerText = `${this.data}`;
            }
 
            console.log();
