@@ -25,7 +25,7 @@ class End extends View {
 			this.canvas.height * 0.19,
 			this.canvas.width / 2 - (this.canvas.width * 0.19)/2,
 			this.canvas.height * 0.77 - (this.canvas.height * 0.19)/2,
-			"purple",
+			"dodgerblue",
             btnText
         );
 
