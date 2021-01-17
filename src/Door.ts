@@ -63,23 +63,6 @@ class Door {
 			//this.width,
 			//this.height
 			//);
-			ctx.stroke();
-
-			const words: string[] = this.data.name.split(" ");
-
-			let i = 0;
-			for (let j = 1; j < words.length; j++) {
-				i += fontSize;
-			}
-
-			words.forEach((word: string) => {
-				ctx.fillText(
-					word,
-					this.canvas.width * 0.41,
-					this.canvas.height * 0.95 - i
-				);
-				i -= fontSize;
-			});
 
 			
 		}
@@ -93,24 +76,6 @@ class Door {
 			//this.width,
 			//this.height
 			//);
-			ctx.stroke();
-
-			const words: string[] = this.data.name.split(" ").reverse();
-
-			let wordCount = words.length;
-			let i = 0;
-			for (let j = 1; j < words.length; j++) {
-				i += fontSize;
-			}
-
-			words.forEach((word: string) => {
-				ctx.fillText(
-					word,
-					this.canvas.width * 0.5,
-					this.canvas.height * 0.05 + i
-				);
-				i -= fontSize;
-			});
 		}
 		if (this.position === "left") {
 			this.width = this.canvas.height * 0.05;
@@ -122,23 +87,6 @@ class Door {
 			//this.width,
 			//this.height
 			//);
-			ctx.stroke();
-
-			const words: string[] = this.data.name.split(" ");
-
-			let i = 0;
-			for (let j = 1; j < words.length; j++) {
-				i += fontSize;
-			}
-
-			words.forEach((word: string) => {
-				ctx.fillText(
-					word,
-					this.canvas.width * 0.12,
-					this.canvas.height * 0.545 - i
-				);
-				i -= fontSize;
-			});
 		}
 		if (this.position === "right") {
 			this.width = this.canvas.height * 0.05;
@@ -150,23 +98,6 @@ class Door {
 			// this.width,
 			// this.height
 			// );
-			ctx.stroke();
-
-			const words: string[] = this.data.name.split(" ");
-
-			let i = 0;
-			for (let j = 1; j < words.length; j++) {
-				i += fontSize;
-			}
-
-			words.forEach((word: string) => {
-				ctx.fillText(
-					word,
-					this.canvas.width * 0.88,
-					this.canvas.height * 0.425 - i
-				);
-				i -= fontSize;
-			});
 		}
 
 		

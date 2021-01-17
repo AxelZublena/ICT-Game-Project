@@ -19,8 +19,6 @@ class Infodot extends View{
     }
 
     public draw = (ctx: CanvasRenderingContext2D) => {
-        
-        
 
         ctx.drawImage(
 			this.image,
@@ -32,8 +30,6 @@ class Infodot extends View{
 
         
         this.isTouched();
-        
-        
     }
 
     private positioning(){
