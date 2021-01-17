@@ -16,14 +16,14 @@ class StartMenu extends View {
         NLButton.addEventListener("click", () => {
             this.language = "dutch"
             this.createButton("BEGIN");
-            NLButton.style.backgroundColor = "purple";
+            NLButton.style.backgroundColor = "dodgerblue";
             ENButton.style.backgroundColor = "white";
         });
         ENButton.addEventListener("click", () => {
             this.language = "english"
             this.createButton("START");
             NLButton.style.backgroundColor = "white";
-            ENButton.style.backgroundColor = "purple";
+            ENButton.style.backgroundColor = "dodgerblue";
         });
 
 		// load the image/logo
@@ -37,7 +37,7 @@ class StartMenu extends View {
             this.canvas.height * 0.19,
             this.canvas.width / 2 - (this.canvas.width * 0.19)/2,
             this.canvas.height * 0.77 - (this.canvas.height * 0.19)/2,
-            "purple",
+            "dodgerblue",
             text
         );
     }
@@ -84,8 +84,12 @@ class StartMenu extends View {
         ctx.shadowColor = "black";
 
         ctx.font = '30px Turret Road'
-        ctx.fillText('MOVEMENT', this.canvas.width * 0.15, this.canvas.height * 0.7)
-
+        
+        if (this.language == 'english') { 
+            ctx.fillText('MOVEMENT', this.canvas.width * 0.15, this.canvas.height * 0.7)
+        } else {
+            ctx.fillText('BESTURING', this.canvas.width * 0.15, this.canvas.height * 0.7);
+        }
         ctx.drawImage(
             this.loadNewImage('./assets/img/wasd.png'),
 			this.canvas.width * 0.085,
